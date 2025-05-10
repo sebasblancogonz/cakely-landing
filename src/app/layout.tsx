@@ -2,7 +2,6 @@ import { Suspense } from "react";
 import "./globals.css";
 
 import { Analytics } from "@vercel/analytics/react";
-import { SessionProvider } from "next-auth/react";
 import { Loader2 } from "lucide-react";
 
 export const metadata = {

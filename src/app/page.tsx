@@ -417,22 +417,3 @@ export default function HomePage() {
     </div>
   );
 }
-
-const Icons = {
-  google: () => (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M15.05 5A5 5 0 0 1 19 8.95M15.05 5A10 10 0 0 0 5.94 15.05M19 8.95A10 10 0 0 1 8.95 19M19 8.95A5 5 0 0 0 15.05 5M5.94 15.05A5 5 0 0 1 5 19M5.94 15.05A10 10 0 0 0 19 8.95M5 19A10 10 0 0 0 15.05 5M5 19A5 5 0 0 0 8.95 19" />
-      <circle cx="12" cy="12" r="3" />
-    </svg>
-  ),
-};

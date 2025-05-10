@@ -9,7 +9,6 @@ export default function PrivacyPolicyPage() {
   const appName = "Cakely";
   const companyName = "Cakely";
   const contactEmail = "contacto@cakely.es";
-  const websiteUrl = process.env.NEXT_PUBLIC_APP_URL || "https://cakely.es";
   const effectiveDate = "5 de Mayo de 2025";
 
   return (

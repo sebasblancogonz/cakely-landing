@@ -57,7 +57,7 @@ export default function HeaderLoginButton() {
     return (
       <>
         <Button variant="ghost" asChild>
-          <Link href={`${appDomain}/dashboard`}>Panel de control</Link>
+          <Link href={`${appDomain}/`}>Panel de control</Link>
         </Button>
         <User isLoading={isLoading} user={user} />
       </>

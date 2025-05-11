@@ -44,7 +44,6 @@ export function User({ isLoading, user }: UserProps) {
           variant="outline"
           size="icon"
           className="overflow-hidden rounded-full"
-          disabled={status !== "authenticated"}
         >
           <Image
             src={user?.image ?? "/img/placeholder-user.jpeg"}

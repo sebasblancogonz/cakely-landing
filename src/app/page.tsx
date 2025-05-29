@@ -25,6 +25,8 @@ import Image from "next/image";
 import Link from "next/link";
 import HeaderLoginButton from "./HeaderLoginButton";
 
+const appDomain = process.env.NEXT_PUBLIC_APP_DOMAIN || "https://app.cakely.es";
+
 export default function HomePage() {
   return (
     <div className="flex flex-col min-h-screen">
@@ -331,7 +333,9 @@ export default function HomePage() {
                 </CardContent>
                 <CardFooter>
                   <Button className="w-full" asChild>
-                    <Link href="/signup?plan=esencial">
+                    <Link
+                      href={`${appDomain}/suscribirse?priceId=price_1RObViDMvGCWBYUyH37UyLMy`}
+                    >
                       Empezar Prueba Gratis
                     </Link>
                   </Button>
@@ -379,7 +383,9 @@ export default function HomePage() {
                 </CardContent>
                 <CardFooter>
                   <Button className="w-full" asChild>
-                    <Link href="/signup?plan=profesional">
+                    <Link
+                      href={`${appDomain}/suscribirse?priceId=price_1ROdz1DMvGCWBYUyUxkysBfh`}
+                    >
                       Empezar Prueba Gratis
                     </Link>
                   </Button>

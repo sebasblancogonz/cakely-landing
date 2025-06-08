@@ -61,7 +61,9 @@ export default function HomePage() {
               </p>
               <div className="space-x-4 space-y-4 py-4">
                 <Button size="lg" asChild>
-                  <Link href="/signup?source=landing_hero">
+                  <Link
+                    href={`${appDomain}/empezar-prueba?priceId=${process.env.STRIPE_PRICE_ID_BASICO_MONTHLY}`}
+                  >
                     Prueba Gratis 14 Días
                   </Link>
                 </Button>
@@ -334,7 +336,7 @@ export default function HomePage() {
                 <CardFooter>
                   <Button className="w-full" asChild>
                     <Link
-                      href={`${appDomain}/suscribirse?priceId=price_1RObViDMvGCWBYUyH37UyLMy`}
+                      href={`${appDomain}/empezar-prueba?priceId=${process.env.STRIPE_PRICE_ID_BASICO_MONTHLY}`}
                     >
                       Empezar Prueba Gratis
                     </Link>
@@ -384,7 +386,7 @@ export default function HomePage() {
                 <CardFooter>
                   <Button className="w-full" asChild>
                     <Link
-                      href={`${appDomain}/suscribirse?priceId=price_1ROdz1DMvGCWBYUyUxkysBfh`}
+                      href={`${appDomain}/empezar-prueba?priceId=${process.env.STRIPE_PRICE_ID_PRO_MONTHLY}`}
                     >
                       Empezar Prueba Gratis
                     </Link>

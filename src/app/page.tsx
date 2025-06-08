@@ -26,6 +26,8 @@ import Link from "next/link";
 import HeaderLoginButton from "./HeaderLoginButton";
 
 const appDomain = process.env.NEXT_PUBLIC_APP_DOMAIN || "https://app.cakely.es";
+const basicPriceId = process.env.STRIPE_PRICE_ID_BASICO_MONTHLY!;
+const proPriceId = process.env.STRIPE_PRICE_ID_PRO_MONTHLY!;
 
 export default function HomePage() {
   return (
@@ -336,7 +338,7 @@ export default function HomePage() {
                 <CardFooter>
                   <Button className="w-full" asChild>
                     <Link
-                      href={`${appDomain}/empezar-prueba?priceId=${process.env.STRIPE_PRICE_ID_BASICO_MONTHLY}`}
+                      href={`${appDomain}/empezar-prueba?priceId=${basicPriceId}`}
                     >
                       Empezar Prueba Gratis
                     </Link>
@@ -386,7 +388,7 @@ export default function HomePage() {
                 <CardFooter>
                   <Button className="w-full" asChild>
                     <Link
-                      href={`${appDomain}/empezar-prueba?priceId=${process.env.STRIPE_PRICE_ID_PRO_MONTHLY}`}
+                      href={`${appDomain}/empezar-prueba?priceId=${proPriceId}`}
                     >
                       Empezar Prueba Gratis
                     </Link>

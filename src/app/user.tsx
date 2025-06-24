@@ -14,6 +14,12 @@ import { signOut } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 
+const landingDomain =
+  process.env.NEXT_PUBLIC_LANDING_DOMAIN || "https://cakely.es";
+
+const appDomain =
+  process.env.NEXT_PUBLIC_APP_DOMAIN || "https://app.cakely.es";
+
 interface UserProps {
   isLoading: boolean;
   user: {
@@ -24,6 +30,12 @@ interface UserProps {
 }
 
 export function User({ isLoading, user }: UserProps) {
+  const handleLogout = () => {
+    const logoutUrl = `${appDomain}/api/auth/signout?callbackUrl=${encodeURIComponent(
+      landingDomain
+    )}`;
+    window.location.href = logoutUrl;
+  };
   if (isLoading) {
     return (
       <Button
@@ -82,7 +94,7 @@ export function User({ isLoading, user }: UserProps) {
             <DropdownMenuSeparator />
             <DropdownMenuItem
               className="cursor-pointer text-destructive focus:text-destructive focus:bg-destructive/10"
-              onClick={() => signOut({ callbackUrl: "/" })}
+              onClick={handleLogout}
             >
               <LogOut className="mr-2 h-4 w-4" />
               <span>Cerrar sesión</span>

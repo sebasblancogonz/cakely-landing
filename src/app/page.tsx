@@ -218,7 +218,6 @@ export default function Index() {
           </div>
         </section>
 
-        {/* Features Section */}
         <section
           id="features"
           className="py-24 md:py-32 bg-gradient-to-br from-gray-50 to-white"
@@ -596,10 +595,12 @@ export default function Index() {
         <div className="container mx-auto px-4">
           <div className="text-center">
             <div className="flex items-center justify-center gap-3 mb-8">
-              <div className="w-12 h-12 bg-gradient-to-br from-emerald-600 to-teal-600 rounded-2xl flex items-center justify-center text-white font-bold text-lg shadow-lg">
-                C
-              </div>
-              <span className="text-3xl font-bold text-white">Cakely</span>
+               <Image
+              src="/img/logo-white.webp"
+              alt="Logo Cakely"
+              width={80}
+              height={80}
+            />
             </div>
             <p className="text-gray-400 mb-10 max-w-3xl mx-auto text-lg leading-relaxed">
               La revolución digital que tu pastelería necesitaba. Transforma el

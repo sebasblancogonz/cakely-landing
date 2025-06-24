@@ -24,6 +24,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import HeaderLoginButton from "./HeaderLoginButton";
 
 const appDomain = process.env.NEXT_PUBLIC_APP_DOMAIN || "https://app.cakely.es";
 const basicPriceId = process.env.STRIPE_PRICE_ID_BASICO_MONTHLY!;
@@ -35,12 +36,12 @@ export default function Index() {
       <header className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <div className="flex items-center gap-3 font-bold text-2xl">
-            <div className="w-10 h-10 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl flex items-center justify-center text-white font-bold text-lg shadow-lg">
-              C
-            </div>
-            <span className="bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
-              Cakely
-            </span>
+            <Image
+            src="/img/logo.webp"
+            alt="Logo Cakely"
+            width={80}
+            height={80}
+          />
           </div>
           <nav className="hidden md:flex items-center gap-8">
             <a
@@ -61,12 +62,7 @@ export default function Index() {
             >
               Precios
             </a>
-            <Button
-              variant="outline"
-              className="border-emerald-200 hover:bg-emerald-50 hover:border-emerald-300"
-            >
-              Iniciar Sesión
-            </Button>
+            <HeaderLoginButton />
           </nav>
         </div>
       </header>

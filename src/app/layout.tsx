@@ -28,7 +28,7 @@ export const metadata = {
     siteName: "Cakely",
     images: [
       {
-        url: "/logo.webp",
+        url: "https://cakely.es/img/logo.png",
         width: 1200,
         height: 630,
         alt: "Cakely – CRM para repostería",
@@ -41,7 +41,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "Cakely – CRM para Repostería",
     description: "Simplifica la gestión de tu pastelería con Cakely.",
-    images: ["/logo.webp"],
+    images: ["https://cakely.es/img/logo.png"],
     creator: "@cakelyapp",
   },
 };

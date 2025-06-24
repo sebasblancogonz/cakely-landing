@@ -297,7 +297,7 @@ export default function Index() {
                 >
                   <CardHeader className="pb-4">
                     <div
-                      className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${feature.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-lg`}
+                      className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${feature.color} flex items-center justify-center mb-6 group-hover:scale-150 transition-transform shadow-lg`}
                     >
                       <feature.icon className="w-8 h-8 text-white" />
                     </div>
@@ -440,9 +440,9 @@ export default function Index() {
               </Card>
 
               {/* Pro Plan */}
-              <Card className="relative group hover:shadow-2xl transition-all duration-500 border-2 border-emerald-400 bg-white scale-110 rounded-3xl">
-                <div className="absolute -top-6 left-1/2 transform -translate-x-1/2">
-                  <span className="bg-gradient-to-r from-emerald-600 to-teal-600 text-white px-6 py-3 rounded-full text-sm font-bold shadow-lg">
+              <Card className="relative group hover:shadow-2xl transition-all duration-500 border-2 border-emerald-400 bg-white scale-105 rounded-3xl md:mt-0 mt-10">
+                <div className="absolute -top-4 sm:-top-6 left-1/2 transform -translate-x-1/2">
+                  <span className="bg-gradient-to-r from-emerald-600 to-teal-600 text-white px-4 sm:px-8 py-2 sm:py-4 rounded-full text-sm font-bold shadow-lg">
                     💎 RECOMENDADO
                   </span>
                 </div>

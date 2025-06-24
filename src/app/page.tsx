@@ -37,28 +37,28 @@ export default function Index() {
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <div className="flex items-center gap-3 font-bold text-2xl">
             <Image
-            src="/img/logo.webp"
-            alt="Logo Cakely"
-            width={80}
-            height={80}
-          />
+              src="/img/logo.webp"
+              alt="Logo Cakely"
+              width={80}
+              height={80}
+            />
           </div>
-          <nav className="hidden md:flex items-center gap-8">
+          <nav className="md:flex items-center gap-8">
             <a
               href="#features"
-              className="text-gray-600 hover:text-emerald-600 transition-colors font-medium"
+              className="text-gray-600 hover:text-emerald-600 transition-colors font-medium hidden md:inline-block"
             >
               Características
             </a>
             <a
               href="#benefits"
-              className="text-gray-600 hover:text-emerald-600 transition-colors font-medium"
+              className="text-gray-600 hover:text-emerald-600 transition-colors font-medium hidden md:inline-block"
             >
               Beneficios
             </a>
             <a
               href="#precios"
-              className="text-gray-600 hover:text-emerald-600 transition-colors font-medium"
+              className="text-gray-600 hover:text-emerald-600 transition-colors font-medium hidden md:inline-block"
             >
               Precios
             </a>
@@ -81,7 +81,7 @@ export default function Index() {
             <div className="text-center max-w-6xl mx-auto">
               <div className="inline-flex items-center gap-2 bg-white shadow-sm border border-emerald-100 text-emerald-700 px-6 py-3 rounded-full text-sm font-medium mb-8 animate-fade-in">
                 <Sparkles className="w-4 h-4" />
-                Más de 500+ pasteleros confían en nosotros
+                Ya está ayudando a pasteleros a organizarse mejor
               </div>
 
               <h1 className="text-5xl md:text-7xl lg:text-8xl font-black leading-tight mb-8 animate-fade-in">
@@ -400,7 +400,7 @@ export default function Index() {
               <Card className="relative group hover:shadow-2xl transition-all duration-500 border-2 border-gray-200 hover:border-emerald-300 rounded-3xl">
                 <CardHeader className="text-center pb-8">
                   <CardTitle className="text-3xl font-bold text-gray-900">
-                    Esencial
+                    Básico
                   </CardTitle>
                   <CardDescription className="text-lg text-gray-600 mt-2">
                     Perfecto para comenzar tu transformación
@@ -417,11 +417,12 @@ export default function Index() {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   {[
-                    "✅ Gestión de hasta pedidos (limitado)",
-                    "✅ Base de Datos de Clientes (limitado)",
-                    "✅ Estadísticas Básicas",
-                    "✅ Integración Google Calendar",
-                    "👤 1 Usuario incluido",
+                    "✅ Hasta 50 pedidos al mes",
+                    "✅ Hasta 100 clientes",
+                    "✅ Hasta 5 recetas",
+                    "📊 Estadísticas básicas",
+                    "📅 Integración con Google Calendar",
+                    "👤 1 usuario incluido",
                   ].map((feature, index) => (
                     <div key={index} className="flex items-center gap-3">
                       <span className="text-gray-700 text-lg">{feature}</span>
@@ -448,7 +449,7 @@ export default function Index() {
                 </div>
                 <CardHeader className="text-center pb-8 pt-8">
                   <CardTitle className="text-3xl font-bold text-gray-900">
-                    Profesional
+                    Pro
                   </CardTitle>
                   <CardDescription className="text-lg text-gray-600 mt-2">
                     Para negocios serios que buscan crecer
@@ -465,13 +466,14 @@ export default function Index() {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   {[
-                    "🚀 Todo lo de Esencial",
-                    "♾️ Recetas e Ingredientes Ilimitados",
-                    "👥 Gestión de Equipo Completa",
-                    "📊 Estadísticas Avanzadas",
-                    "🎯 Generador de Presupuestos",
-                    "👨‍👩‍👧‍👦 Hasta 5 Usuarios incluidos",
-                    "⚡ Soporte Prioritario",
+                    "🚀 Todo lo del plan Básico",
+                    "♾️ Pedidos, clientes y recetas ilimitados",
+                    "👥 Gestión completa de equipo (hasta 5 usuarios)",
+                    "📊 Estadísticas avanzadas",
+                    "🎯 Generador de presupuestos",
+                    "💡 Insights de fidelidad de clientes",
+                    "⚙️ Integraciones personalizadas",
+                    "⚡ Soporte prioritario",
                   ].map((feature, index) => (
                     <div key={index} className="flex items-center gap-3">
                       <span
@@ -510,6 +512,83 @@ export default function Index() {
             </div>
           </div>
         </section>
+        <section id="comparativa" className="py-24 md:py-32 bg-white">
+  <div className="container mx-auto px-4">
+    <div className="text-center mb-20">
+      <h2 className="text-4xl md:text-6xl font-black text-gray-900 mb-8 leading-tight">
+        Compara nuestros
+        <br />
+        <span className="bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
+          planes disponibles
+        </span>
+      </h2>
+    </div>
+
+    <div className="overflow-x-auto max-w-6xl mx-auto">
+      <table className="w-full text-left border-collapse">
+        <thead>
+          <tr className="bg-gray-100 text-gray-800 text-lg">
+            <th className="py-4 px-6 font-bold">Características</th>
+            <th className="py-4 px-6 font-bold text-center">🟢 Básico</th>
+            <th className="py-4 px-6 font-bold text-center">🚀 Pro</th>
+          </tr>
+        </thead>
+        <tbody className="text-gray-700 text-base">
+          <tr className="border-t">
+            <td className="py-4 px-6">Pedidos mensuales</td>
+            <td className="py-4 px-6 text-center">Hasta 50</td>
+            <td className="py-4 px-6 text-center">Ilimitados</td>
+          </tr>
+          <tr className="border-t">
+            <td className="py-4 px-6">Clientes</td>
+            <td className="py-4 px-6 text-center">Hasta 100</td>
+            <td className="py-4 px-6 text-center">Ilimitados</td>
+          </tr>
+          <tr className="border-t">
+            <td className="py-4 px-6">Recetas</td>
+            <td className="py-4 px-6 text-center">Hasta 5</td>
+            <td className="py-4 px-6 text-center">Ilimitadas</td>
+          </tr>
+          <tr className="border-t">
+            <td className="py-4 px-6">Usuarios incluidos</td>
+            <td className="py-4 px-6 text-center">1</td>
+            <td className="py-4 px-6 text-center">Hasta 5</td>
+          </tr>
+          <tr className="border-t">
+            <td className="py-4 px-6">Estadísticas avanzadas</td>
+            <td className="py-4 px-6 text-center">❌</td>
+            <td className="py-4 px-6 text-center">✅</td>
+          </tr>
+          <tr className="border-t">
+            <td className="py-4 px-6">Generador de presupuestos</td>
+            <td className="py-4 px-6 text-center">❌</td>
+            <td className="py-4 px-6 text-center">✅</td>
+          </tr>
+          <tr className="border-t">
+            <td className="py-4 px-6">Insights de fidelidad</td>
+            <td className="py-4 px-6 text-center">❌</td>
+            <td className="py-4 px-6 text-center">✅</td>
+          </tr>
+          <tr className="border-t">
+            <td className="py-4 px-6">Integraciones personalizadas</td>
+            <td className="py-4 px-6 text-center">❌</td>
+            <td className="py-4 px-6 text-center">✅</td>
+          </tr>
+          <tr className="border-t">
+            <td className="py-4 px-6">Soporte prioritario</td>
+            <td className="py-4 px-6 text-center">❌</td>
+            <td className="py-4 px-6 text-center">✅</td>
+          </tr>
+          <tr className="border-t border-b">
+            <td className="py-4 px-6">Integración con Google Calendar</td>
+            <td className="py-4 px-6 text-center">✅</td>
+            <td className="py-4 px-6 text-center">✅</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
       </main>
 
       {/* Footer */}

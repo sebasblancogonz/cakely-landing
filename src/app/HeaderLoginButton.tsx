@@ -56,7 +56,7 @@ export default function HeaderLoginButton() {
   if (isAuthenticated && user) {
     return (
       <>
-        <Button variant="ghost" className="border-emerald-200 hover:bg-emerald-50 hover:border-emerald-300" asChild>
+        <Button className="bg-emerald-600 border-emerald-200 hover:bg-emerald-300 hover:border-emerald-300" asChild>
           <Link href={`${appDomain}/`}>Panel de control</Link>
         </Button>
         <User isLoading={isLoading} user={user} />

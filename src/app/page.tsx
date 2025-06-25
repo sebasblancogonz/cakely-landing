@@ -406,12 +406,12 @@ export default function Index() {
                   </CardDescription>
                   <div className="mt-8">
                     <span className="text-6xl font-black text-gray-900">
-                      19€
+                      19,99€
                     </span>
                     <span className="text-2xl text-gray-500">/mes</span>
                   </div>
                   <p className="text-sm text-gray-500 mt-4 font-medium">
-                    (o 190€/año, ¡ahorra 2 meses!)
+                    (o 199,99€/año, ¡ahorra 2 meses!)
                   </p>
                 </CardHeader>
                 <CardContent className="space-y-4">
@@ -455,12 +455,12 @@ export default function Index() {
                   </CardDescription>
                   <div className="mt-8">
                     <span className="text-6xl font-black bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
-                      49€
+                      49,99€
                     </span>
                     <span className="text-2xl text-gray-500">/mes</span>
                   </div>
                   <p className="text-sm text-gray-500 mt-4 font-medium">
-                    (o 490€/año, ¡ahorra 2 meses!)
+                    (o 499,99€/año, ¡ahorra 2 meses!)
                   </p>
                 </CardHeader>
                 <CardContent className="space-y-4">

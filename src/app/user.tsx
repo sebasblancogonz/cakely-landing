@@ -13,9 +13,6 @@ import { LifeBuoy, Loader2, LogIn, LogOut, Settings } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-const landingDomain =
-  process.env.NEXT_PUBLIC_LANDING_DOMAIN || "https://cakely.es";
-
 const appDomain =
   process.env.NEXT_PUBLIC_APP_DOMAIN || "https://app.cakely.es";
 
@@ -30,9 +27,7 @@ interface UserProps {
 
 export function User({ isLoading, user }: UserProps) {
   const handleLogout = () => {
-    const logoutUrl = `${appDomain}/api/auth/signout?callbackUrl=${encodeURIComponent(
-      landingDomain
-    )}`;
+    const logoutUrl = `${appDomain}/logout}`;
     window.location.href = logoutUrl;
   };
   if (isLoading) {

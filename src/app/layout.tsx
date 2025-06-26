@@ -5,25 +5,25 @@ import { Analytics } from "@vercel/analytics/react";
 import { Loader2 } from "lucide-react";
 
 export const metadata = {
-  title: "Cakely – CRM para Repostería",
+  title: "Cakely – Gestión de pedidos para pastelerías",
   description:
-    "Cakely es un software de gestión de pedidos y clientes para pastelerías modernas. Organiza tu negocio de repostería de forma fácil y eficiente.",
+    "Gestiona pedidos, clientes y recetas en tu pastelería sin complicaciones. Cakely te ayuda a organizar tu negocio de repostería de forma sencilla y profesional.",
   keywords: [
-    "CRM para repostería",
-    "gestión de pedidos",
-    "software pastelería",
-    "CRM panaderías",
-    "cakely",
-    "gestión clientes repostería",
-    "CRM para negocios de tartas y galletas",
+    "gestión pedidos pastelería",
+    "software para pastelerías",
+    "app para reposterías",
+    "organizar pedidos tartas",
+    "gestionar clientes pastelería",
+    "agenda para pastelerías",
+    "cakely app repostería",
   ],
   authors: [{ name: "Cakely", url: "https://cakely.es" }],
   creator: "Cakely",
   metadataBase: new URL("https://cakely.es"),
   openGraph: {
-    title: "Cakely – CRM para Repostería",
+    title: "Cakely – Gestión de pedidos para pastelerías",
     description:
-      "Gestiona clientes y pedidos de tu pastelería con facilidad usando Cakely.",
+      "Organiza los pedidos de tu pastelería, lleva el control de tus clientes y haz crecer tu negocio de repostería con Cakely.",
     url: "https://cakely.es",
     siteName: "Cakely",
     images: [
@@ -31,7 +31,7 @@ export const metadata = {
         url: "https://cakely.es/img/logo.png",
         width: 1200,
         height: 630,
-        alt: "Cakely – CRM para repostería",
+        alt: "Cakely – Gestión de pedidos para pastelerías",
       },
     ],
     locale: "es_ES",
@@ -39,10 +39,10 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Cakely – CRM para Repostería",
-    description: "Simplifica la gestión de tu pastelería con Cakely.",
+    title: "Cakely – Gestión de pedidos para pastelerías",
+    description: "Organiza los pedidos de tu pastelería, lleva el control de tus clientes y haz crecer tu negocio de repostería con Cakely.",
     images: ["https://cakely.es/img/logo.png"],
-    creator: "@cakelyapp",
+    creator: "@cakely_app",
   },
 };
 

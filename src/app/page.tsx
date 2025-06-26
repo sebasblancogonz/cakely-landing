@@ -23,12 +23,10 @@ import {
   ArrowRight,
   Sparkles,
   TrendingUp,
-  ChevronDown,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import HeaderLoginButton from "./HeaderLoginButton";
-import { useState } from "react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
 const appDomain = process.env.NEXT_PUBLIC_APP_DOMAIN || "https://app.cakely.es";
@@ -69,7 +67,6 @@ const faqs = [
 ];
 
 export default function Index() {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
   return (
     <div className="flex flex-col min-h-screen bg-white">
       <header className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100">

@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -21,16 +23,53 @@ import {
   ArrowRight,
   Sparkles,
   TrendingUp,
+  ChevronDown,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import HeaderLoginButton from "./HeaderLoginButton";
+import { useState } from "react";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
 const appDomain = process.env.NEXT_PUBLIC_APP_DOMAIN || "https://app.cakely.es";
 const basicPriceId = process.env.STRIPE_PRICE_ID_BASICO_MONTHLY!;
 const proPriceId = process.env.STRIPE_PRICE_ID_PRO_MONTHLY!;
 
+const faqs = [
+  {
+    question: "¿Qué es Cakely y para quién está pensado?",
+    answer:
+      "Cakely es una herramienta de gestión diseñada para pastelerías artesanales. Ayuda a organizar pedidos, clientes y recetas desde un solo lugar de forma eficiente y sencilla.",
+  },
+  {
+    question: "¿Cuántos pedidos y clientes puedo gestionar en el plan Básico?",
+    answer:
+      "El plan Básico te permite gestionar hasta 50 pedidos mensuales y un total acumulado de 100 clientes. Es ideal para pastelerías pequeñas o en fase inicial.",
+  },
+  {
+    question: "¿Qué ocurre si supero el límite de clientes en el plan Básico?",
+    answer:
+      "Una vez alcanzas los 100 clientes acumulados, tendrás que pasarte al plan Pro para seguir añadiendo nuevos. Tus datos no se pierden, pero no podrás registrar más hasta actualizar.",
+  },
+  {
+    question: "¿Puedo usar Cakely desde el móvil o la tablet?",
+    answer:
+      "Sí. Cakely está optimizado para usarse desde cualquier dispositivo con navegador moderno, ya sea móvil, tablet o PC.",
+  },
+  {
+    question: "¿Cómo me ayuda Cakely a ahorrar tiempo?",
+    answer:
+      "Automatiza tareas como el seguimiento de pedidos, el historial de clientes, la gestión de recetas y los presupuestos. Todo centralizado, sin Excel ni papeles.",
+  },
+  {
+    question: "¿Qué incluye el plan Pro además de los límites ampliados?",
+    answer:
+      "Además de clientes y pedidos ilimitados, tendrás estadísticas avanzadas, generador de presupuestos, insights de fidelidad, integraciones personalizadas y soporte prioritario.",
+  },
+];
+
 export default function Index() {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
   return (
     <div className="flex flex-col min-h-screen bg-white">
       <header className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100">
@@ -44,24 +83,30 @@ export default function Index() {
             />
           </div>
           <nav className="md:flex items-center gap-8">
-            <a
+            <Link
               href="#features"
               className="text-gray-600 hover:text-emerald-600 transition-colors font-medium hidden md:inline-block"
             >
               Características
-            </a>
-            <a
+            </Link>
+            <Link
               href="#benefits"
               className="text-gray-600 hover:text-emerald-600 transition-colors font-medium hidden md:inline-block"
             >
               Beneficios
-            </a>
-            <a
+            </Link>
+            <Link
               href="#precios"
               className="text-gray-600 hover:text-emerald-600 transition-colors font-medium hidden md:inline-block"
             >
               Precios
-            </a>
+            </Link>
+            <Link
+              href="#faq"
+              className="text-gray-600 hover:text-emerald-600 transition-colors font-medium hidden md:inline-block"
+            >
+              FAQ
+            </Link>
             <HeaderLoginButton />
           </nav>
         </div>
@@ -512,82 +557,121 @@ export default function Index() {
           </div>
         </section>
         <section id="comparativa" className="py-24 md:py-32 bg-white">
-  <div className="container mx-auto px-4">
-    <div className="text-center mb-20">
-      <h2 className="text-4xl md:text-6xl font-black text-gray-900 mb-8 leading-tight">
-        Compara nuestros
-        <br />
-        <span className="bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
-          planes disponibles
-        </span>
-      </h2>
-    </div>
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-20">
+              <h2 className="text-4xl md:text-6xl font-black text-gray-900 mb-8 leading-tight">
+                Compara nuestros
+                <br />
+                <span className="bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
+                  planes disponibles
+                </span>
+              </h2>
+            </div>
 
-    <div className="overflow-x-auto max-w-6xl mx-auto">
-      <table className="w-full text-left border-collapse">
-        <thead>
-          <tr className="bg-gray-100 text-gray-800 text-lg">
-            <th className="py-4 px-6 font-bold">Características</th>
-            <th className="py-4 px-6 font-bold text-center">🟢 Básico</th>
-            <th className="py-4 px-6 font-bold text-center">🚀 Pro</th>
-          </tr>
-        </thead>
-        <tbody className="text-gray-700 text-base">
-          <tr className="border-t">
-            <td className="py-4 px-6">Pedidos mensuales</td>
-            <td className="py-4 px-6 text-center">Hasta 50</td>
-            <td className="py-4 px-6 text-center">Ilimitados</td>
-          </tr>
-          <tr className="border-t">
-            <td className="py-4 px-6">Clientes</td>
-            <td className="py-4 px-6 text-center">Hasta 100</td>
-            <td className="py-4 px-6 text-center">Ilimitados</td>
-          </tr>
-          <tr className="border-t">
-            <td className="py-4 px-6">Recetas</td>
-            <td className="py-4 px-6 text-center">Hasta 5</td>
-            <td className="py-4 px-6 text-center">Ilimitadas</td>
-          </tr>
-          <tr className="border-t">
-            <td className="py-4 px-6">Usuarios incluidos</td>
-            <td className="py-4 px-6 text-center">1</td>
-            <td className="py-4 px-6 text-center">Hasta 5</td>
-          </tr>
-          <tr className="border-t">
-            <td className="py-4 px-6">Estadísticas avanzadas</td>
-            <td className="py-4 px-6 text-center">❌</td>
-            <td className="py-4 px-6 text-center">✅</td>
-          </tr>
-          <tr className="border-t">
-            <td className="py-4 px-6">Generador de presupuestos</td>
-            <td className="py-4 px-6 text-center">❌</td>
-            <td className="py-4 px-6 text-center">✅</td>
-          </tr>
-          <tr className="border-t">
-            <td className="py-4 px-6">Insights de fidelidad</td>
-            <td className="py-4 px-6 text-center">❌</td>
-            <td className="py-4 px-6 text-center">✅</td>
-          </tr>
-          <tr className="border-t">
-            <td className="py-4 px-6">Integraciones personalizadas</td>
-            <td className="py-4 px-6 text-center">❌</td>
-            <td className="py-4 px-6 text-center">✅</td>
-          </tr>
-          <tr className="border-t">
-            <td className="py-4 px-6">Soporte prioritario</td>
-            <td className="py-4 px-6 text-center">❌</td>
-            <td className="py-4 px-6 text-center">✅</td>
-          </tr>
-          <tr className="border-t border-b">
-            <td className="py-4 px-6">Integración con Google Calendar</td>
-            <td className="py-4 px-6 text-center">✅</td>
-            <td className="py-4 px-6 text-center">✅</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</section>
+            <div className="overflow-x-auto max-w-6xl mx-auto">
+              <table className="w-full text-left border-collapse">
+                <thead>
+                  <tr className="bg-gray-100 text-gray-800 text-lg">
+                    <th className="py-4 px-6 font-bold">Características</th>
+                    <th className="py-4 px-6 font-bold text-center">
+                      🟢 Básico
+                    </th>
+                    <th className="py-4 px-6 font-bold text-center">🚀 Pro</th>
+                  </tr>
+                </thead>
+                <tbody className="text-gray-700 text-base">
+                  <tr className="border-t">
+                    <td className="py-4 px-6">Pedidos mensuales</td>
+                    <td className="py-4 px-6 text-center">Hasta 50</td>
+                    <td className="py-4 px-6 text-center">Ilimitados</td>
+                  </tr>
+                  <tr className="border-t">
+                    <td className="py-4 px-6">Clientes</td>
+                    <td className="py-4 px-6 text-center">Hasta 100</td>
+                    <td className="py-4 px-6 text-center">Ilimitados</td>
+                  </tr>
+                  <tr className="border-t">
+                    <td className="py-4 px-6">Recetas</td>
+                    <td className="py-4 px-6 text-center">Hasta 5</td>
+                    <td className="py-4 px-6 text-center">Ilimitadas</td>
+                  </tr>
+                  <tr className="border-t">
+                    <td className="py-4 px-6">Usuarios incluidos</td>
+                    <td className="py-4 px-6 text-center">1</td>
+                    <td className="py-4 px-6 text-center">Hasta 5</td>
+                  </tr>
+                  <tr className="border-t">
+                    <td className="py-4 px-6">Estadísticas avanzadas</td>
+                    <td className="py-4 px-6 text-center">❌</td>
+                    <td className="py-4 px-6 text-center">✅</td>
+                  </tr>
+                  <tr className="border-t">
+                    <td className="py-4 px-6">Generador de presupuestos</td>
+                    <td className="py-4 px-6 text-center">❌</td>
+                    <td className="py-4 px-6 text-center">✅</td>
+                  </tr>
+                  <tr className="border-t">
+                    <td className="py-4 px-6">Insights de fidelidad</td>
+                    <td className="py-4 px-6 text-center">❌</td>
+                    <td className="py-4 px-6 text-center">✅</td>
+                  </tr>
+                  <tr className="border-t">
+                    <td className="py-4 px-6">Integraciones personalizadas</td>
+                    <td className="py-4 px-6 text-center">❌</td>
+                    <td className="py-4 px-6 text-center">✅</td>
+                  </tr>
+                  <tr className="border-t">
+                    <td className="py-4 px-6">Soporte prioritario</td>
+                    <td className="py-4 px-6 text-center">❌</td>
+                    <td className="py-4 px-6 text-center">✅</td>
+                  </tr>
+                  <tr className="border-t border-b">
+                    <td className="py-4 px-6">
+                      Integración con Google Calendar
+                    </td>
+                    <td className="py-4 px-6 text-center">✅</td>
+                    <td className="py-4 px-6 text-center">✅</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <section
+          className="relative bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 py-24 px-4"
+          id="faq"
+        >
+          <div className="absolute top-20 left-10 w-20 h-20 bg-gradient-to-br from-emerald-200 to-teal-300 rounded-full opacity-60 animate-pulse"></div>
+          <div className="absolute top-40 right-16 w-32 h-32 bg-gradient-to-br from-teal-200 to-cyan-300 rounded-full opacity-40 animate-pulse delay-1000"></div>
+          <div className="absolute bottom-32 left-20 w-16 h-16 bg-gradient-to-br from-cyan-200 to-emerald-300 rounded-full opacity-50 animate-pulse delay-500"></div>
+
+          <div className="relative max-w-4xl mx-auto z-10">
+            <h2 className="text-4xl font-extrabold text-center text-gray-900 mb-8">
+              Preguntas frecuentes
+            </h2>
+            <div className="space-y-4">
+              <Accordion type="multiple" className="space-y-4">
+                {faqs.map((faq, i) => (
+                  <AccordionItem
+                    key={i}
+                    value={`item-${i}`}
+                    className="bg-white border border-emerald-100 rounded-xl shadow-sm overflow-hidden"
+                  >
+                    <AccordionTrigger style={{
+                      "textDecoration": "none",
+                    }} className="flex w-full justify-between items-center px-6 py-4 text-left text-lg font-medium text-gray-800 transition-colors">
+                      {faq.question}
+                    </AccordionTrigger>
+                    <AccordionContent className="px-6 pb-4 text-gray-600 text-base">
+                      {faq.answer}
+                    </AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
+            </div>
+          </div>
+        </section>
       </main>
 
       {/* Footer */}
@@ -595,12 +679,12 @@ export default function Index() {
         <div className="container mx-auto px-4">
           <div className="text-center">
             <div className="flex items-center justify-center gap-3 mb-8">
-               <Image
-              src="/img/logo-white.webp"
-              alt="Logo Cakely"
-              width={80}
-              height={80}
-            />
+              <Image
+                src="/img/logo-white.webp"
+                alt="Logo Cakely"
+                width={80}
+                height={80}
+              />
             </div>
             <p className="text-gray-400 mb-10 max-w-3xl mx-auto text-lg leading-relaxed">
               La revolución digital que tu pastelería necesitaba. Transforma el

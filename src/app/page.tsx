@@ -27,7 +27,12 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import HeaderLoginButton from "./HeaderLoginButton";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 const appDomain = process.env.NEXT_PUBLIC_APP_DOMAIN || "https://app.cakely.es";
 const basicPriceId = process.env.STRIPE_PRICE_ID_BASICO_MONTHLY!;
@@ -655,9 +660,12 @@ export default function Index() {
                     value={`item-${i}`}
                     className="bg-white border border-emerald-100 rounded-xl shadow-sm overflow-hidden"
                   >
-                    <AccordionTrigger style={{
-                      "textDecoration": "none",
-                    }} className="flex w-full justify-between items-center px-6 py-4 text-left text-lg font-medium text-gray-800 transition-colors">
+                    <AccordionTrigger
+                      style={{
+                        textDecoration: "none",
+                      }}
+                      className="flex w-full justify-between items-center px-6 py-4 text-left text-lg font-medium text-gray-800 transition-colors"
+                    >
                       {faq.question}
                     </AccordionTrigger>
                     <AccordionContent className="px-6 pb-4 text-gray-600 text-base">
@@ -705,6 +713,12 @@ export default function Index() {
                 className="text-gray-400 hover:text-white transition-colors text-lg"
               >
                 Contacto
+              </Link>
+              <Link
+                href="/privacidad/cookies"
+                className="text-gray-400 hover:text-white transition-colors text-lg"
+              >
+                Política de Cookies
               </Link>
             </div>
             <p className="text-gray-500">

@@ -695,7 +695,7 @@ export default function Index() {
               La revolución digital que tu pastelería necesitaba. Transforma el
               caos en control y el estrés en crecimiento.
             </p>
-            <div className="flex justify-center gap-8 mb-10">
+            <div className="grid grid-cols-2 gap-4 sm:flex sm:justify-center sm:gap-8 mb-10 text-center">
               <Link
                 href="/terminos"
                 className="text-gray-400 hover:text-white transition-colors text-lg"

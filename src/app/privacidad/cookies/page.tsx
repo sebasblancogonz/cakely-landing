@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Card, CardContent, CardFooter } from "@/components/ui/card"; // Asegúrate de que la ruta a tus componentes sea correcta
 import { Button } from "@/components/ui/button"; // Asegúrate de que la ruta a tus componentes sea correcta
 
-export function CookiePolicyPage() {
+export default const CookiePolicyPage = () => {
   const contactEmail = "contacto@cakely.es";
 
   return (
@@ -258,5 +258,3 @@ export function CookiePolicyPage() {
     </div>
   );
 }
-
-export default CookiePolicyPage;

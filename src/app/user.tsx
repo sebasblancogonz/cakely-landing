@@ -27,7 +27,7 @@ interface UserProps {
 
 export function User({ isLoading, user }: UserProps) {
   const handleLogout = () => {
-    const logoutUrl = `${appDomain}/logout}`;
+    const logoutUrl = `${appDomain}/logout`;
     window.location.href = logoutUrl;
   };
   if (isLoading) {

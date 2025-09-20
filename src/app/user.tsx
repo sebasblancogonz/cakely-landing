@@ -27,7 +27,7 @@ interface UserProps {
 
 export function User({ isLoading, user }: UserProps) {
   const handleLogout = () => {
-    const logoutUrl = `${appDomain}/logout}`;
+    const logoutUrl = `${appDomain}/logout`;
     window.location.href = logoutUrl;
   };
   if (isLoading) {
@@ -87,7 +87,7 @@ export function User({ isLoading, user }: UserProps) {
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem
-              className="cursor-pointer text-destructive focus:text-destructive focus:bg-destructive/10"
+              className="cursor-pointer text-destructive focus:text-destructive focus:bg-destructive/10 bg-destructive/5"
               onClick={handleLogout}
             >
               <LogOut className="mr-2 h-4 w-4" />

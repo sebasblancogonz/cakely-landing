@@ -45,6 +45,11 @@ const faqs = [
       "Cakely es una herramienta de gestión diseñada para pastelerías artesanales. Ayuda a organizar pedidos, clientes y recetas desde un solo lugar de forma eficiente y sencilla.",
   },
   {
+    question: "¿Puedo empezar a usar Cakely gratis?",
+    answer:
+      "Sí, ofrecemos un plan gratuito que te permite gestionar hasta 10 pedidos al mes, 20 clientes y 5 recetas. Es perfecto para pastelerías que están empezando o quieren probar la plataforma.",
+  },
+  {
     question: "¿Cuántos pedidos y clientes puedo gestionar en el plan Básico?",
     answer:
       "El plan Básico te permite gestionar hasta 50 pedidos mensuales y un total acumulado de 100 clientes. Es ideal para pastelerías pequeñas o en fase inicial.",
@@ -441,7 +446,47 @@ export default function Index() {
               </p>
             </div>
 
-            <div className="grid lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+              {/* Free Plan */}
+              <Card className="relative group hover:shadow-2xl transition-all duration-500 border-2 border-gray-200 hover:border-emerald-300 rounded-3xl">
+                <CardHeader className="text-center pb-8">
+                  <CardTitle className="text-3xl font-bold text-gray-900">
+                    Gratuito
+                  </CardTitle>
+                  <CardDescription className="text-lg text-gray-600 mt-2">
+                    Perfecto para empezar sin compromisos
+                  </CardDescription>
+                  <div className="mt-8">
+                    <span className="text-6xl font-black text-gray-900">
+                      0€
+                    </span>
+                    <span className="text-2xl text-gray-500">/mes</span>
+                  </div>
+                  <p className="text-sm text-gray-500 mt-4 font-medium">
+                    Siempre gratis
+                  </p>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  {[
+                    "✅ Hasta 10 pedidos al mes",
+                    "✅ Hasta 20 clientes",
+                    "✅ Hasta 5 recetas",
+                    "📊 Analíticas básicas",
+                    "📅 Integración con Google Calendar",
+                    "👤 1 usuario incluido",
+                  ].map((feature, index) => (
+                    <div key={index} className="flex items-center gap-3">
+                      <span className="text-gray-700 text-lg">{feature}</span>
+                    </div>
+                  ))}
+                </CardContent>
+                <CardFooter>
+                  <Button className="w-full bg-gradient-to-r from-gray-600 to-gray-700 hover:from-gray-700 hover:to-gray-800 text-white py-6 text-lg font-semibold rounded-xl">
+                    <Link href={`${appDomain}/registro`}>Comenzar Gratis</Link>
+                  </Button>
+                </CardFooter>
+              </Card>
+
               {/* Basic Plan */}
               <Card className="relative group hover:shadow-2xl transition-all duration-500 border-2 border-gray-200 hover:border-emerald-300 rounded-3xl">
                 <CardHeader className="text-center pb-8">
@@ -449,7 +494,7 @@ export default function Index() {
                     Básico
                   </CardTitle>
                   <CardDescription className="text-lg text-gray-600 mt-2">
-                    Perfecto para comenzar tu transformación
+                    Ideal para pastelerías en crecimiento
                   </CardDescription>
                   <div className="mt-8">
                     <span className="text-6xl font-black text-gray-900">
@@ -463,15 +508,21 @@ export default function Index() {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   {[
+                    "🚀 Todo lo del plan Gratuito",
                     "✅ Hasta 50 pedidos al mes",
                     "✅ Hasta 100 clientes",
-                    "✅ Hasta 5 recetas",
-                    "📊 Estadísticas básicas",
+                    "📊 Estadísticas completas",
                     "📅 Integración con Google Calendar",
                     "👤 1 usuario incluido",
                   ].map((feature, index) => (
                     <div key={index} className="flex items-center gap-3">
-                      <span className="text-gray-700 text-lg">{feature}</span>
+                      <span
+                        className={`text-gray-700 text-lg ${
+                          index === 0 ? "font-semibold" : ""
+                        }`}
+                      >
+                        {feature}
+                      </span>
                     </div>
                   ))}
                 </CardContent>
@@ -487,13 +538,13 @@ export default function Index() {
               </Card>
 
               {/* Pro Plan */}
-              <Card className="relative group hover:shadow-2xl transition-all duration-500 border-2 border-emerald-400 bg-white scale-105 rounded-3xl md:mt-0 mt-10">
-                <div className="absolute -top-4 sm:-top-6 left-1/2 transform -translate-x-1/2">
-                  <span className="bg-gradient-to-r from-emerald-600 to-teal-600 text-white px-4 sm:px-8 py-2 sm:py-4 rounded-full text-sm font-bold shadow-lg">
+              <Card className="relative group hover:shadow-2xl transition-all duration-500 border-2 border-emerald-400 bg-white rounded-3xl">
+                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-10">
+                  <span className="bg-gradient-to-r from-emerald-600 to-teal-600 text-white px-3 py-2 rounded-full text-xs font-bold shadow-lg whitespace-nowrap">
                     💎 RECOMENDADO
                   </span>
                 </div>
-                <CardHeader className="text-center pb-8 pt-8">
+                <CardHeader className="text-center pb-8 pt-10">
                   <CardTitle className="text-3xl font-bold text-gray-900">
                     Pro
                   </CardTitle>
@@ -548,8 +599,8 @@ export default function Index() {
 
             <div className="text-center mt-16">
               <p className="text-gray-600 text-lg mb-4">
-                ✨ 14 días gratis • 🚫 Sin tarjeta de crédito • ⚡ Cancela
-                cuando quieras
+                ✨ Plan gratuito disponible • 🚫 Sin tarjeta de crédito • ⚡
+                Cancela cuando quieras
               </p>
               <p className="text-gray-500">
                 Todos los precios incluyen IVA • Soporte en español • Datos
@@ -576,6 +627,9 @@ export default function Index() {
                   <tr className="bg-gray-100 text-gray-800 text-lg">
                     <th className="py-4 px-6 font-bold">Características</th>
                     <th className="py-4 px-6 font-bold text-center">
+                      🆓 Gratuito
+                    </th>
+                    <th className="py-4 px-6 font-bold text-center">
                       🟢 Básico
                     </th>
                     <th className="py-4 px-6 font-bold text-center">🚀 Pro</th>
@@ -584,46 +638,73 @@ export default function Index() {
                 <tbody className="text-gray-700 text-base">
                   <tr className="border-t">
                     <td className="py-4 px-6">Pedidos mensuales</td>
+                    <td className="py-4 px-6 text-center">Hasta 10</td>
                     <td className="py-4 px-6 text-center">Hasta 50</td>
                     <td className="py-4 px-6 text-center">Ilimitados</td>
                   </tr>
                   <tr className="border-t">
                     <td className="py-4 px-6">Clientes</td>
+                    <td className="py-4 px-6 text-center">Hasta 20</td>
                     <td className="py-4 px-6 text-center">Hasta 100</td>
                     <td className="py-4 px-6 text-center">Ilimitados</td>
                   </tr>
                   <tr className="border-t">
                     <td className="py-4 px-6">Recetas</td>
                     <td className="py-4 px-6 text-center">Hasta 5</td>
+                    <td className="py-4 px-6 text-center">Hasta 5</td>
                     <td className="py-4 px-6 text-center">Ilimitadas</td>
                   </tr>
                   <tr className="border-t">
                     <td className="py-4 px-6">Usuarios incluidos</td>
                     <td className="py-4 px-6 text-center">1</td>
+                    <td className="py-4 px-6 text-center">1</td>
                     <td className="py-4 px-6 text-center">Hasta 5</td>
                   </tr>
                   <tr className="border-t">
+                    <td className="py-4 px-6">Analíticas básicas</td>
+                    <td className="py-4 px-6 text-center">✅</td>
+                    <td className="py-4 px-6 text-center">✅</td>
+                    <td className="py-4 px-6 text-center">✅</td>
+                  </tr>
+                  <tr className="border-t">
+                    <td className="py-4 px-6">Estadísticas completas</td>
+                    <td className="py-4 px-6 text-center">❌</td>
+                    <td className="py-4 px-6 text-center">✅</td>
+                    <td className="py-4 px-6 text-center">✅</td>
+                  </tr>
+                  <tr className="border-t">
                     <td className="py-4 px-6">Estadísticas avanzadas</td>
+                    <td className="py-4 px-6 text-center">❌</td>
                     <td className="py-4 px-6 text-center">❌</td>
                     <td className="py-4 px-6 text-center">✅</td>
                   </tr>
                   <tr className="border-t">
                     <td className="py-4 px-6">Generador de presupuestos</td>
                     <td className="py-4 px-6 text-center">❌</td>
+                    <td className="py-4 px-6 text-center">❌</td>
+                    <td className="py-4 px-6 text-center">✅</td>
+                  </tr>
+                  <tr className="border-t">
+                    <td className="py-4 px-6">Chat Bot</td>
+                    <td className="py-4 px-6 text-center">❌</td>
+                    <td className="py-4 px-6 text-center">❌</td>
                     <td className="py-4 px-6 text-center">✅</td>
                   </tr>
                   <tr className="border-t">
                     <td className="py-4 px-6">Insights de fidelidad</td>
+                    <td className="py-4 px-6 text-center">❌</td>
                     <td className="py-4 px-6 text-center">❌</td>
                     <td className="py-4 px-6 text-center">✅</td>
                   </tr>
                   <tr className="border-t">
                     <td className="py-4 px-6">Integraciones personalizadas</td>
                     <td className="py-4 px-6 text-center">❌</td>
+                    <td className="py-4 px-6 text-center">❌</td>
                     <td className="py-4 px-6 text-center">✅</td>
                   </tr>
                   <tr className="border-t">
                     <td className="py-4 px-6">Soporte prioritario</td>
+                    <td className="py-4 px-6 text-center">❌</td>
                     <td className="py-4 px-6 text-center">❌</td>
                     <td className="py-4 px-6 text-center">✅</td>
                   </tr>
@@ -631,6 +712,7 @@ export default function Index() {
                     <td className="py-4 px-6">
                       Integración con Google Calendar
                     </td>
+                    <td className="py-4 px-6 text-center">✅</td>
                     <td className="py-4 px-6 text-center">✅</td>
                     <td className="py-4 px-6 text-center">✅</td>
                   </tr>

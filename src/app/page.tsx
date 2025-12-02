@@ -27,6 +27,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import HeaderLoginButton from "./HeaderLoginButton";
+import { MobileMenu } from "@/components/MobileMenu";
 import {
   Accordion,
   AccordionContent,
@@ -120,7 +121,10 @@ export default function Index() {
             >
               FAQ
             </Link>
-            <HeaderLoginButton />
+            <div className="hidden md:block">
+              <HeaderLoginButton />
+            </div>
+            <MobileMenu />
           </nav>
         </div>
       </header>

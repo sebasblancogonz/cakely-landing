@@ -4,6 +4,8 @@ import { notFound } from "next/navigation";
 import { Calendar, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { prisma } from "@/lib/prisma";
+import { MobileMenu } from "@/components/MobileMenu";
+import "./blog-post.css";
 
 async function getBlogPost(slug: string) {
   const post = await prisma.blogPost.findUnique({
@@ -83,6 +85,21 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   };
 }
 
+// Revalidar cada 60 segundos (ISR - Incremental Static Regeneration)
+export const revalidate = 60;
+
+// Generar rutas estáticas solo para posts publicados en build time
+export async function generateStaticParams() {
+  const posts = await prisma.blogPost.findMany({
+    where: { published: true },
+    select: { slug: true },
+  });
+
+  return posts.map((post) => ({
+    slug: post.slug,
+  }));
+}
+
 export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const post = await getBlogPost(slug);
@@ -141,7 +158,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               height={80}
             />
           </Link>
-          <nav className="flex items-center gap-8">
+          <nav className="hidden md:flex items-center gap-8">
             <Link
               href="/blog"
               className="text-gray-600 hover:text-emerald-600 transition-colors font-medium"
@@ -155,6 +172,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               Inicio
             </Link>
           </nav>
+          <MobileMenu />
         </div>
       </header>
 
@@ -205,7 +223,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               )}
 
               <div
-                className="prose prose-lg max-w-none prose-headings:font-bold prose-headings:text-gray-900 prose-p:text-gray-700 prose-p:leading-relaxed prose-a:text-emerald-600 prose-a:no-underline hover:prose-a:underline prose-strong:text-gray-900 prose-img:rounded-2xl"
+                className="blog-content"
                 dangerouslySetInnerHTML={{ __html: post.content }}
               />
 

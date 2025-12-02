@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';
 import { prisma } from '@/lib/prisma';
 
 function validateApiKey(request: NextRequest): boolean {
@@ -67,6 +68,10 @@ export async function POST(request: NextRequest) {
         publishedAt: published !== false ? new Date() : null,
       },
     });
+
+    // Revalidar las páginas del blog inmediatamente
+    revalidatePath('/blog');
+    revalidatePath(`/blog/${post.slug}`);
 
     return NextResponse.json(
       {

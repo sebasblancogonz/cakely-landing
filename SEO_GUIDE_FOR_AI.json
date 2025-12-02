@@ -1,0 +1,173 @@
+{
+  "objetivo": "Esta guía contiene las mejores prácticas de SEO para generar contenido optimizado para el blog de Cakely",
+  "sobre_cakely": {
+    "descripcion": "Cakely es un software CRM para pastelerías artesanales",
+    "funcionalidades": [
+      "Gestión de pedidos",
+      "Control de costes y rentabilidad",
+      "Fidelización de clientes",
+      "Productividad y organización del obrador",
+      "Marketing digital"
+    ]
+  },
+  "reglas_seo": {
+    "titulo": {
+      "longitud_min": 50,
+      "longitud_max": 70,
+      "longitud_ideal": "50-60 caracteres",
+      "debe_incluir": [
+        "Palabras clave relacionadas con pastelería",
+        "Atractivo para humanos",
+        "Único para cada post"
+      ],
+      "ejemplos_buenos": [
+        "Cómo organizar pedidos de pastelería en temporada alta",
+        "5 errores comunes al gestionar una repostería artesanal",
+        "Guía completa: Calcular costes de recetas de pastelería"
+      ],
+      "ejemplos_malos": [
+        "Post sobre pasteles",
+        "Todo lo que necesitas saber sobre absolutamente todo relacionado con la gestión completa de pastelerías"
+      ]
+    },
+    "excerpt": {
+      "longitud_min": 150,
+      "longitud_max": 170,
+      "longitud_ideal": "150-160 caracteres",
+      "debe_incluir": [
+        "Resume el contenido",
+        "Call to action implícito",
+        "Palabras clave naturales"
+      ],
+      "ejemplos_buenos": [
+        "Descubre 7 estrategias probadas para organizar pedidos, reducir errores y ahorrar tiempo en tu pastelería. Incluye plantillas descargables.",
+        "Aprende a calcular el coste real de tus recetas, establecer precios rentables y aumentar tus márgenes. Guía paso a paso con ejemplos."
+      ]
+    },
+    "contenido": {
+      "longitud_min_palabras": 800,
+      "longitud_ideal_palabras": "1200-2000",
+      "longitud_max_palabras": 3000,
+      "estructura_html": {
+        "usar": ["h2", "h3", "h4", "p", "ul", "ol", "li", "strong", "em", "a"],
+        "minimos": {
+          "h2": 2,
+          "h3": 4,
+          "parrafos": 10,
+          "enlaces_internos": 1,
+          "enlaces_a_cakely": 1
+        },
+        "jerarquia": "Usar h2 para secciones principales, h3 para subsecciones, h4 para puntos específicos"
+      },
+      "parrafos": {
+        "lineas_por_parrafo": "2-4 líneas máximo",
+        "evitar": "Párrafos muy largos que cansan al lector"
+      },
+      "listas": {
+        "cuando_usar": "Para enumerar puntos clave, pasos o características",
+        "formato_ul": "Para listas no ordenadas",
+        "formato_ol": "Para pasos secuenciales"
+      },
+      "enfasis": {
+        "strong": "Para términos importantes y conceptos clave",
+        "em": "Para énfasis sutil"
+      },
+      "enlaces": {
+        "enlace_cakely_obligatorio": "https://cakely.es",
+        "contexto_enlace": "Integrar naturalmente en el contenido",
+        "enlaces_internos": "Vincular a otros posts del blog cuando sea relevante"
+      }
+    },
+    "keywords": {
+      "densidad_objetivo": "1-2% del contenido total",
+      "temas_principales": [
+        "gestión de pedidos pastelería",
+        "software para pastelerías",
+        "CRM pastelería",
+        "calcular costes pastelería",
+        "rentabilidad repostería",
+        "fidelización clientes pastelería",
+        "productividad pastelería",
+        "marketing digital pastelería"
+      ],
+      "uso_natural": "Integrar keywords de forma natural, sin keyword stuffing",
+      "variaciones": "Usar sinónimos como pastelería, repostería, obrador"
+    },
+    "imagen_portada": {
+      "dimensiones": "1200x630px",
+      "ratio": "1.91:1",
+      "peso_max_kb": 200,
+      "formatos": ["jpg", "png", "webp"],
+      "fuentes_recomendadas": [
+        "https://unsplash.com",
+        "https://pexels.com"
+      ],
+      "busquedas_sugeridas": [
+        "bakery",
+        "pastry",
+        "cake shop",
+        "pastry chef",
+        "baking"
+      ]
+    }
+  },
+  "estructura_post_ideal": {
+    "introduccion": {
+      "h2": "Introducción al tema",
+      "contenido": "Presenta el problema o tema, estadísticas relevantes, por qué es importante"
+    },
+    "desarrollo": {
+      "seccion_1": {
+        "h2": "Primera estrategia o punto principal",
+        "h3": "Subtemas o detalles específicos",
+        "contenido": "Explicación detallada, ejemplos prácticos"
+      },
+      "seccion_2": {
+        "h2": "Segunda estrategia o punto principal",
+        "contenido": "Más desarrollo del tema"
+      },
+      "seccion_n": {
+        "h2": "Otras secciones según sea necesario",
+        "contenido": "Continuar con estructura similar"
+      }
+    },
+    "conclusion": {
+      "h2": "Conclusión",
+      "contenido": "Resume los puntos clave, incluye CTA hacia Cakely"
+    }
+  },
+  "cta_recomendados": [
+    "¿Quieres automatizar la gestión de tu pastelería? Prueba Cakely gratis",
+    "Con Cakely puedes gestionar todos tus pedidos desde un solo lugar",
+    "Descubre cómo Cakely puede ayudarte a optimizar tu pastelería"
+  ],
+  "evitar": {
+    "contenido_delgado": "Posts de menos de 800 palabras sin valor real",
+    "keyword_stuffing": "Repetir keywords de forma no natural",
+    "clickbait": "Títulos engañosos que no coinciden con el contenido",
+    "contenido_no_relacionado": "Temas ajenos a pastelería o gestión",
+    "enlaces_rotos": "Verificar que todos los enlaces funcionen",
+    "parrafos_largos": "Más de 5 líneas seguidas sin separación"
+  },
+  "metricas_exito": {
+    "checklist": [
+      "Título entre 50-60 caracteres",
+      "Excerpt entre 150-160 caracteres",
+      "Contenido mínimo 1200 palabras",
+      "Al menos 2 H2",
+      "Al menos 4 H3",
+      "Imagen de portada 1200x630px",
+      "Al menos 1 enlace a cakely.es",
+      "2-3 enlaces internos a otros posts",
+      "Keywords con densidad 1-2%",
+      "Listas o elementos visuales",
+      "CTA al final del artículo"
+    ]
+  },
+  "formato_respuesta_json": {
+    "title": "Título del artículo aquí (50-60 caracteres)",
+    "excerpt": "Resumen del artículo aquí (150-160 caracteres)",
+    "content": "HTML completo del artículo siguiendo todas las reglas anteriores"
+  },
+  "instrucciones_finales": "RESPONDE SOLO EN FORMATO JSON sin markdown ni bloques de código. El contenido debe ser práctico, profesional y altamente relevante para propietarios de pastelerías artesanales."
+}

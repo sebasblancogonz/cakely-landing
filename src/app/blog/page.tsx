@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ArrowRight, Calendar } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 import { Metadata } from "next";
+import { MobileMenu } from "@/components/MobileMenu";
 
 type BlogPostPreview = {
   id: string;
@@ -53,6 +54,9 @@ export const metadata: Metadata = {
   },
 };
 
+// Revalidar cada 60 segundos (ISR - Incremental Static Regeneration)
+export const revalidate = 60;
+
 export default async function BlogPage() {
   const posts = await getBlogPosts();
   const baseUrl = process.env.NEXT_PUBLIC_LANDING_DOMAIN || 'https://cakely.es';
@@ -91,7 +95,7 @@ export default async function BlogPage() {
               height={80}
             />
           </Link>
-          <nav className="flex items-center gap-8">
+          <nav className="hidden md:flex items-center gap-8">
             <Link
               href="/"
               className="text-gray-600 hover:text-emerald-600 transition-colors font-medium"
@@ -99,6 +103,7 @@ export default async function BlogPage() {
               Inicio
             </Link>
           </nav>
+          <MobileMenu />
         </div>
       </header>
 

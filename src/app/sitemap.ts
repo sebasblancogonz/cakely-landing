@@ -1,11 +1,17 @@
 import { MetadataRoute } from 'next'
 import { prisma } from '@/lib/prisma'
 
+type BlogPostForSitemap = {
+  slug: string;
+  updatedAt: Date;
+  publishedAt: Date | null;
+};
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_LANDING_DOMAIN || 'https://cakely.es'
 
   // Obtener todos los posts publicados
-  const posts = await prisma.blogPost.findMany({
+  const posts: BlogPostForSitemap[] = await prisma.blogPost.findMany({
     where: { published: true },
     select: {
       slug: true,

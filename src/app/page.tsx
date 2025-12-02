@@ -109,6 +109,12 @@ export default function Index() {
               Precios
             </Link>
             <Link
+              href="/blog"
+              className="text-gray-600 hover:text-emerald-600 transition-colors font-medium hidden md:inline-block"
+            >
+              Blog
+            </Link>
+            <Link
               href="#faq"
               className="text-gray-600 hover:text-emerald-600 transition-colors font-medium hidden md:inline-block"
             >

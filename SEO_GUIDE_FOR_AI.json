@@ -48,6 +48,7 @@
       "longitud_min_palabras": 800,
       "longitud_ideal_palabras": "1200-2000",
       "longitud_max_palabras": 3000,
+      "comillas": "Usar html &quot; para comillas dobles y &#39; para comillas simples",
       "estructura_html": {
         "usar": ["h2", "h3", "h4", "p", "ul", "ol", "li", "strong", "em", "a"],
         "minimos": {
@@ -98,10 +99,7 @@
       "ratio": "1.91:1",
       "peso_max_kb": 200,
       "formatos": ["jpg", "png", "webp"],
-      "fuentes_recomendadas": [
-        "https://unsplash.com",
-        "https://pexels.com"
-      ],
+      "fuentes_recomendadas": ["https://unsplash.com", "https://pexels.com"],
       "busquedas_sugeridas": [
         "bakery",
         "pastry",

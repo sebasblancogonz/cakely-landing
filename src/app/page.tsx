@@ -164,9 +164,7 @@ export default function Index() {
                   size="lg"
                   className="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 px-10 py-7 text-lg font-semibold rounded-xl"
                 >
-                  <Link
-                    href={`${appDomain}/empezar-prueba`}
-                  >
+                  <Link href={`${appDomain}/empezar-prueba`}>
                     Comenzar Gratis
                   </Link>
                   <ArrowRight className="ml-2 h-5 w-5" />

@@ -5,7 +5,16 @@ import { ArrowRight, Calendar } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 import { Metadata } from "next";
 
-async function getBlogPosts() {
+type BlogPostPreview = {
+  id: string;
+  title: string;
+  slug: string;
+  excerpt: string | null;
+  coverImage: string | null;
+  publishedAt: Date | null;
+};
+
+async function getBlogPosts(): Promise<BlogPostPreview[]> {
   const posts = await prisma.blogPost.findMany({
     where: { published: true },
     orderBy: { publishedAt: 'desc' },

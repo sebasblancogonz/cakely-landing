@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { ArrowRight, Calendar } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 import { Metadata } from "next";
@@ -13,11 +14,15 @@ type BlogPostPreview = {
   excerpt: string | null;
   coverImage: string | null;
   publishedAt: Date | null;
+  tags: string[];
 };
 
-async function getBlogPosts(): Promise<BlogPostPreview[]> {
+async function getBlogPosts(tag?: string): Promise<BlogPostPreview[]> {
   const posts = await prisma.blogPost.findMany({
-    where: { published: true },
+    where: {
+      published: true,
+      ...(tag && { tags: { has: tag } })
+    },
     orderBy: { publishedAt: 'desc' },
     select: {
       id: true,
@@ -26,6 +31,7 @@ async function getBlogPosts(): Promise<BlogPostPreview[]> {
       excerpt: true,
       coverImage: true,
       publishedAt: true,
+      tags: true,
     },
   });
   return posts;
@@ -57,8 +63,26 @@ export const metadata: Metadata = {
 // Revalidar cada 60 segundos (ISR - Incremental Static Regeneration)
 export const revalidate = 60;
 
-export default async function BlogPage() {
-  const posts = await getBlogPosts();
+async function getAllTags(): Promise<string[]> {
+  const posts = await prisma.blogPost.findMany({
+    where: { published: true },
+    select: { tags: true },
+  });
+
+  const allTags = posts.flatMap(post => post.tags);
+  const uniqueTags = Array.from(new Set(allTags));
+  return uniqueTags.sort();
+}
+
+export default async function BlogPage({
+  searchParams
+}: {
+  searchParams: Promise<{ tag?: string }>
+}) {
+  const params = await searchParams;
+  const selectedTag = params.tag;
+  const posts = await getBlogPosts(selectedTag);
+  const allTags = await getAllTags();
   const baseUrl = process.env.NEXT_PUBLIC_LANDING_DOMAIN || 'https://cakely.es';
 
   // JSON-LD para la página del blog
@@ -127,11 +151,45 @@ export default async function BlogPage() {
 
         <section className="py-24 bg-white">
           <div className="container mx-auto px-4">
+            {allTags.length > 0 && (
+              <div className="max-w-7xl mx-auto mb-12">
+                <div className="flex flex-wrap gap-3 items-center">
+                  <span className="text-gray-600 font-medium">Filtrar por categoría:</span>
+                  <Link href="/blog">
+                    <Badge
+                      variant={!selectedTag ? "default" : "outline"}
+                      className="cursor-pointer"
+                    >
+                      Todas
+                    </Badge>
+                  </Link>
+                  {allTags.map((tag) => (
+                    <Link key={tag} href={`/blog?tag=${encodeURIComponent(tag)}`}>
+                      <Badge
+                        variant={selectedTag === tag ? "default" : "outline"}
+                        className="cursor-pointer"
+                      >
+                        {tag}
+                      </Badge>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )}
+
             {posts.length === 0 ? (
               <div className="text-center py-20">
                 <p className="text-xl text-gray-600">
-                  Aún no hay artículos publicados. ¡Pronto habrá contenido nuevo!
+                  {selectedTag
+                    ? `No hay artículos con la categoría "${selectedTag}"`
+                    : 'Aún no hay artículos publicados. ¡Pronto habrá contenido nuevo!'
+                  }
                 </p>
+                {selectedTag && (
+                  <Link href="/blog" className="text-emerald-600 hover:text-emerald-700 font-semibold mt-4 inline-block">
+                    Ver todos los artículos
+                  </Link>
+                )}
               </div>
             ) : (
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
@@ -162,6 +220,15 @@ export default async function BlogPage() {
                         <CardTitle className="text-2xl font-bold text-gray-900 group-hover:text-emerald-600 transition-colors">
                           {post.title}
                         </CardTitle>
+                        {post.tags.length > 0 && (
+                          <div className="flex flex-wrap gap-2 mt-3">
+                            {post.tags.map((tag) => (
+                              <Badge key={tag} variant="secondary" className="text-xs">
+                                {tag}
+                              </Badge>
+                            ))}
+                          </div>
+                        )}
                       </CardHeader>
                       <CardContent>
                         {post.excerpt && (

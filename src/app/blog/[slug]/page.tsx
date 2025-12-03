@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Calendar, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { prisma } from "@/lib/prisma";
 import { MobileMenu } from "@/components/MobileMenu";
 import "./blog-post.css";
@@ -204,6 +205,17 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                 <h1 className="text-4xl md:text-6xl font-black text-gray-900 leading-tight mb-6">
                   {post.title}
                 </h1>
+                {post.tags && post.tags.length > 0 && (
+                  <div className="flex flex-wrap gap-2 mb-6">
+                    {post.tags.map((tag) => (
+                      <Link key={tag} href={`/blog?tag=${encodeURIComponent(tag)}`}>
+                        <Badge variant="secondary" className="cursor-pointer hover:bg-gray-300 transition-colors">
+                          {tag}
+                        </Badge>
+                      </Link>
+                    ))}
+                  </div>
+                )}
                 {post.excerpt && (
                   <p className="text-xl text-gray-600 leading-relaxed">
                     {post.excerpt}

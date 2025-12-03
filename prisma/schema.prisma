@@ -15,6 +15,7 @@ model BlogPost {
   coverImage  String?
   published   Boolean  @default(false)
   publishedAt DateTime?
+  tags        String[] @default([])
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 

@@ -34,6 +34,19 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const publishedTime = post.publishedAt ? new Date(post.publishedAt).toISOString() : undefined;
   const modifiedTime = new Date(post.updatedAt).toISOString();
 
+  // Optimizar imagen para redes sociales (WhatsApp, Facebook, Twitter)
+  // Si viene de Unsplash, añadir parámetros de optimización
+  let optimizedImage = post.coverImage;
+  if (optimizedImage) {
+    // Si es de Unsplash, asegurar dimensiones correctas para OG
+    if (optimizedImage.includes('unsplash.com')) {
+      // Eliminar parámetros existentes y añadir los correctos
+      optimizedImage = optimizedImage.split('?')[0] + '?w=1200&h=630&fit=crop&q=80';
+    }
+  } else {
+    optimizedImage = `${baseUrl}/img/logo.png`;
+  }
+
   return {
     title: `${post.title} - Cakely Blog`,
     description,
@@ -49,23 +62,19 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       publishedTime,
       modifiedTime,
       authors: ['Cakely'],
-      images: post.coverImage ? [{
-        url: post.coverImage,
+      images: [{
+        url: optimizedImage,
         width: 1200,
         height: 630,
         alt: post.title,
-      }] : [{
-        url: `${baseUrl}/img/logo.png`,
-        width: 1200,
-        height: 630,
-        alt: 'Cakely - Gestión para pastelerías',
+        type: 'image/jpeg',
       }],
     },
     twitter: {
       card: 'summary_large_image',
       title: post.title,
       description,
-      images: post.coverImage ? [post.coverImage] : [`${baseUrl}/img/logo.png`],
+      images: [optimizedImage],
       creator: '@cakely_app',
     },
     alternates: {

@@ -1,9 +1,14 @@
-# *
+# Allow all user agents
 User-agent: *
 Allow: /
+
+# Disallow API routes and admin paths
+Disallow: /api/
+Disallow: /_next/
+Disallow: /admin/
 
 # Host
 Host: https://cakely.es
 
-# Sitemaps
+# Sitemap
 Sitemap: https://cakely.es/sitemap.xml

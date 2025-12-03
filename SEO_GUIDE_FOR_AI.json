@@ -162,10 +162,75 @@
       "CTA al final del artículo"
     ]
   },
+  "categorias": {
+    "descripcion": "Cada artículo DEBE pertenecer a UNA de estas categorías",
+    "categorias_disponibles": [
+      {
+        "valor": "GESTION",
+        "descripcion": "Gestión de pedidos, clientes y operaciones diarias"
+      },
+      {
+        "valor": "FINANZAS",
+        "descripcion": "Control de costes, rentabilidad y precios"
+      },
+      {
+        "valor": "RECETAS",
+        "descripcion": "Recetas y técnicas de repostería artesanal"
+      },
+      {
+        "valor": "MARKETING",
+        "descripcion": "Estrategias de marketing y captación de clientes"
+      },
+      {
+        "valor": "PRODUCTIVIDAD",
+        "descripcion": "Organización del obrador y mejora de procesos"
+      },
+      {
+        "valor": "TENDENCIAS",
+        "descripcion": "Novedades del sector y tendencias del mercado"
+      },
+      {
+        "valor": "CASOS_ESTUDIO",
+        "descripcion": "Casos de éxito y testimonios de pastelerías"
+      }
+    ],
+    "regla_seleccion": "Elige la categoría que mejor se ajuste al tema principal del artículo. Solo UNA categoría por artículo.",
+    "ejemplos": [
+      {
+        "titulo": "Cómo organizar pedidos de pastelería en temporada alta",
+        "categoria": "GESTION"
+      },
+      {
+        "titulo": "5 estrategias para reducir costes en tu pastelería",
+        "categoria": "FINANZAS"
+      },
+      {
+        "titulo": "Receta perfecta de macarons franceses",
+        "categoria": "RECETAS"
+      },
+      {
+        "titulo": "Cómo usar Instagram para captar más clientes",
+        "categoria": "MARKETING"
+      },
+      {
+        "titulo": "7 pasos para optimizar tu obrador",
+        "categoria": "PRODUCTIVIDAD"
+      },
+      {
+        "titulo": "Tendencias de repostería para 2025",
+        "categoria": "TENDENCIAS"
+      },
+      {
+        "titulo": "Cómo duplicamos ventas con Cakely: Caso Pastelería Luna",
+        "categoria": "CASOS_ESTUDIO"
+      }
+    ]
+  },
   "formato_respuesta_json": {
     "title": "Título del artículo aquí (50-60 caracteres)",
     "excerpt": "Resumen del artículo aquí (150-160 caracteres)",
-    "content": "HTML completo del artículo siguiendo todas las reglas anteriores"
+    "content": "HTML completo del artículo siguiendo todas las reglas anteriores",
+    "category": "CATEGORIA_EXACTA (usar valor de categorias_disponibles)"
   },
-  "instrucciones_finales": "RESPONDE SOLO EN FORMATO JSON sin markdown ni bloques de código. El contenido debe ser práctico, profesional y altamente relevante para propietarios de pastelerías artesanales."
+  "instrucciones_finales": "RESPONDE SOLO EN FORMATO JSON sin markdown ni bloques de código. El contenido debe ser práctico, profesional y altamente relevante para propietarios de pastelerías artesanales. DEBES incluir el campo 'category' con uno de los valores exactos de categorias_disponibles."
 }

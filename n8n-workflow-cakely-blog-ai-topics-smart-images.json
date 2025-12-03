@@ -1,0 +1,573 @@
+{
+  "name": "Cakely Blog - AI Topics + Smart Images",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "daysInterval": 3
+            }
+          ]
+        }
+      },
+      "name": "Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [
+        -1072,
+        144
+      ],
+      "id": "9b862376-e45b-4ec8-9064-ff439400171d"
+    },
+    {
+      "parameters": {
+        "jsCode": "const now = new Date();\nconst currentDate = now.toISOString().split('T')[0];\nconst currentMonth = now.toLocaleDateString('es-ES', { month: 'long', year: 'numeric' });\n\nreturn [{\n  json: {\n    currentDate,\n    currentMonth,\n    timestamp: now.getTime()\n  }\n}];"
+      },
+      "name": "Get Current Date",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -848,
+        144
+      ],
+      "id": "42237139-d950-4730-9dad-2ace56cec1bc"
+    },
+    {
+      "parameters": {
+        "url": "https://cakely.es/api/blog/posts",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "limit",
+              "value": "100"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Get Cakely Blog Posts",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        -624,
+        144
+      ],
+      "id": "bc2c720f-c261-49a6-adda-167998b9d871",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "YOUR_BLOG_API_KEY_CREDENTIAL_ID",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const posts = $input.first().json.posts || [];\n\n// Extraer títulos de artículos publicados\nconst publishedArticles = posts\n  .filter(post => post.published === true)\n  .map(post => post.title);\n\n// Extraer URLs de imágenes usadas (filtrar nulls y vacíos)\nconst usedImages = posts\n  .filter(post => post.coverImage)\n  .map(post => post.coverImage);\n\nreturn [{\n  json: {\n    publishedArticles,\n    usedImages,\n    totalPosts: posts.length\n  }\n}];"
+      },
+      "name": "Extract Published Data",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -400,
+        144
+      ],
+      "id": "fcc5d2e5-42bd-43c4-be5e-bd15eea4012f"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.anthropic.com/v1/messages",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "anthropicApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "anthropic-version",
+              "value": "2023-06-01"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"claude-3-5-haiku-20241022\",\n  \"max_tokens\": 500,\n  \"temperature\": 0.9,\n  \"system\": \"Eres un experto en marketing de contenidos para pastelerías. Tu trabajo es sugerir temas relevantes y actuales para el blog de Cakely.\\n\\nCakely es un software CRM para pastelerías artesanales que ayuda con:\\n- Gestión de pedidos\\n- Control de costes y rentabilidad\\n- Fidelización de clientes\\n- Productividad y organización del obrador\\n- Marketing digital\\n\\nRESPONDE SOLO EN FORMATO JSON (sin markdown):\\n{\\n  \\\"topic\\\": \\\"tema específico aquí\\\",\\n  \\\"postType\\\": \\\"tipo de post aquí\\\",\\n  \\\"reasoning\\\": \\\"1-2 líneas explicando por qué este tema es relevante ahora\\\"\\n}\\n\\nTipos de post válidos: guía práctica, consejos, tutorial paso a paso, errores comunes, estrategias, caso de estudio, checklist\",\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"Estamos en {{ $json.currentMonth }} ({{ $json.currentDate }}). Sugiere UN tema relevante y actual para el blog de Cakely. Considera:\\n- Temporada actual (¿qué desafíos enfrentan las pastelerías ahora?)\\n- Tendencias del sector\\n- Problemas comunes en esta época del año\\n- Oportunidades de negocio actuales\\n- Evita temas similares a los ya publicados: {{ $('Extract Published Data').item.json.publishedArticles.slice(0, 10).join(', ') }}\\n\\nResponde SOLO con el JSON.\"\n    }\n  ]\n}",
+        "options": {}
+      },
+      "name": "AI Generate Topic",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        -176,
+        144
+      ],
+      "id": "ca3e8888-5f42-497b-b859-94d8545776b1",
+      "credentials": {
+        "anthropicApi": {
+          "id": "YOUR_ANTHROPIC_API_CREDENTIAL_ID",
+          "name": "Anthropic account"
+        }
+      },
+      "notes": "Usa Claude Haiku para generar temas dinámicos"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={{ $json.content[0].text }}",
+        "options": {}
+      },
+      "name": "Parse Topic JSON",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3,
+      "position": [
+        48,
+        144
+      ],
+      "id": "5b81d9ad-356c-422f-907b-8cb051d0d66b"
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "operation": "get",
+        "owner": {
+          "__rl": true,
+          "value": "sebasblancogonz",
+          "mode": "list"
+        },
+        "repository": {
+          "__rl": true,
+          "value": "cakely-seo-ai",
+          "mode": "list"
+        },
+        "filePath": "SEO_GUIDE_FOR_AI.json",
+        "additionalParameters": {}
+      },
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 1.1,
+      "position": [
+        272,
+        144
+      ],
+      "id": "f0e4b965-a213-46f5-990d-63c91cd77aaa",
+      "name": "Get SEO Guide",
+      "credentials": {
+        "githubApi": {
+          "id": "YOUR_GITHUB_API_CREDENTIAL_ID",
+          "name": "GitHub account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "fromJson",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1,
+      "position": [
+        496,
+        144
+      ],
+      "id": "22763265-94a4-43f1-a0c8-d9229a88d2bd",
+      "name": "Extract SEO Guide"
+    },
+    {
+      "parameters": {
+        "jsCode": "return [{\n  json: {\n    body: {\n      model: \"claude-sonnet-4-5-20250929\",\n      max_tokens: 8192,\n      temperature: 0.8,\n      system: JSON.stringify($('Extract SEO Guide').first().json.data, null, 2),\n      messages: [\n        {\n          role: \"user\",\n          content:\n            \"Crea un artículo de blog tipo '\" +\n            $node[\"Parse Topic JSON\"].json.postType +\n            \"' sobre '\" +\n            $node[\"Parse Topic JSON\"].json.topic +\n            \"' para pastelerías artesanales. Contexto de por qué este tema es relevante: \" +\n            $node[\"Parse Topic JSON\"].json.reasoning +\n            \". Sigue TODAS las directrices SEO de la guía. El contenido debe ser práctico, profesional y altamente relevante para propietarios de pastelerías. Fecha actual: \" +\n            $node[\"Get Current Date\"].json.currentDate\n        }\n      ]\n    }\n  }\n}];"
+      },
+      "name": "Prepare Article Request",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        720,
+        144
+      ],
+      "id": "586edad2-9364-4926-909d-09fdf2db3530"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.anthropic.com/v1/messages",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "anthropicApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "anthropic-version",
+              "value": "2023-06-01"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ $json.body }}",
+        "options": {}
+      },
+      "name": "Generate Article",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        944,
+        144
+      ],
+      "id": "019ba0fa-2106-4d4e-8aba-b7163b2ad5fb",
+      "credentials": {
+        "anthropicApi": {
+          "id": "YOUR_ANTHROPIC_API_CREDENTIAL_ID",
+          "name": "Anthropic account"
+        }
+      },
+      "notes": "Claude Sonnet genera el artículo completo"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={{ $json.content[0].text.replace(/^```json\\n/, '').replace(/\\n```$/, '').trim() }}",
+        "options": {}
+      },
+      "name": "Parse Article JSON",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3,
+      "position": [
+        1168,
+        144
+      ],
+      "id": "5d8c7600-5099-48de-8e31-d3936765617e"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.anthropic.com/v1/messages",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "anthropicApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "anthropic-version",
+              "value": "2023-06-01"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"claude-3-5-haiku-20241022\",\n  \"max_tokens\": 200,\n  \"temperature\": 0.7,\n  \"system\": \"Eres un experto en búsqueda de imágenes. Dado un título de artículo, genera 2-3 términos de búsqueda en INGLÉS para Unsplash que sean específicos y relevantes. RESPONDE SOLO EN FORMATO JSON: {\\\"keywords\\\": [\\\"término1\\\", \\\"término2\\\", \\\"término3\\\"]}\",\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"Título del artículo: {{ $('Parse Article JSON').item.json.title }}\\n\\nGenera 2-3 términos de búsqueda en INGLÉS para encontrar una imagen de portada relevante en Unsplash. Los términos deben ser específicos al tema del artículo y relacionados con pastelerías/repostería. Responde SOLO con el JSON.\"\n    }\n  ]\n}",
+        "options": {}
+      },
+      "name": "Generate Image Keywords",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        1392,
+        144
+      ],
+      "id": "a1b2c3d4-e5f6-4a5b-8c9d-0e1f2a3b4c5d",
+      "credentials": {
+        "anthropicApi": {
+          "id": "YOUR_ANTHROPIC_API_CREDENTIAL_ID",
+          "name": "Anthropic account"
+        }
+      },
+      "notes": "Genera keywords específicos del artículo"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={{ $json.content[0].text }}",
+        "options": {}
+      },
+      "name": "Parse Keywords JSON",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3,
+      "position": [
+        1616,
+        144
+      ],
+      "id": "b2c3d4e5-f6a7-4b5c-9d0e-1f2a3b4c5d6e"
+    },
+    {
+      "parameters": {
+        "url": "https://api.unsplash.com/search/photos",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "query",
+              "value": "={{ $json.keywords.join(' ') + ' bakery pastry' }}"
+            },
+            {
+              "name": "orientation",
+              "value": "landscape"
+            },
+            {
+              "name": "per_page",
+              "value": "30"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Search Unsplash",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        1840,
+        144
+      ],
+      "id": "d736939c-25c2-439a-9122-d922f1f6f536",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "YOUR_UNSPLASH_API_KEY_CREDENTIAL_ID",
+          "name": "Unsplash Auth"
+        }
+      },
+      "notes": "Busca con keywords generados por IA"
+    },
+    {
+      "parameters": {
+        "jsCode": "const results = $input.first().json.results || [];\nconst usedImages = $node['Extract Published Data'].json.usedImages || [];\n\n// Filtrar imágenes que NO han sido usadas\nconst availableImages = results.filter(img => {\n  const imageUrl = img.urls.raw;\n  // Comparar por ID de Unsplash (más confiable que URL completa)\n  const imageId = img.id;\n  return !usedImages.some(used => used.includes(imageId));\n});\n\nif (availableImages.length === 0) {\n  // Si no hay imágenes disponibles, usar una genérica de respaldo\n  return [{\n    json: {\n      coverImage: results[0]?.urls.raw + '&w=1200&h=630&fit=crop' || '',\n      warning: 'No unused images found, using fallback',\n      totalResults: results.length,\n      usedCount: usedImages.length\n    }\n  }];\n}\n\n// Seleccionar imagen aleatoria de las disponibles\nconst selectedImage = availableImages[Math.floor(Math.random() * availableImages.length)];\n\nreturn [{\n  json: {\n    coverImage: selectedImage.urls.raw + '&w=1200&h=630&fit=crop',\n    imageId: selectedImage.id,\n    imageDescription: selectedImage.description || selectedImage.alt_description,\n    photographer: selectedImage.user.name,\n    photographerUrl: selectedImage.user.links.html,\n    totalResults: results.length,\n    availableImages: availableImages.length,\n    usedImagesCount: usedImages.length\n  }\n}];"
+      },
+      "name": "Select Unused Image",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2064,
+        144
+      ],
+      "id": "547f397f-fef7-4cd5-a98b-afce09c9e4f0",
+      "notes": "Filtra imágenes ya usadas y selecciona una nueva"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://cakely.es/api/blog/posts",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "title",
+              "value": "={{ $('Parse Article JSON').item.json.title }}"
+            },
+            {
+              "name": "excerpt",
+              "value": "={{ $('Parse Article JSON').item.json.excerpt }}"
+            },
+            {
+              "name": "content",
+              "value": "={{ $('Parse Article JSON').item.json.content }}"
+            },
+            {
+              "name": "coverImage",
+              "value": "={{ $json.coverImage }}"
+            },
+            {
+              "name": "category",
+              "value": "={{ $('Parse Article JSON').item.json.category }}"
+            },
+            {
+              "name": "published",
+              "value": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Publish to Blog",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        2288,
+        144
+      ],
+      "id": "ce1dbb0c-29c2-43ed-a70a-3ffa4801f965",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "YOUR_BLOG_API_KEY_CREDENTIAL_ID",
+          "name": "Header Auth account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Get Current Date",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Current Date": {
+      "main": [
+        [
+          {
+            "node": "Get Cakely Blog Posts",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Cakely Blog Posts": {
+      "main": [
+        [
+          {
+            "node": "Extract Published Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Published Data": {
+      "main": [
+        [
+          {
+            "node": "AI Generate Topic",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Generate Topic": {
+      "main": [
+        [
+          {
+            "node": "Parse Topic JSON",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Topic JSON": {
+      "main": [
+        [
+          {
+            "node": "Get SEO Guide",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get SEO Guide": {
+      "main": [
+        [
+          {
+            "node": "Extract SEO Guide",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract SEO Guide": {
+      "main": [
+        [
+          {
+            "node": "Prepare Article Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Article Request": {
+      "main": [
+        [
+          {
+            "node": "Generate Article",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Article": {
+      "main": [
+        [
+          {
+            "node": "Parse Article JSON",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Article JSON": {
+      "main": [
+        [
+          {
+            "node": "Generate Image Keywords",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Image Keywords": {
+      "main": [
+        [
+          {
+            "node": "Parse Keywords JSON",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Keywords JSON": {
+      "main": [
+        [
+          {
+            "node": "Search Unsplash",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search Unsplash": {
+      "main": [
+        [
+          {
+            "node": "Select Unused Image",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Select Unused Image": {
+      "main": [
+        [
+          {
+            "node": "Publish to Blog",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "meta": {
+    "templateCredsSetupCompleted": true
+  }
+}

@@ -63,7 +63,7 @@ export async function PATCH(
 
     const { slug } = await params;
     const body = await request.json();
-    const { title, content, excerpt, coverImage, published } = body;
+    const { title, content, excerpt, coverImage, published, category } = body;
 
     const existingPost = await prisma.blogPost.findUnique({
       where: { slug },
@@ -83,6 +83,7 @@ export async function PATCH(
         ...(content && { content }),
         ...(excerpt !== undefined && { excerpt }),
         ...(coverImage !== undefined && { coverImage }),
+        ...(category !== undefined && { category }),
         ...(published !== undefined && {
           published,
           publishedAt: published && !existingPost.publishedAt ? new Date() : existingPost.publishedAt,

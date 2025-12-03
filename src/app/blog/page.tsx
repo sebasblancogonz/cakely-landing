@@ -5,6 +5,8 @@ import { ArrowRight, Calendar } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 import { Metadata } from "next";
 import { MobileMenu } from "@/components/MobileMenu";
+import { getAllCategories, getCategorySlug } from "@/lib/categories";
+import { BlogCategory } from "@prisma/client";
 
 type BlogPostPreview = {
   id: string;
@@ -12,6 +14,7 @@ type BlogPostPreview = {
   slug: string;
   excerpt: string | null;
   coverImage: string | null;
+  category: BlogCategory | null;
   publishedAt: Date | null;
 };
 
@@ -25,6 +28,7 @@ async function getBlogPosts(): Promise<BlogPostPreview[]> {
       slug: true,
       excerpt: true,
       coverImage: true,
+      category: true,
       publishedAt: true,
     },
   });
@@ -59,6 +63,7 @@ export const revalidate = 60;
 
 export default async function BlogPage() {
   const posts = await getBlogPosts();
+  const allCategories = getAllCategories();
   const baseUrl = process.env.NEXT_PUBLIC_LANDING_DOMAIN || 'https://cakely.es';
 
   // JSON-LD para la página del blog
@@ -118,9 +123,28 @@ export default async function BlogPage() {
                   Cakely
                 </span>
               </h1>
-              <p className="text-xl md:text-2xl text-gray-600 mb-12 max-w-3xl mx-auto">
+              <p className="text-xl md:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto">
                 Consejos, novedades y mejores prácticas para gestionar tu pastelería
               </p>
+
+              {/* Categories pills */}
+              <div className="flex flex-wrap justify-center gap-2 mt-8">
+                <Link
+                  href="/blog"
+                  className="px-4 py-2 rounded-full text-sm font-medium bg-emerald-600 text-white transition-all"
+                >
+                  Todas
+                </Link>
+                {allCategories.map((category) => (
+                  <Link
+                    key={category.value}
+                    href={`/blog/categoria/${category.slug}`}
+                    className="px-4 py-2 rounded-full text-sm font-medium bg-white text-gray-600 hover:bg-emerald-50 hover:text-emerald-600 transition-all"
+                  >
+                    {category.label}
+                  </Link>
+                ))}
+              </div>
             </div>
           </div>
         </section>
@@ -158,6 +182,18 @@ export default async function BlogPage() {
                                 day: 'numeric',
                               })
                             : 'Sin fecha'}
+                          {post.category && (
+                            <>
+                              <span className="text-gray-300">•</span>
+                              <Link
+                                href={`/blog/categoria/${getCategorySlug(post.category)}`}
+                                className="text-emerald-600 hover:text-emerald-700 font-medium"
+                                onClick={(e) => e.stopPropagation()}
+                              >
+                                {allCategories.find(c => c.value === post.category)?.label}
+                              </Link>
+                            </>
+                          )}
                         </div>
                         <CardTitle className="text-2xl font-bold text-gray-900 group-hover:text-emerald-600 transition-colors">
                           {post.title}

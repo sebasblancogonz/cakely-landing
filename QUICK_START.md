@@ -216,14 +216,22 @@ Si quieres automatizar la generación de contenido con IA:
    - Contexto SEO completo
    - ~$0.015 por post
 
-4. **`n8n-workflow-cakely-blog-ai-topics.json`** - ⭐ Para largo plazo
+4. **`n8n-workflow-cakely-blog-ai-topics.json`** - Para largo plazo
    - Temas dinámicos con IA (adaptados a temporada)
    - Variedad infinita
    - ~$0.020 por post
 
+5. **`n8n-workflow-cakely-blog-ai-topics-smart-images.json`** - 🌟 Recomendado para producción
+   - Temas dinámicos con IA
+   - **Imágenes únicas** (nunca repite la misma)
+   - **Imágenes relevantes** (keywords generados por IA según el tema)
+   - Trackea imágenes ya usadas
+   - ~$0.019 por post
+
 ### Guías:
 - [N8N_WORKFLOW_GUIDE.md](./N8N_WORKFLOW_GUIDE.md) - Configuración paso a paso
 - [N8N_AI_TOPICS_VS_MANUAL.md](./N8N_AI_TOPICS_VS_MANUAL.md) - Comparación de workflows
+- [N8N_SMART_IMAGES_GUIDE.md](./N8N_SMART_IMAGES_GUIDE.md) - ⭐ Sistema de imágenes inteligentes
 
 ## Próximos pasos
 

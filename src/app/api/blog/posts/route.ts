@@ -35,7 +35,7 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json();
-    const { title, content, excerpt, coverImage, published } = body;
+    const { title, content, excerpt, coverImage, published, category } = body;
 
     if (!title || !content) {
       return NextResponse.json(
@@ -64,6 +64,7 @@ export async function POST(request: NextRequest) {
         content,
         excerpt,
         coverImage,
+        category: category || null,
         published: published ?? true,
         publishedAt: published !== false ? new Date() : null,
       },
@@ -100,12 +101,17 @@ export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
     const published = searchParams.get('published');
+    const category = searchParams.get('category');
     const limit = parseInt(searchParams.get('limit') || '10');
     const offset = parseInt(searchParams.get('offset') || '0');
 
-    const where = published === 'false'
+    const where: any = published === 'false'
       ? {}
       : { published: true };
+
+    if (category) {
+      where.category = category.toUpperCase();
+    }
 
     const [posts, total] = await Promise.all([
       prisma.blogPost.findMany({
@@ -119,6 +125,7 @@ export async function GET(request: NextRequest) {
           slug: true,
           excerpt: true,
           coverImage: true,
+          category: true,
           published: true,
           publishedAt: true,
           createdAt: true,

@@ -1,10 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Calendar } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 import { Metadata } from "next";
 import { MobileMenu } from "@/components/MobileMenu";
-import { getAllCategories, getCategorySlug } from "@/lib/categories";
+import { getAllCategories } from "@/lib/categories";
 import { BlogCategory } from "@prisma/client";
 
 type BlogPostPreview = {

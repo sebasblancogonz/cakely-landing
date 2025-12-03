@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Calendar, ArrowLeft } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 import { MobileMenu } from "@/components/MobileMenu";
 import {
@@ -10,7 +10,6 @@ import {
   getCategoryDescription,
   getAllCategories,
 } from "@/lib/categories";
-import { getCategoryIcon, getCategoryColors } from "@/lib/category-icons";
 
 export const revalidate = 60;
 
@@ -47,6 +46,21 @@ async function getCategoryPosts(categorySlug: string) {
   });
 
   return { posts, category };
+}
+
+async function getCategoriesWithCounts() {
+  const categories = getAllCategories();
+
+  const counts = await prisma.blogPost.groupBy({
+    by: ['category'],
+    where: { published: true },
+    _count: { id: true },
+  });
+
+  return categories.map((cat) => ({
+    ...cat,
+    count: counts.find((c) => c.category === cat.value)?._count.id || 0,
+  }));
 }
 
 export async function generateMetadata({
@@ -91,6 +105,7 @@ export default async function CategoryPage({
 }) {
   const { category: categorySlug } = await params;
   const result = await getCategoryPosts(categorySlug);
+  const categoriesWithCounts = await getCategoriesWithCounts();
 
   if (!result) {
     notFound();
@@ -99,9 +114,6 @@ export default async function CategoryPage({
   const { posts, category } = result;
   const categoryLabel = getCategoryLabel(category);
   const categoryDescription = getCategoryDescription(category);
-  const allCategories = getAllCategories();
-  const Icon = getCategoryIcon(category);
-  const colors = getCategoryColors(category);
 
   return (
     <div className="flex flex-col min-h-screen bg-white">
@@ -134,55 +146,46 @@ export default async function CategoryPage({
       </header>
 
       <main className="flex-grow pt-20">
-        {/* Hero Section with Category */}
-        <section className={`py-20 ${colors.bg}`}>
+        {/* Hero Section */}
+        <section className="py-20 bg-gray-50 border-b border-gray-200">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
               <Link
                 href="/blog"
-                className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-8 transition-colors"
+                className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-6 transition-colors text-sm"
               >
                 <ArrowLeft className="w-4 h-4" />
-                <span className="font-medium">Volver al blog</span>
+                Volver al blog
               </Link>
 
-              <div className="flex items-center gap-4 mb-6">
-                <div className={`p-5 bg-white rounded-3xl shadow-lg ${colors.text}`}>
-                  <Icon className="w-12 h-12" />
-                </div>
-                <div>
-                  <h1 className="text-4xl md:text-6xl font-black text-gray-900 leading-tight">
-                    {categoryLabel}
-                  </h1>
-                  <p className="text-lg text-gray-600 mt-2">
-                    {posts.length} {posts.length === 1 ? 'artículo' : 'artículos'}
-                  </p>
-                </div>
-              </div>
-
+              <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-4">
+                {categoryLabel}
+              </h1>
               <p className="text-xl text-gray-600 mb-8">
                 {categoryDescription}
               </p>
 
-              {/* Categories Navigation */}
-              <div className="flex flex-wrap gap-2">
-                {allCategories.map((cat) => {
-                  const CatIcon = getCategoryIcon(cat.value);
-                  const catColors = getCategoryColors(cat.value);
+              {/* Navegación entre categorías */}
+              <div className="flex flex-wrap gap-4 text-sm">
+                <Link
+                  href="/blog"
+                  className="text-gray-600 hover:text-gray-900 transition-colors border-b-2 border-transparent hover:border-gray-300 pb-1"
+                >
+                  Todos los artículos
+                </Link>
+                {categoriesWithCounts.map((cat) => {
                   const isActive = cat.value === category;
-
                   return (
                     <Link
                       key={cat.value}
                       href={`/blog/categoria/${cat.slug}`}
-                      className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                      className={`transition-colors border-b-2 pb-1 ${
                         isActive
-                          ? `${catColors.bg} ${catColors.text} border-2 ${catColors.text.replace('text-', 'border-')}`
-                          : "bg-white text-gray-600 hover:bg-gray-50 border border-gray-200"
+                          ? "text-emerald-600 font-medium border-emerald-600"
+                          : "text-gray-600 hover:text-gray-900 border-transparent hover:border-gray-300"
                       }`}
                     >
-                      <CatIcon className="w-4 h-4" />
-                      {cat.label}
+                      {cat.label} ({cat.count})
                     </Link>
                   );
                 })}
@@ -192,13 +195,10 @@ export default async function CategoryPage({
         </section>
 
         {/* Posts Grid */}
-        <section className="py-16 bg-white">
+        <section className="py-16">
           <div className="container mx-auto px-4">
             {posts.length === 0 ? (
-              <div className="max-w-4xl mx-auto text-center py-20">
-                <div className={`inline-flex p-6 ${colors.bg} rounded-full mb-6`}>
-                  <Icon className={`w-16 h-16 ${colors.text}`} />
-                </div>
+              <div className="max-w-2xl mx-auto text-center py-20">
                 <h2 className="text-2xl font-bold text-gray-900 mb-4">
                   Aún no hay artículos en esta categoría
                 </h2>
@@ -207,53 +207,50 @@ export default async function CategoryPage({
                 </p>
                 <Link
                   href="/blog"
-                  className="inline-block bg-emerald-600 text-white px-8 py-4 rounded-full font-bold hover:bg-emerald-700 transition-all hover:scale-105"
+                  className="inline-block bg-emerald-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-emerald-700 transition-colors"
                 >
                   Ver todos los artículos
                 </Link>
               </div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12 max-w-7xl mx-auto">
                 {posts.map((post) => (
-                  <Link
-                    key={post.id}
-                    href={`/blog/${post.slug}`}
-                    className="group bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
-                  >
-                    {post.coverImage && (
-                      <div className="relative w-full h-64 overflow-hidden">
-                        <Image
-                          src={post.coverImage}
-                          alt={post.title}
-                          fill
-                          className="object-cover group-hover:scale-110 transition-transform duration-300"
-                        />
-                      </div>
-                    )}
-                    <div className="p-6">
-                      <div className="flex items-center gap-2 text-sm text-gray-500 mb-3">
-                        <Calendar className="w-4 h-4" />
-                        {post.publishedAt
-                          ? new Date(post.publishedAt).toLocaleDateString(
-                              "es-ES",
-                              {
+                  <article key={post.id} className="group">
+                    <Link href={`/blog/${post.slug}`} className="block">
+                      {post.coverImage && (
+                        <div className="relative h-56 w-full overflow-hidden rounded-lg mb-4">
+                          <Image
+                            src={post.coverImage}
+                            alt={post.title}
+                            fill
+                            className="object-cover group-hover:opacity-90 transition-opacity"
+                          />
+                        </div>
+                      )}
+
+                      <div className="text-sm text-gray-500 mb-2">
+                        <time dateTime={post.publishedAt?.toISOString()}>
+                          {post.publishedAt
+                            ? new Date(post.publishedAt).toLocaleDateString("es-ES", {
                                 year: "numeric",
                                 month: "long",
                                 day: "numeric",
-                              }
-                            )
-                          : "Sin fecha"}
+                              })
+                            : "Sin fecha"}
+                        </time>
                       </div>
-                      <h2 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-emerald-600 transition-colors line-clamp-2">
+
+                      <h2 className="text-2xl font-bold text-gray-900 mb-2 group-hover:text-emerald-600 transition-colors">
                         {post.title}
                       </h2>
+
                       {post.excerpt && (
-                        <p className="text-gray-600 line-clamp-3">
+                        <p className="text-gray-600 line-clamp-2 leading-relaxed">
                           {post.excerpt}
                         </p>
                       )}
-                    </div>
-                  </Link>
+                    </Link>
+                  </article>
                 ))}
               </div>
             )}
@@ -276,8 +273,8 @@ export default async function CategoryPage({
               La revolución digital que tu pastelería necesitaba.
             </p>
             <p className="text-gray-500">
-              © {new Date().getFullYear()} Cakely. Hecho con ❤️ para
-              profesionales de la repostería.
+              © {new Date().getFullYear()} Cakely. Hecho con ❤️ para profesionales
+              de la repostería.
             </p>
           </div>
         </div>

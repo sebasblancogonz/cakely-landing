@@ -5,7 +5,6 @@ import { prisma } from "@/lib/prisma";
 import { Metadata } from "next";
 import { MobileMenu } from "@/components/MobileMenu";
 import { getAllCategories, getCategorySlug } from "@/lib/categories";
-import { getCategoryIcon, getCategoryColors } from "@/lib/category-icons";
 import { BlogCategory } from "@prisma/client";
 
 type BlogPostPreview = {
@@ -89,15 +88,6 @@ export default async function BlogPage() {
   const categoriesWithCounts = await getCategoriesWithCounts();
   const baseUrl = process.env.NEXT_PUBLIC_LANDING_DOMAIN || "https://cakely.es";
 
-  // Últimos 3 posts destacados
-  const featuredPosts = posts.slice(0, 3);
-
-  // Posts por categoría (primeros 3 de cada una)
-  const postsByCategory = categoriesWithCounts.map((cat) => ({
-    ...cat,
-    posts: posts.filter((p) => p.category === cat.value).slice(0, 3),
-  }));
-
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Blog",
@@ -115,7 +105,7 @@ export default async function BlogPage() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-gradient-to-b from-gray-50 to-white">
+    <div className="flex flex-col min-h-screen bg-white">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -139,231 +129,100 @@ export default async function BlogPage() {
       </header>
 
       <main className="flex-grow pt-20">
-        {/* Hero Section */}
-        <section className="relative py-16 md:py-24 bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 overflow-hidden">
-          <div className="container mx-auto px-4 relative z-10">
-            <div className="text-center max-w-4xl mx-auto">
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-black leading-tight mb-6">
-                <span className="text-gray-900">Blog de</span>
-                <br />
-                <span className="bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 bg-clip-text text-transparent">
-                  Cakely
-                </span>
+        {/* Hero Section - Simplificado */}
+        <section className="py-20 bg-gray-50 border-b border-gray-200">
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto">
+              <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-4">
+                Blog
               </h1>
-              <p className="text-xl md:text-2xl text-gray-600 mb-8">
-                Consejos profesionales para gestionar tu pastelería con éxito
+              <p className="text-xl text-gray-600 mb-8">
+                Consejos y recursos para gestionar tu pastelería
               </p>
-              <div className="flex flex-wrap justify-center gap-3">
-                {categoriesWithCounts.map((cat) => {
-                  const Icon = getCategoryIcon(cat.value);
-                  const colors = getCategoryColors(cat.value);
-                  return (
-                    <Link
-                      key={cat.value}
-                      href={`/blog/categoria/${cat.slug}`}
-                      className={`flex items-center gap-2 px-5 py-2.5 ${colors.bg} ${colors.hover} ${colors.text} rounded-full transition-all hover:scale-105 border border-gray-200 shadow-sm`}
-                    >
-                      <Icon className="w-4 h-4" />
-                      <span className="font-medium">{cat.label}</span>
-                      <span className="text-sm opacity-75">({cat.count})</span>
-                    </Link>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
-        </section>
 
-        {/* Featured Posts */}
-        {featuredPosts.length > 0 && (
-          <section className="py-16 bg-white">
-            <div className="container mx-auto px-4">
-              <div className="flex items-center justify-between mb-10">
-                <h2 className="text-3xl md:text-4xl font-black text-gray-900">
-                  Últimos Artículos
-                </h2>
+              {/* Categorías como links simples */}
+              <div className="flex flex-wrap gap-4 text-sm">
                 <Link
-                  href="#categorias"
-                  className="text-emerald-600 hover:text-emerald-700 font-semibold"
+                  href="/blog"
+                  className="text-emerald-600 font-medium border-b-2 border-emerald-600 pb-1"
                 >
-                  Ver por categoría →
+                  Todos los artículos
                 </Link>
-              </div>
-              <div className="grid md:grid-cols-3 gap-6">
-                {featuredPosts.map((post) => (
+                {categoriesWithCounts.map((cat) => (
                   <Link
-                    key={post.id}
-                    href={`/blog/${post.slug}`}
-                    className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1"
+                    key={cat.value}
+                    href={`/blog/categoria/${cat.slug}`}
+                    className="text-gray-600 hover:text-gray-900 transition-colors border-b-2 border-transparent hover:border-gray-300 pb-1"
                   >
-                    {post.coverImage && (
-                      <div className="relative h-56 w-full overflow-hidden">
-                        <Image
-                          src={post.coverImage}
-                          alt={post.title}
-                          fill
-                          className="object-cover group-hover:scale-110 transition-transform duration-500"
-                        />
-                      </div>
-                    )}
-                    <div className="p-6">
-                      <div className="flex items-center gap-2 text-sm text-gray-500 mb-3">
-                        <Calendar className="w-4 h-4" />
-                        {post.publishedAt
-                          ? new Date(post.publishedAt).toLocaleDateString("es-ES", {
-                              year: "numeric",
-                              month: "long",
-                              day: "numeric",
-                            })
-                          : "Sin fecha"}
-                      </div>
-                      <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-emerald-600 transition-colors line-clamp-2">
-                        {post.title}
-                      </h3>
-                      {post.excerpt && (
-                        <p className="text-gray-600 line-clamp-2">{post.excerpt}</p>
-                      )}
-                    </div>
+                    {cat.label} ({cat.count})
                   </Link>
                 ))}
               </div>
             </div>
-          </section>
-        )}
-
-        {/* Categories Grid */}
-        <section id="categorias" className="py-16 bg-gray-50">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-4">
-                Explora por Categoría
-              </h2>
-              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                Encuentra exactamente lo que necesitas para tu pastelería
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-              {postsByCategory.map((cat) => {
-                const Icon = getCategoryIcon(cat.value);
-                const colors = getCategoryColors(cat.value);
-
-                return (
-                  <div
-                    key={cat.value}
-                    className="bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
-                  >
-                    <Link href={`/blog/categoria/${cat.slug}`}>
-                      <div className={`p-8 ${colors.bg} ${colors.hover} transition-colors`}>
-                        <div className="flex items-center justify-between mb-4">
-                          <div className={`p-4 bg-white rounded-2xl shadow-md ${colors.text}`}>
-                            <Icon className="w-8 h-8" />
-                          </div>
-                          <span className={`text-sm font-bold ${colors.text} bg-white px-3 py-1 rounded-full`}>
-                            {cat.count} {cat.count === 1 ? 'artículo' : 'artículos'}
-                          </span>
-                        </div>
-                        <h3 className="text-2xl font-black text-gray-900 mb-2">
-                          {cat.label}
-                        </h3>
-                        <p className="text-gray-600 text-sm">
-                          {cat.description}
-                        </p>
-                      </div>
-                    </Link>
-
-                    {/* Preview de posts */}
-                    <div className="p-6 space-y-4">
-                      {cat.posts.length > 0 ? (
-                        cat.posts.map((post) => (
-                          <Link
-                            key={post.id}
-                            href={`/blog/${post.slug}`}
-                            className="block group"
-                          >
-                            <h4 className="text-sm font-semibold text-gray-900 group-hover:text-emerald-600 transition-colors line-clamp-2">
-                              {post.title}
-                            </h4>
-                          </Link>
-                        ))
-                      ) : (
-                        <p className="text-sm text-gray-400 italic">
-                          Próximamente contenido nuevo
-                        </p>
-                      )}
-
-                      {cat.posts.length > 0 && (
-                        <Link
-                          href={`/blog/categoria/${cat.slug}`}
-                          className={`inline-flex items-center text-sm font-semibold ${colors.text} hover:underline mt-2`}
-                        >
-                          Ver todos →
-                        </Link>
-                      )}
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
           </div>
         </section>
 
-        {/* All Posts */}
-        {posts.length > 3 && (
-          <section className="py-16 bg-white">
-            <div className="container mx-auto px-4">
-              <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-10">
-                Todos los Artículos
-              </h2>
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
+        {/* Posts Grid - Sin categorías visibles */}
+        <section className="py-16">
+          <div className="container mx-auto px-4">
+            {posts.length === 0 ? (
+              <div className="text-center py-20 max-w-2xl mx-auto">
+                <p className="text-xl text-gray-600">
+                  Aún no hay artículos publicados. ¡Pronto habrá contenido nuevo!
+                </p>
+              </div>
+            ) : (
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12 max-w-7xl mx-auto">
                 {posts.map((post) => (
-                  <Link
-                    key={post.id}
-                    href={`/blog/${post.slug}`}
-                    className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1"
-                  >
-                    {post.coverImage && (
-                      <div className="relative h-48 w-full overflow-hidden">
-                        <Image
-                          src={post.coverImage}
-                          alt={post.title}
-                          fill
-                          className="object-cover group-hover:scale-110 transition-transform duration-500"
-                        />
-                      </div>
-                    )}
-                    <div className="p-6">
-                      <div className="flex items-center gap-2 text-sm text-gray-500 mb-3">
-                        <Calendar className="w-4 h-4" />
-                        {post.publishedAt
-                          ? new Date(post.publishedAt).toLocaleDateString("es-ES", {
-                              year: "numeric",
-                              month: "long",
-                              day: "numeric",
-                            })
-                          : "Sin fecha"}
+                  <article key={post.id} className="group">
+                    <Link href={`/blog/${post.slug}`} className="block">
+                      {post.coverImage && (
+                        <div className="relative h-56 w-full overflow-hidden rounded-lg mb-4">
+                          <Image
+                            src={post.coverImage}
+                            alt={post.title}
+                            fill
+                            className="object-cover group-hover:opacity-90 transition-opacity"
+                          />
+                        </div>
+                      )}
+
+                      <div className="flex items-center gap-2 text-sm text-gray-500 mb-2">
+                        <time dateTime={post.publishedAt?.toISOString()}>
+                          {post.publishedAt
+                            ? new Date(post.publishedAt).toLocaleDateString("es-ES", {
+                                year: "numeric",
+                                month: "long",
+                                day: "numeric",
+                              })
+                            : "Sin fecha"}
+                        </time>
                         {post.category && (
                           <>
-                            <span className="text-gray-300">•</span>
-                            <span className={getCategoryColors(post.category).text}>
+                            <span>·</span>
+                            <span className="text-emerald-600">
                               {getAllCategories().find((c) => c.value === post.category)?.label}
                             </span>
                           </>
                         )}
                       </div>
-                      <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-emerald-600 transition-colors line-clamp-2">
+
+                      <h2 className="text-2xl font-bold text-gray-900 mb-2 group-hover:text-emerald-600 transition-colors">
                         {post.title}
-                      </h3>
+                      </h2>
+
                       {post.excerpt && (
-                        <p className="text-gray-600 line-clamp-2">{post.excerpt}</p>
+                        <p className="text-gray-600 line-clamp-2 leading-relaxed">
+                          {post.excerpt}
+                        </p>
                       )}
-                    </div>
-                  </Link>
+                    </Link>
+                  </article>
                 ))}
               </div>
-            </div>
-          </section>
-        )}
+            )}
+          </div>
+        </section>
       </main>
 
       <footer className="py-16 bg-gray-900 text-white">

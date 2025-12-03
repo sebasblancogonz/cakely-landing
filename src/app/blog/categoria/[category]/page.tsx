@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Calendar } from "lucide-react";
+import { Calendar, ArrowLeft } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 import { MobileMenu } from "@/components/MobileMenu";
 import {
@@ -9,12 +9,11 @@ import {
   getCategoryLabel,
   getCategoryDescription,
   getAllCategories,
-  getCategorySlug,
 } from "@/lib/categories";
+import { getCategoryIcon, getCategoryColors } from "@/lib/category-icons";
 
 export const revalidate = 60;
 
-// Generar rutas estáticas para todas las categorías
 export async function generateStaticParams() {
   const categories = getAllCategories();
 
@@ -101,6 +100,8 @@ export default async function CategoryPage({
   const categoryLabel = getCategoryLabel(category);
   const categoryDescription = getCategoryDescription(category);
   const allCategories = getAllCategories();
+  const Icon = getCategoryIcon(category);
+  const colors = getCategoryColors(category);
 
   return (
     <div className="flex flex-col min-h-screen bg-white">
@@ -133,44 +134,80 @@ export default async function CategoryPage({
       </header>
 
       <main className="flex-grow pt-20">
-        <div className="py-24 bg-gradient-to-br from-emerald-50 to-teal-50">
+        {/* Hero Section with Category */}
+        <section className={`py-20 ${colors.bg}`}>
           <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto text-center">
-              <h1 className="text-4xl md:text-6xl font-black text-gray-900 leading-tight mb-6">
-                {categoryLabel}
-              </h1>
+            <div className="max-w-4xl mx-auto">
+              <Link
+                href="/blog"
+                className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-8 transition-colors"
+              >
+                <ArrowLeft className="w-4 h-4" />
+                <span className="font-medium">Volver al blog</span>
+              </Link>
+
+              <div className="flex items-center gap-4 mb-6">
+                <div className={`p-5 bg-white rounded-3xl shadow-lg ${colors.text}`}>
+                  <Icon className="w-12 h-12" />
+                </div>
+                <div>
+                  <h1 className="text-4xl md:text-6xl font-black text-gray-900 leading-tight">
+                    {categoryLabel}
+                  </h1>
+                  <p className="text-lg text-gray-600 mt-2">
+                    {posts.length} {posts.length === 1 ? 'artículo' : 'artículos'}
+                  </p>
+                </div>
+              </div>
+
               <p className="text-xl text-gray-600 mb-8">
                 {categoryDescription}
               </p>
-              <div className="flex flex-wrap justify-center gap-2 mb-8">
-                {allCategories.map((cat) => (
-                  <Link
-                    key={cat.value}
-                    href={`/blog/categoria/${cat.slug}`}
-                    className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
-                      cat.value === category
-                        ? "bg-emerald-600 text-white"
-                        : "bg-white text-gray-600 hover:bg-emerald-50 hover:text-emerald-600"
-                    }`}
-                  >
-                    {cat.label}
-                  </Link>
-                ))}
+
+              {/* Categories Navigation */}
+              <div className="flex flex-wrap gap-2">
+                {allCategories.map((cat) => {
+                  const CatIcon = getCategoryIcon(cat.value);
+                  const catColors = getCategoryColors(cat.value);
+                  const isActive = cat.value === category;
+
+                  return (
+                    <Link
+                      key={cat.value}
+                      href={`/blog/categoria/${cat.slug}`}
+                      className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                        isActive
+                          ? `${catColors.bg} ${catColors.text} border-2 ${catColors.text.replace('text-', 'border-')}`
+                          : "bg-white text-gray-600 hover:bg-gray-50 border border-gray-200"
+                      }`}
+                    >
+                      <CatIcon className="w-4 h-4" />
+                      {cat.label}
+                    </Link>
+                  );
+                })}
               </div>
             </div>
           </div>
-        </div>
+        </section>
 
-        <section className="py-24 bg-white">
+        {/* Posts Grid */}
+        <section className="py-16 bg-white">
           <div className="container mx-auto px-4">
             {posts.length === 0 ? (
-              <div className="max-w-4xl mx-auto text-center">
-                <p className="text-xl text-gray-600 mb-8">
-                  Aún no hay artículos en esta categoría. ¡Vuelve pronto!
+              <div className="max-w-4xl mx-auto text-center py-20">
+                <div className={`inline-flex p-6 ${colors.bg} rounded-full mb-6`}>
+                  <Icon className={`w-16 h-16 ${colors.text}`} />
+                </div>
+                <h2 className="text-2xl font-bold text-gray-900 mb-4">
+                  Aún no hay artículos en esta categoría
+                </h2>
+                <p className="text-lg text-gray-600 mb-8">
+                  ¡Vuelve pronto para descubrir nuevo contenido!
                 </p>
                 <Link
                   href="/blog"
-                  className="inline-block bg-emerald-600 text-white px-8 py-4 rounded-full font-bold hover:bg-emerald-700 transition-all"
+                  className="inline-block bg-emerald-600 text-white px-8 py-4 rounded-full font-bold hover:bg-emerald-700 transition-all hover:scale-105"
                 >
                   Ver todos los artículos
                 </Link>
@@ -181,7 +218,7 @@ export default async function CategoryPage({
                   <Link
                     key={post.id}
                     href={`/blog/${post.slug}`}
-                    className="group bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
+                    className="group bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
                   >
                     {post.coverImage && (
                       <div className="relative w-full h-64 overflow-hidden">
@@ -207,7 +244,7 @@ export default async function CategoryPage({
                             )
                           : "Sin fecha"}
                       </div>
-                      <h2 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-emerald-600 transition-colors">
+                      <h2 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-emerald-600 transition-colors line-clamp-2">
                         {post.title}
                       </h2>
                       {post.excerpt && (

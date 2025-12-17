@@ -490,7 +490,7 @@ export default function Index() {
                 </CardContent>
                 <CardFooter>
                   <Button className="w-full bg-gradient-to-r from-gray-600 to-gray-700 hover:from-gray-700 hover:to-gray-800 text-white py-6 text-lg font-semibold rounded-xl">
-                    <Link href={`${appDomain}/registro`}>Comenzar Gratis</Link>
+                    <Link href="/empezar-prueba">Comenzar Gratis</Link>
                   </Button>
                 </CardFooter>
               </Card>

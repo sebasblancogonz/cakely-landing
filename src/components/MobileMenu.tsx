@@ -198,7 +198,7 @@ export function MobileMenu() {
               </Link>
 
               <Link
-                href={`${appDomain}/registro`}
+                href="/empezar-prueba"
                 onClick={handleClose}
                 style={{
                   display: "block",

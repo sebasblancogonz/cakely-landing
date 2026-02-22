@@ -3,6 +3,21 @@ import "./globals.css";
 
 import { Analytics } from "@vercel/analytics/react";
 import { Loader2 } from "lucide-react";
+import { Playfair_Display, DM_Sans } from "next/font/google";
+
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-playfair",
+  display: "swap",
+  weight: ["400", "500", "600", "700", "800"],
+});
+
+const dmSans = DM_Sans({
+  subsets: ["latin"],
+  variable: "--font-dm-sans",
+  display: "swap",
+  weight: ["400", "500", "600", "700"],
+});
 
 export const metadata = {
   title: "Cakely – Gestión de pedidos para pastelerías",
@@ -52,12 +67,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="es">
+    <html lang="es" className={`${playfair.variable} ${dmSans.variable}`}>
       <body className="flex min-h-screen w-full flex-col">
         <Suspense
           fallback={
-            <div className="flex justify-center items-center min-h-screen">
-              <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
+            <div className="flex justify-center items-center min-h-screen bg-[#FFF8F0]">
+              <Loader2 className="h-8 w-8 animate-spin text-[#A89888]" />
             </div>
           }
         >

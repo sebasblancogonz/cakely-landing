@@ -2,27 +2,18 @@
 
 import { Button } from "@/components/ui/button";
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import {
   ClipboardList,
   Users,
-  Euro,
-  UsersRound,
-  BarChartBig,
-  CalendarCheck,
   Calculator,
-  FolderKanban,
-  ShieldCheck,
-  Clock,
+  CalendarCheck,
+  BarChartBig,
+  UsersRound,
   ArrowRight,
-  Sparkles,
-  TrendingUp,
+  Quote,
+  Star,
+  Heart,
+  ChefHat,
+  Palette,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -35,7 +26,8 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-const appDomain = process.env.NEXT_PUBLIC_APP_DOMAIN || "https://app.cakely.es";
+const appDomain =
+  process.env.NEXT_PUBLIC_APP_DOMAIN || "https://app.cakely.es";
 const basicPriceId = process.env.STRIPE_PRICE_ID_BASICO_MONTHLY!;
 const proPriceId = process.env.STRIPE_PRICE_ID_PRO_MONTHLY!;
 
@@ -43,85 +35,91 @@ const faqs = [
   {
     question: "¿Qué es Cakely y para quién está pensado?",
     answer:
-      "Cakely es una herramienta de gestión diseñada para pastelerías artesanales. Ayuda a organizar pedidos, clientes y recetas desde un solo lugar de forma eficiente y sencilla.",
+      "Cakely es una herramienta de gestión pensada con cariño para pastelerías artesanales. Te ayuda a organizar pedidos, clientes y recetas desde un solo lugar, de forma sencilla y cercana.",
   },
   {
     question: "¿Puedo empezar a usar Cakely gratis?",
     answer:
-      "Sí, ofrecemos un plan gratuito que te permite gestionar hasta 10 pedidos al mes, 20 clientes y 5 recetas. Es perfecto para pastelerías que están empezando o quieren probar la plataforma.",
+      "¡Por supuesto! Nuestro plan gratuito te permite gestionar hasta 10 pedidos al mes, 20 clientes y 5 recetas. Perfecto para empezar sin compromisos y descubrir cómo Cakely puede ayudarte.",
   },
   {
     question: "¿Cuántos pedidos y clientes puedo gestionar en el plan Básico?",
     answer:
-      "El plan Básico te permite gestionar hasta 50 pedidos mensuales y un total acumulado de 100 clientes. Es ideal para pastelerías pequeñas o en fase inicial.",
+      "El plan Básico te permite gestionar hasta 50 pedidos mensuales y un total acumulado de 100 clientes. Ideal para pastelerías que están creciendo y necesitan más espacio.",
   },
   {
     question: "¿Qué ocurre si supero el límite de clientes en el plan Básico?",
     answer:
-      "Una vez alcanzas los 100 clientes acumulados, tendrás que pasarte al plan Pro para seguir añadiendo nuevos. Tus datos no se pierden, pero no podrás registrar más hasta actualizar.",
+      "Tus datos siempre están seguros. Simplemente necesitarás pasar al plan Pro para seguir añadiendo nuevos clientes. No perderás ninguna información.",
   },
   {
-    question: "¿Puedo usar Cakely desde el móvil o la tablet?",
+    question: "¿Puedo usar Cakely desde el móvil?",
     answer:
-      "Sí. Cakely está optimizado para usarse desde cualquier dispositivo con navegador moderno, ya sea móvil, tablet o PC.",
+      "Sí, Cakely está optimizado para usarse desde cualquier dispositivo: móvil, tablet o PC. Tu obrador, siempre en tu bolsillo.",
   },
   {
     question: "¿Cómo me ayuda Cakely a ahorrar tiempo?",
     answer:
-      "Automatiza tareas como el seguimiento de pedidos, el historial de clientes, la gestión de recetas y los presupuestos. Todo centralizado, sin Excel ni papeles.",
+      "Centraliza todo lo que hoy tienes disperso entre WhatsApp, notas y hojas de cálculo. Seguimiento de pedidos, historial de clientes, recetas y presupuestos, todo en un mismo lugar.",
   },
   {
-    question: "¿Qué incluye el plan Pro además de los límites ampliados?",
+    question: "¿Qué incluye el plan Pro?",
     answer:
-      "Además de clientes y pedidos ilimitados, tendrás estadísticas avanzadas, generador de presupuestos, insights de fidelidad, integraciones personalizadas y soporte prioritario.",
+      "Además de clientes y pedidos ilimitados, tendrás estadísticas avanzadas, generador de presupuestos, insights de fidelidad, integraciones personalizadas y soporte prioritario. Todo lo que necesitas para crecer con confianza.",
+  },
+];
+
+const testimonials = [
+  {
+    name: "María García",
+    business: "La Dulce María, Madrid",
+    text: "Desde que uso Cakely, mis mañanas son mucho más tranquilas. Ya no tengo que revisar cinco sitios distintos para saber qué pedidos tengo hoy. Todo está ahí, claro y organizado.",
+    rating: 5,
+  },
+  {
+    name: "Laura Fernández",
+    business: "Bake & Love, Valencia",
+    text: "Lo que más me gusta es que siento que está hecho por alguien que entiende mi trabajo. No es un software frío, es una herramienta que habla mi idioma.",
+    rating: 5,
+  },
+  {
+    name: "Carmen Ruiz",
+    business: "Dulces de Carmen, Sevilla",
+    text: "La calculadora de costes me abrió los ojos. Descubrí que algunos de mis pasteles más populares apenas me dejaban margen. Ahora fijo precios con confianza.",
+    rating: 5,
   },
 ];
 
 export default function Index() {
   return (
-    <div className="flex flex-col min-h-screen bg-white">
-      <header className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100">
-        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <div className="flex items-center gap-3 font-bold text-2xl">
+    <div className="flex flex-col min-h-screen bg-[#FFF8F0]">
+      {/* ─── Header ─── */}
+      <header className="fixed top-0 w-full z-50 bg-[#FFF8F0]/90 backdrop-blur-md border-b border-[#E8DDD0]/60">
+        <div className="max-w-6xl mx-auto px-5 py-4 flex justify-between items-center">
+          <Link href="/" className="flex items-center gap-3">
             <Image
               src="/img/logo.webp"
               alt="Logo Cakely"
-              width={80}
-              height={80}
+              width={52}
+              height={52}
             />
-          </div>
-          <nav className="md:flex items-center gap-8">
-            <Link
-              href="#features"
-              className="text-gray-600 hover:text-emerald-600 transition-colors font-medium hidden md:inline-block"
-            >
-              Características
-            </Link>
-            <Link
-              href="#benefits"
-              className="text-gray-600 hover:text-emerald-600 transition-colors font-medium hidden md:inline-block"
-            >
-              Beneficios
-            </Link>
-            <Link
-              href="#precios"
-              className="text-gray-600 hover:text-emerald-600 transition-colors font-medium hidden md:inline-block"
-            >
-              Precios
-            </Link>
-            <Link
-              href="/blog"
-              className="text-gray-600 hover:text-emerald-600 transition-colors font-medium hidden md:inline-block"
-            >
-              Blog
-            </Link>
-            <Link
-              href="#faq"
-              className="text-gray-600 hover:text-emerald-600 transition-colors font-medium hidden md:inline-block"
-            >
-              FAQ
-            </Link>
-            <div className="hidden md:block">
+          </Link>
+          <nav className="flex items-center gap-1">
+            {[
+              { href: "#servicios", label: "Servicios" },
+              { href: "#como-funciona", label: "Cómo funciona" },
+              { href: "#precios", label: "Precios" },
+              { href: "/blog", label: "Blog" },
+            ].map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="hidden md:inline-block px-4 py-2 text-[#5C3D2E] hover:text-[#8B9E7E] transition-colors font-medium text-[15px] rounded-full hover:bg-[#8B9E7E]/8"
+              >
+                {link.label}
+              </Link>
+            ))}
+            <div className="hidden md:block ml-3">
               <HeaderLoginButton />
             </div>
             <MobileMenu />
@@ -129,67 +127,99 @@ export default function Index() {
         </div>
       </header>
 
-      <main className="flex-grow pt-20">
-        {/* Hero Section */}
-        <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50"></div>
+      <main className="flex-grow">
+        {/* ═══════════════════════════════════════════
+            HERO SECTION
+            Emotional, warm, inviting
+        ═══════════════════════════════════════════ */}
+        <section className="relative min-h-[90vh] flex items-center overflow-hidden pt-24 pb-16">
+          {/* Warm gradient background */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#FFF8F0] via-[#FAF0E6] to-[#F2D1D1]/20"></div>
 
-          {/* Floating elements */}
-          <div className="absolute top-20 left-10 w-20 h-20 bg-gradient-to-br from-emerald-200 to-teal-300 rounded-full opacity-60 animate-pulse"></div>
-          <div className="absolute top-40 right-16 w-32 h-32 bg-gradient-to-br from-teal-200 to-cyan-300 rounded-full opacity-40 animate-pulse delay-1000"></div>
-          <div className="absolute bottom-32 left-20 w-16 h-16 bg-gradient-to-br from-cyan-200 to-emerald-300 rounded-full opacity-50 animate-pulse delay-500"></div>
+          {/* Organic decorative blobs */}
+          <div className="absolute top-32 -left-16 w-64 h-64 bg-[#F2D1D1]/30 blob-1 animate-float-slow"></div>
+          <div className="absolute top-48 -right-20 w-80 h-80 bg-[#8B9E7E]/10 blob-2 animate-float"></div>
+          <div className="absolute bottom-20 left-1/4 w-40 h-40 bg-[#C9A96E]/12 blob-3 animate-float-slow"></div>
 
-          <div className="container mx-auto px-4 py-20 relative">
-            <div className="text-center max-w-6xl mx-auto">
-              <div className="inline-flex items-center gap-2 bg-white shadow-sm border border-emerald-100 text-emerald-700 px-6 py-3 rounded-full text-sm font-medium mb-8 animate-fade-in">
-                <Sparkles className="w-4 h-4" />
-                Ya está ayudando a pasteleros a organizarse mejor
+          {/* Subtle texture */}
+          <div className="absolute inset-0 texture-grain"></div>
+
+          <div className="max-w-6xl mx-auto px-5 relative z-10 w-full">
+            <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+              {/* Left: Copy */}
+              <div className="space-y-8 text-center lg:text-left">
+                <div className="inline-flex items-center gap-2 bg-[#FFFDF9] border border-[#E8DDD0] text-[#8B9E7E] px-5 py-2.5 rounded-full text-sm font-medium shadow-warm">
+                  <Heart className="w-4 h-4 fill-[#D4A0A0] text-[#D4A0A0]" />
+                  Hecho para pasteleros de verdad
+                </div>
+
+                <h1 className="font-serif text-[2.75rem] md:text-6xl lg:text-[4rem] leading-[1.1] tracking-tight">
+                  <span className="text-[#3D2519]">Tu pastelería,</span>
+                  <br />
+                  <span className="text-[#8B9E7E]">organizada</span>
+                  <br />
+                  <span className="text-[#3D2519] italic">con cariño</span>
+                </h1>
+
+                <p className="text-lg md:text-xl text-[#5C3D2E]/80 leading-relaxed max-w-lg mx-auto lg:mx-0">
+                  Dedica más tiempo a crear y menos a gestionar. Cakely reúne
+                  tus pedidos, clientes y recetas en un solo lugar, para que
+                  puedas enfocarte en lo que amas.
+                </p>
+
+                <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                  <Button
+                    size="lg"
+                    className="bg-[#8B9E7E] hover:bg-[#6B7F5E] text-white px-8 py-6 text-base font-semibold rounded-full shadow-warm-lg transition-all duration-300 hover:shadow-warm-xl"
+                    asChild
+                  >
+                    <Link href={`${appDomain}/empezar-prueba`}>
+                      Prueba Cakely gratis
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </Link>
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    className="border-[#E8DDD0] text-[#5C3D2E] hover:bg-[#FAF0E6] px-8 py-6 text-base font-medium rounded-full"
+                    asChild
+                  >
+                    <Link href="#como-funciona">Ver cómo funciona</Link>
+                  </Button>
+                </div>
+
+                <p className="text-sm text-[#A89888] font-medium">
+                  Sin tarjeta de crédito · Configuración en 60 segundos · Datos
+                  seguros en Europa
+                </p>
               </div>
 
-              <h1 className="text-5xl md:text-7xl lg:text-8xl font-black leading-tight mb-8 animate-fade-in">
-                <span className="text-gray-900">Transforma el</span>
-                <br />
-                <span className="bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 bg-clip-text text-transparent">
-                  caos en control
-                </span>
-              </h1>
-
-              <p className="text-xl md:text-2xl text-gray-600 mb-12 max-w-4xl mx-auto leading-relaxed animate-fade-in font-light">
-                La plataforma todo-en-uno que convierte tu pastelería artesanal
-                en un negocio organizado, rentable y escalable.
-              </p>
-
-              <div className="flex flex-col sm:flex-row gap-6 justify-center mb-12 animate-fade-in">
-                <Button
-                  size="lg"
-                  className="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 px-10 py-7 text-lg font-semibold rounded-xl"
-                >
-                  <Link href={`${appDomain}/empezar-prueba`}>
-                    Comenzar Gratis
-                  </Link>
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Button>
-              </div>
-
-              <p className="text-sm text-gray-500 mb-20 font-medium">
-                🎂 Sin tarjeta de crédito • ⚡ Configuración en 60 segundos • 🔒
-                Datos seguros
-              </p>
-
-              {/* Hero Image */}
-              <div className="relative max-w-7xl mx-auto animate-fade-in">
-                <div className="bg-white rounded-3xl shadow-2xl p-2 border border-gray-100">
-                  <div className="bg-gradient-to-br from-gray-50 to-white rounded-2xl flex items-center justify-center relative overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 to-teal-500/10"></div>
-                    <div className="text-center relative z-10">
-                      <Image
-                        src="/img/hero.png"
-                        alt="Cakely CRM para Repostería"
-                        className="w-full h-full object-cover rounded-2xl shadow-lg"
-                        width={1200}
-                        height={800}
-                      />
-                    </div>
+              {/* Right: Hero visual */}
+              <div className="relative flex justify-center lg:justify-end">
+                <div className="relative">
+                  {/* Organic frame around hero image */}
+                  <div className="absolute -inset-3 bg-gradient-to-br from-[#F2D1D1]/40 via-[#FAF0E6] to-[#8B9E7E]/20 rounded-[2rem] rotate-2"></div>
+                  <div className="relative bg-[#FFFDF9] rounded-[1.5rem] shadow-warm-xl p-3 border border-[#E8DDD0]/50">
+                    {/*
+                      TODO: Reemplazar con fotografía real de productos
+                      (luz natural, composición cercana, pasteles artesanales).
+                      Ejemplo: mesa de trabajo con tartas decoradas,
+                      ingredientes naturales y luz de ventana.
+                    */}
+                    <Image
+                      src="/img/hero.png"
+                      alt="Panel de gestión de Cakely para tu pastelería"
+                      className="rounded-[1rem] w-full"
+                      width={600}
+                      height={400}
+                    />
+                  </div>
+                  {/* Floating decorative elements */}
+                  <div className="absolute -top-4 -right-4 w-16 h-16 bg-[#F2D1D1]/60 blob-1 animate-float flex items-center justify-center">
+                    <ChefHat className="w-7 h-7 text-[#D4A0A0]" />
+                  </div>
+                  <div className="absolute -bottom-3 -left-5 w-14 h-14 bg-[#8B9E7E]/20 blob-2 animate-float-slow flex items-center justify-center">
+                    <Palette className="w-6 h-6 text-[#8B9E7E]" />
                   </div>
                 </div>
               </div>
@@ -197,623 +227,597 @@ export default function Index() {
           </div>
         </section>
 
-        {/* Problem Section */}
-        <section className="py-24 md:py-32 bg-white">
-          <div className="container mx-auto px-4">
-            <div className="grid lg:grid-cols-2 gap-20 items-center max-w-7xl mx-auto">
-              <div className="space-y-8">
-                <div className="space-y-6">
-                  <div className="inline-block bg-red-100 text-red-700 px-4 py-2 rounded-full text-sm font-semibold">
-                    Los problemas que conoces
-                  </div>
-                  <h2 className="text-4xl md:text-6xl font-black text-gray-900 leading-tight">
-                    ¿Te suena familiar?
-                  </h2>
-                </div>
+        {/* ═══════════════════════════════════════════
+            EMPATHY / PROBLEM SECTION
+            Warm, understanding, not aggressive
+        ═══════════════════════════════════════════ */}
+        <section className="relative py-20 md:py-28 bg-[#FFFDF9]">
+          <div className="max-w-5xl mx-auto px-5">
+            <div className="text-center mb-16">
+              <p className="text-[#D4A0A0] font-medium text-sm uppercase tracking-widest mb-4">
+                Te entendemos
+              </p>
+              <h2 className="font-serif text-3xl md:text-5xl text-[#3D2519] leading-tight mb-6">
+                Sabemos cómo se siente
+              </h2>
+              <p className="text-lg text-[#5C3D2E]/70 max-w-2xl mx-auto leading-relaxed">
+                Gestionar una pastelería artesanal es apasionante, pero también
+                puede ser agotador cuando todo está disperso.
+              </p>
+            </div>
 
-                <div className="space-y-6">
-                  {[
-                    {
-                      emoji: "😰",
-                      text: "Perder pedidos importantes entre WhatsApp, notas y papeles",
-                      color: "from-red-50 to-red-100 border-red-200",
-                    },
-                    {
-                      emoji: "🤷‍♀️",
-                      text: "No saber si realmente estás ganando dinero con cada pastel",
-                      color: "from-orange-50 to-orange-100 border-orange-200",
-                    },
-                    {
-                      emoji: "📅",
-                      text: "Calendario caótico con fechas tachadas y sobrescritas",
-                      color: "from-yellow-50 to-yellow-100 border-yellow-200",
-                    },
-                    {
-                      emoji: "🔥",
-                      text: "Estrés constante por posibles errores u olvidos",
-                      color: "from-purple-50 to-purple-100 border-purple-200",
-                    },
-                  ].map((item, index) => (
-                    <div
-                      key={index}
-                      className={`flex items-start gap-4 p-6 rounded-2xl bg-gradient-to-r ${item.color} border hover:scale-105 transition-transform`}
-                    >
-                      <span className="text-3xl">{item.emoji}</span>
-                      <p className="text-gray-800 font-medium text-lg">
-                        {item.text}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="p-8 bg-gradient-to-br from-emerald-50 to-teal-50 rounded-3xl border border-emerald-100">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-3">
-                    <TrendingUp className="w-6 h-6 text-emerald-600" />
-                    La solución está aquí
-                  </h3>
-                  <p className="text-gray-700 text-lg leading-relaxed">
-                    Cakely convierte el caos en claridad. Un sistema pensado por
-                    y para profesionales de la repostería que entiende tus
-                    necesidades únicas.
+            <div className="grid sm:grid-cols-2 gap-5 max-w-3xl mx-auto">
+              {[
+                {
+                  text: "Pedidos repartidos entre WhatsApp, notas y papeles que se pierden",
+                  bg: "bg-[#FFF8F0]",
+                  border: "border-[#F2D1D1]/60",
+                },
+                {
+                  text: "No saber si realmente estás ganando dinero con cada receta",
+                  bg: "bg-[#FAF0E6]",
+                  border: "border-[#C9A96E]/30",
+                },
+                {
+                  text: "Un calendario lleno de tachones y fechas que se solapan",
+                  bg: "bg-[#FFF8F0]",
+                  border: "border-[#E8DDD0]",
+                },
+                {
+                  text: "La sensación de que algo se te va a olvidar en cualquier momento",
+                  bg: "bg-[#FAF0E6]",
+                  border: "border-[#D4A0A0]/30",
+                },
+              ].map((item, i) => (
+                <div
+                  key={i}
+                  className={`${item.bg} ${item.border} border rounded-2xl p-6 card-organic`}
+                >
+                  <p className="text-[#5C3D2E] leading-relaxed text-[15px]">
+                    {item.text}
                   </p>
                 </div>
-              </div>
+              ))}
+            </div>
 
-              <div className="flex justify-center">
-                <div className="relative">
-                  <div className="bg-white rounded-3xl shadow-2xl p-8 border border-gray-100 transform rotate-3 hover:rotate-0 transition-transform duration-500">
-                    <div className="bg-gradient-to-br from-emerald-50 to-teal-50 rounded-2xl h-96 flex items-center justify-center">
-                      <div className="text-center">
-                        <ClipboardList className="w-20 h-20 mx-auto text-emerald-600 mb-6" />
-                        <h4 className="text-gray-800 font-bold text-xl mb-2">
-                          Pedidos Organizados
-                        </h4>
-                        <p className="text-gray-600">Todo en su lugar</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+            <div className="text-center mt-14">
+              <div className="inline-block bg-[#8B9E7E]/10 border border-[#8B9E7E]/20 rounded-2xl px-8 py-5">
+                <p className="text-[#5C3D2E] text-lg font-serif italic">
+                  &ldquo;Si esto te suena, Cakely se hizo pensando en ti.&rdquo;
+                </p>
               </div>
             </div>
           </div>
         </section>
 
-        <section
-          id="features"
-          className="py-24 md:py-32 bg-gradient-to-br from-gray-50 to-white"
-        >
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-20">
-              <div className="inline-block bg-emerald-100 text-emerald-700 px-6 py-3 rounded-full text-sm font-semibold mb-8">
-                Características Principales
-              </div>
-              <h2 className="text-4xl md:text-6xl font-black text-gray-900 mb-8 leading-tight">
-                Herramientas que
+        {/* ═══════════════════════════════════════════
+            SERVICES / FEATURES SECTION
+            Organic cards, warm feel
+        ═══════════════════════════════════════════ */}
+        <section id="servicios" className="relative py-20 md:py-28 bg-[#FFF8F0]">
+          {/* Organic background decoration */}
+          <div className="absolute top-0 right-0 w-72 h-72 bg-[#F2D1D1]/15 blob-2 -translate-y-1/2"></div>
+          <div className="absolute bottom-0 left-0 w-56 h-56 bg-[#8B9E7E]/8 blob-1 translate-y-1/3"></div>
+
+          <div className="max-w-6xl mx-auto px-5 relative z-10">
+            <div className="text-center mb-16">
+              <p className="text-[#8B9E7E] font-medium text-sm uppercase tracking-widest mb-4">
+                Qué te ofrece Cakely
+              </p>
+              <h2 className="font-serif text-3xl md:text-5xl text-[#3D2519] leading-tight mb-6">
+                Todo lo que necesitas,
                 <br />
-                <span className="bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
-                  cambian el juego
-                </span>
+                <span className="text-[#8B9E7E]">nada que te sobre</span>
               </h2>
-              <p className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
-                Cada función diseñada para resolver problemas reales de tu día a
-                día
+              <p className="text-lg text-[#5C3D2E]/70 max-w-2xl mx-auto">
+                Cada herramienta pensada para resolver un problema real de tu
+                día a día
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+            {/* Feature cards with organic layout */}
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {[
                 {
                   icon: ClipboardList,
-                  title: "Gestión Visual de Pedidos",
+                  title: "Gestión de pedidos",
                   description:
-                    "Panel centralizado con calendario inteligente. Ve el estado de cada pedido, fechas de entrega y detalles críticos de un vistazo.",
-                  color: "from-emerald-500 to-emerald-600",
-                  bgColor: "from-emerald-50 to-emerald-100",
+                    "Un panel claro donde ves todos tus pedidos, su estado y sus fechas de entrega. Sin sorpresas, sin olvidos.",
+                  accent: "#8B9E7E",
+                  bgAccent: "#8B9E7E",
                 },
                 {
                   icon: Calculator,
-                  title: "Calculadora de Costes",
+                  title: "Costes y márgenes",
                   description:
-                    "Define ingredientes, crea recetas y calcula automáticamente costes reales. Conoce tus márgenes y fija precios con confianza.",
-                  color: "from-teal-500 to-teal-600",
-                  bgColor: "from-teal-50 to-teal-100",
+                    "Define ingredientes, crea recetas y conoce al céntimo cuánto te cuesta cada creación. Fija precios con confianza.",
+                  accent: "#C9A96E",
+                  bgAccent: "#C9A96E",
                 },
                 {
                   icon: Users,
-                  title: "CRM para Pasteleros",
+                  title: "Tus clientes, cerca",
                   description:
-                    "Base de datos de clientes con historial, preferencias, alergias y notas importantes. Nunca olvides un detalle.",
-                  color: "from-cyan-500 to-cyan-600",
-                  bgColor: "from-cyan-50 to-cyan-100",
+                    "Historial de pedidos, preferencias, alergias y notas especiales. Cada cliente se siente único porque recuerdas cada detalle.",
+                  accent: "#D4A0A0",
+                  bgAccent: "#D4A0A0",
                 },
                 {
                   icon: UsersRound,
-                  title: "Trabajo en Equipo",
+                  title: "Equipo coordinado",
                   description:
-                    "Invita a tu equipo, asigna roles y colabora en tiempo real. Comunicación clara y responsabilidades definidas.",
-                  color: "from-blue-500 to-blue-600",
-                  bgColor: "from-blue-50 to-blue-100",
+                    "Invita a tu equipo, asigna responsabilidades y trabaja con la tranquilidad de saber que todos están alineados.",
+                  accent: "#8B9E7E",
+                  bgAccent: "#8B9E7E",
                 },
                 {
                   icon: CalendarCheck,
-                  title: "Sincronización Calendario",
+                  title: "Calendario sincronizado",
                   description:
-                    "Integración automática con Google Calendar. Fechas de entrega sincronizadas para ti y tu equipo.",
-                  color: "from-indigo-500 to-indigo-600",
-                  bgColor: "from-indigo-50 to-indigo-100",
+                    "Integración automática con Google Calendar. Las fechas de entrega siempre visibles para ti y tu equipo.",
+                  accent: "#C9A96E",
+                  bgAccent: "#C9A96E",
                 },
                 {
                   icon: BarChartBig,
-                  title: "Analytics Inteligente",
+                  title: "Estadísticas claras",
                   description:
-                    "Métricas clave de tu negocio, generador de presupuestos y reportes que te ayudan a crecer estratégicamente.",
-                  color: "from-purple-500 to-purple-600",
-                  bgColor: "from-purple-50 to-purple-100",
+                    "Métricas de tu negocio que te ayudan a tomar decisiones. Saber es poder, y con Cakely, sabes.",
+                  accent: "#D4A0A0",
+                  bgAccent: "#D4A0A0",
                 },
-              ].map((feature, index) => (
-                <Card
-                  key={index}
-                  className="group hover:shadow-2xl transition-all duration-500 border-0 bg-white hover:scale-105 rounded-2xl overflow-hidden"
+              ].map((feature, i) => (
+                <div
+                  key={i}
+                  className="bg-[#FFFDF9] rounded-2xl p-7 border border-[#E8DDD0]/60 card-organic group"
                 >
-                  <CardHeader className="pb-4">
-                    <div
-                      className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${feature.color} flex items-center justify-center mb-6 group-hover:scale-150 transition-transform shadow-lg`}
-                    >
-                      <feature.icon className="w-8 h-8 text-white" />
-                    </div>
-                    <CardTitle className="text-2xl font-bold text-gray-900">
-                      {feature.title}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-gray-600 leading-relaxed text-lg">
-                      {feature.description}
-                    </p>
-                  </CardContent>
-                </Card>
+                  <div
+                    className="w-12 h-12 rounded-xl flex items-center justify-center mb-5 transition-transform duration-300 group-hover:scale-110"
+                    style={{ backgroundColor: `${feature.bgAccent}15` }}
+                  >
+                    <feature.icon
+                      className="w-6 h-6"
+                      style={{ color: feature.accent }}
+                    />
+                  </div>
+                  <h3 className="font-serif text-xl text-[#3D2519] mb-3">
+                    {feature.title}
+                  </h3>
+                  <p className="text-[#5C3D2E]/70 leading-relaxed text-[15px]">
+                    {feature.description}
+                  </p>
+                </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Benefits Section */}
-        <section id="benefits" className="py-24 md:py-32 bg-white">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-20">
-              <h2 className="text-4xl md:text-6xl font-black text-gray-900 mb-8 leading-tight">
-                Los resultados que
-                <br />
-                <span className="bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
-                  vas a experimentar
-                </span>
+        {/* ═══════════════════════════════════════════
+            HOW IT WORKS
+            Simple steps, organic feel
+        ═══════════════════════════════════════════ */}
+        <section
+          id="como-funciona"
+          className="relative py-20 md:py-28 bg-[#FAF0E6]"
+        >
+          <div className="absolute inset-0 texture-grain"></div>
+
+          <div className="max-w-5xl mx-auto px-5 relative z-10">
+            <div className="text-center mb-16">
+              <p className="text-[#C9A96E] font-medium text-sm uppercase tracking-widest mb-4">
+                Paso a paso
+              </p>
+              <h2 className="font-serif text-3xl md:text-5xl text-[#3D2519] leading-tight mb-6">
+                Así de sencillo
               </h2>
+              <p className="text-lg text-[#5C3D2E]/70 max-w-xl mx-auto">
+                Empieza a organizar tu pastelería en tres pasos
+              </p>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
+            <div className="grid md:grid-cols-3 gap-8 md:gap-12">
               {[
                 {
-                  icon: Clock,
-                  title: "Ahorra 10+ Horas/Semana",
+                  step: "1",
+                  title: "Crea tu cuenta",
                   description:
-                    "Automatiza tareas repetitivas y encuentra información al instante. Más tiempo para lo que amas: crear.",
+                    "Regístrate gratis en menos de un minuto. Sin tarjeta, sin compromisos, sin complicaciones.",
+                  icon: Heart,
                 },
                 {
-                  icon: ShieldCheck,
-                  title: "Cero Errores Costosos",
+                  step: "2",
+                  title: "Organiza tu obrador",
                   description:
-                    "Información centralizada y alertas inteligentes. Cada detalle bajo control para entregas perfectas.",
+                    "Añade tus recetas, clientes y pedidos. Cakely se adapta a tu forma de trabajar, no al revés.",
+                  icon: ChefHat,
                 },
                 {
-                  icon: Euro,
-                  title: "Incrementa Márgenes 20%",
+                  step: "3",
+                  title: "Disfruta del control",
                   description:
-                    "Costes precisos y pricing estratégico. Descubre qué productos son realmente rentables.",
+                    "Ve tu negocio con claridad: qué pedidos tienes, cuánto ganas y quiénes son tus mejores clientes.",
+                  icon: Star,
                 },
-                {
-                  icon: FolderKanban,
-                  title: "Negocio Escalable",
-                  description:
-                    "Sistemas que crecen contigo. Desde emprendedor hasta equipo completo sin perder control.",
-                },
-              ].map((benefit, index) => (
-                <div
-                  key={index}
-                  className="text-center group hover:scale-105 transition-transform p-6"
-                >
-                  <div className="w-20 h-20 mx-auto mb-8 bg-gradient-to-br from-emerald-100 to-teal-100 rounded-3xl flex items-center justify-center group-hover:from-emerald-200 group-hover:to-teal-200 transition-colors shadow-lg">
-                    <benefit.icon className="w-10 h-10 text-emerald-600" />
+              ].map((item, i) => (
+                <div key={i} className="text-center group">
+                  {/* Step number with organic shape */}
+                  <div className="relative inline-flex mb-6">
+                    <div className="w-20 h-20 bg-[#FFFDF9] rounded-full shadow-warm flex items-center justify-center border-2 border-[#E8DDD0] group-hover:border-[#8B9E7E]/40 transition-colors duration-300">
+                      <item.icon className="w-8 h-8 text-[#8B9E7E]" />
+                    </div>
+                    <span className="absolute -top-1 -right-1 w-7 h-7 bg-[#8B9E7E] text-white text-xs font-bold rounded-full flex items-center justify-center">
+                      {item.step}
+                    </span>
                   </div>
-                  <h3 className="text-2xl font-bold text-gray-900 mb-4">
-                    {benefit.title}
+                  <h3 className="font-serif text-xl text-[#3D2519] mb-3">
+                    {item.title}
                   </h3>
-                  <p className="text-gray-600 leading-relaxed text-lg">
-                    {benefit.description}
+                  <p className="text-[#5C3D2E]/70 leading-relaxed text-[15px] max-w-xs mx-auto">
+                    {item.description}
                   </p>
+                </div>
+              ))}
+            </div>
+
+            <div className="text-center mt-14">
+              <Button
+                size="lg"
+                className="bg-[#8B9E7E] hover:bg-[#6B7F5E] text-white px-10 py-6 text-base font-semibold rounded-full shadow-warm-lg transition-all duration-300"
+                asChild
+              >
+                <Link href={`${appDomain}/empezar-prueba`}>
+                  Empieza tu historia
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
+            </div>
+          </div>
+        </section>
+
+        {/* ═══════════════════════════════════════════
+            TESTIMONIALS
+            Warm, human, trustworthy
+        ═══════════════════════════════════════════ */}
+        <section className="relative py-20 md:py-28 bg-[#FFFDF9]">
+          <div className="absolute top-12 left-8 w-48 h-48 bg-[#F2D1D1]/15 blob-3 animate-float-slow"></div>
+
+          <div className="max-w-6xl mx-auto px-5 relative z-10">
+            <div className="text-center mb-16">
+              <p className="text-[#D4A0A0] font-medium text-sm uppercase tracking-widest mb-4">
+                Nuestra comunidad
+              </p>
+              <h2 className="font-serif text-3xl md:text-5xl text-[#3D2519] leading-tight mb-6">
+                Lo que dicen quienes
+                <br />
+                <span className="text-[#8B9E7E]">ya confían en Cakely</span>
+              </h2>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+              {testimonials.map((t, i) => (
+                <div
+                  key={i}
+                  className="bg-[#FFF8F0] rounded-2xl p-7 border border-[#E8DDD0]/50 card-organic relative"
+                >
+                  <Quote className="w-8 h-8 text-[#F2D1D1] mb-4" />
+                  <p className="text-[#5C3D2E]/80 leading-relaxed text-[15px] mb-6 italic">
+                    &ldquo;{t.text}&rdquo;
+                  </p>
+                  <div className="flex items-center gap-1 mb-3">
+                    {Array.from({ length: t.rating }).map((_, j) => (
+                      <Star
+                        key={j}
+                        className="w-4 h-4 fill-[#C9A96E] text-[#C9A96E]"
+                      />
+                    ))}
+                  </div>
+                  <div>
+                    <p className="font-semibold text-[#3D2519] text-sm">
+                      {t.name}
+                    </p>
+                    <p className="text-[#A89888] text-sm">{t.business}</p>
+                  </div>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Pricing Section */}
-        <section
-          id="precios"
-          className="py-24 md:py-32 bg-gradient-to-br from-emerald-50 to-teal-50"
-        >
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-20">
-              <h2 className="text-4xl md:text-6xl font-black text-gray-900 mb-8 leading-tight">
-                Planes que se adaptan
-                <br />
-                <span className="bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
-                  a tu crecimiento
-                </span>
+        {/* ═══════════════════════════════════════════
+            PRICING SECTION
+            Warm redesign, same plans
+        ═══════════════════════════════════════════ */}
+        <section id="precios" className="relative py-20 md:py-28 bg-[#FFF8F0]">
+          <div className="absolute top-0 left-0 w-64 h-64 bg-[#8B9E7E]/6 blob-1"></div>
+          <div className="absolute bottom-0 right-0 w-72 h-72 bg-[#F2D1D1]/10 blob-2"></div>
+
+          <div className="max-w-6xl mx-auto px-5 relative z-10">
+            <div className="text-center mb-16">
+              <p className="text-[#8B9E7E] font-medium text-sm uppercase tracking-widest mb-4">
+                Planes
+              </p>
+              <h2 className="font-serif text-3xl md:text-5xl text-[#3D2519] leading-tight mb-6">
+                Crece a tu ritmo
               </h2>
-              <p className="text-xl text-gray-600">
-                Empieza gratis y escala cuando estés listo
+              <p className="text-lg text-[#5C3D2E]/70 max-w-xl mx-auto">
+                Empieza gratis y escala cuando estés lista. Sin presiones, sin
+                letra pequeña.
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+            <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto items-start">
               {/* Free Plan */}
-              <Card className="relative group hover:shadow-2xl transition-all duration-500 border-2 border-gray-200 hover:border-emerald-300 rounded-3xl">
-                <CardHeader className="text-center pb-8">
-                  <CardTitle className="text-3xl font-bold text-gray-900">
+              <div className="bg-[#FFFDF9] rounded-2xl border border-[#E8DDD0] p-8 card-organic">
+                <div className="mb-6">
+                  <h3 className="font-serif text-2xl text-[#3D2519] mb-2">
                     Gratuito
-                  </CardTitle>
-                  <CardDescription className="text-lg text-gray-600 mt-2">
-                    Perfecto para empezar sin compromisos
-                  </CardDescription>
-                  <div className="mt-8">
-                    <span className="text-6xl font-black text-gray-900">
-                      0€
-                    </span>
-                    <span className="text-2xl text-gray-500">/mes</span>
-                  </div>
-                  <p className="text-sm text-gray-500 mt-4 font-medium">
-                    Siempre gratis
+                  </h3>
+                  <p className="text-sm text-[#A89888]">
+                    Para empezar sin compromisos
                   </p>
-                </CardHeader>
-                <CardContent className="space-y-4">
+                </div>
+                <div className="mb-6">
+                  <span className="font-serif text-5xl text-[#3D2519]">0€</span>
+                  <span className="text-[#A89888] text-lg ml-1">/mes</span>
+                </div>
+                <p className="text-xs text-[#8B9E7E] font-medium mb-6">
+                  Siempre gratis
+                </p>
+                <ul className="space-y-3 mb-8">
                   {[
-                    "✅ Hasta 10 pedidos al mes",
-                    "✅ Hasta 20 clientes",
-                    "✅ Hasta 5 recetas",
-                    "📊 Analíticas básicas",
-                    "📅 Integración con Google Calendar",
-                    "👤 1 usuario incluido",
-                  ].map((feature, index) => (
-                    <div key={index} className="flex items-center gap-3">
-                      <span className="text-gray-700 text-lg">{feature}</span>
-                    </div>
+                    "Hasta 10 pedidos al mes",
+                    "Hasta 20 clientes",
+                    "Hasta 5 recetas",
+                    "Analíticas básicas",
+                    "Google Calendar",
+                    "1 usuario",
+                  ].map((f, j) => (
+                    <li
+                      key={j}
+                      className="flex items-start gap-3 text-[#5C3D2E]/80 text-sm"
+                    >
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#8B9E7E] mt-2 shrink-0"></span>
+                      {f}
+                    </li>
                   ))}
-                </CardContent>
-                <CardFooter>
-                  <Button className="w-full bg-gradient-to-r from-gray-600 to-gray-700 hover:from-gray-700 hover:to-gray-800 text-white py-6 text-lg font-semibold rounded-xl">
-                    <Link href={`${appDomain}/registro`}>Comenzar Gratis</Link>
-                  </Button>
-                </CardFooter>
-              </Card>
+                </ul>
+                <Button
+                  className="w-full bg-[#5C3D2E] hover:bg-[#3D2519] text-white py-5 rounded-full font-medium transition-all duration-300"
+                  asChild
+                >
+                  <Link href={`${appDomain}/registro`}>Comenzar gratis</Link>
+                </Button>
+              </div>
 
               {/* Basic Plan */}
-              <Card className="relative group hover:shadow-2xl transition-all duration-500 border-2 border-gray-200 hover:border-emerald-300 rounded-3xl">
-                <CardHeader className="text-center pb-8">
-                  <CardTitle className="text-3xl font-bold text-gray-900">
+              <div className="bg-[#FFFDF9] rounded-2xl border border-[#E8DDD0] p-8 card-organic">
+                <div className="mb-6">
+                  <h3 className="font-serif text-2xl text-[#3D2519] mb-2">
                     Básico
-                  </CardTitle>
-                  <CardDescription className="text-lg text-gray-600 mt-2">
-                    Ideal para pastelerías en crecimiento
-                  </CardDescription>
-                  <div className="mt-8">
-                    <span className="text-6xl font-black text-gray-900">
-                      9,99€
-                    </span>
-                    <span className="text-2xl text-gray-500">/mes</span>
-                  </div>
-                  <p className="text-sm text-gray-500 mt-4 font-medium">
-                    (o 99,99€/año, ¡ahorra 2 meses!)
+                  </h3>
+                  <p className="text-sm text-[#A89888]">
+                    Para pastelerías en crecimiento
                   </p>
-                </CardHeader>
-                <CardContent className="space-y-4">
+                </div>
+                <div className="mb-6">
+                  <span className="font-serif text-5xl text-[#3D2519]">
+                    9,99€
+                  </span>
+                  <span className="text-[#A89888] text-lg ml-1">/mes</span>
+                </div>
+                <p className="text-xs text-[#C9A96E] font-medium mb-6">
+                  99,99€/año — ahorra 2 meses
+                </p>
+                <ul className="space-y-3 mb-8">
                   {[
-                    "🚀 Todo lo del plan Gratuito",
-                    "✅ Hasta 50 pedidos al mes",
-                    "✅ Hasta 100 clientes",
-                    "📊 Estadísticas completas",
-                    "📅 Integración con Google Calendar",
-                    "👤 1 usuario incluido",
-                  ].map((feature, index) => (
-                    <div key={index} className="flex items-center gap-3">
-                      <span
-                        className={`text-gray-700 text-lg ${
-                          index === 0 ? "font-semibold" : ""
-                        }`}
-                      >
-                        {feature}
-                      </span>
-                    </div>
-                  ))}
-                </CardContent>
-                <CardFooter>
-                  <Button className="w-full bg-gradient-to-r from-gray-600 to-gray-700 hover:from-gray-700 hover:to-gray-800 text-white py-6 text-lg font-semibold rounded-xl">
-                    <Link
-                      href={`${appDomain}/empezar-prueba?priceId=${basicPriceId}`}
+                    "Todo lo del plan Gratuito",
+                    "Hasta 50 pedidos al mes",
+                    "Hasta 100 clientes",
+                    "Estadísticas completas",
+                    "Google Calendar",
+                    "1 usuario",
+                  ].map((f, j) => (
+                    <li
+                      key={j}
+                      className={`flex items-start gap-3 text-sm ${j === 0 ? "text-[#8B9E7E] font-medium" : "text-[#5C3D2E]/80"}`}
                     >
-                      Empezar Gratis 14 Días
-                    </Link>
-                  </Button>
-                </CardFooter>
-              </Card>
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#8B9E7E] mt-2 shrink-0"></span>
+                      {f}
+                    </li>
+                  ))}
+                </ul>
+                <Button
+                  className="w-full bg-[#5C3D2E] hover:bg-[#3D2519] text-white py-5 rounded-full font-medium transition-all duration-300"
+                  asChild
+                >
+                  <Link
+                    href={`${appDomain}/empezar-prueba?priceId=${basicPriceId}`}
+                  >
+                    Probar 14 días gratis
+                  </Link>
+                </Button>
+              </div>
 
-              {/* Pro Plan */}
-              <Card className="relative group hover:shadow-2xl transition-all duration-500 border-2 border-emerald-400 bg-white rounded-3xl">
-                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-10">
-                  <span className="bg-gradient-to-r from-emerald-600 to-teal-600 text-white px-3 py-2 rounded-full text-xs font-bold shadow-lg whitespace-nowrap">
-                    💎 RECOMENDADO
+              {/* Pro Plan — Highlighted */}
+              <div className="relative bg-[#3D2519] rounded-2xl p-8 card-organic text-white">
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                  <span className="bg-[#C9A96E] text-[#3D2519] px-4 py-1.5 rounded-full text-xs font-bold tracking-wide whitespace-nowrap">
+                    RECOMENDADO
                   </span>
                 </div>
-                <CardHeader className="text-center pb-8 pt-10">
-                  <CardTitle className="text-3xl font-bold text-gray-900">
-                    Pro
-                  </CardTitle>
-                  <CardDescription className="text-lg text-gray-600 mt-2">
-                    Para negocios serios que buscan crecer
-                  </CardDescription>
-                  <div className="mt-8">
-                    <span className="text-6xl font-black bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
-                      19,99€
-                    </span>
-                    <span className="text-2xl text-gray-500">/mes</span>
-                  </div>
-                  <p className="text-sm text-gray-500 mt-4 font-medium">
-                    (o 199,99€/año, ¡ahorra 2 meses!)
+                <div className="mb-6 pt-2">
+                  <h3 className="font-serif text-2xl mb-2">Pro</h3>
+                  <p className="text-sm text-white/60">
+                    Para negocios que quieren crecer
                   </p>
-                </CardHeader>
-                <CardContent className="space-y-4">
+                </div>
+                <div className="mb-6">
+                  <span className="font-serif text-5xl text-[#C9A96E]">
+                    19,99€
+                  </span>
+                  <span className="text-white/60 text-lg ml-1">/mes</span>
+                </div>
+                <p className="text-xs text-[#C9A96E] font-medium mb-6">
+                  199,99€/año — ahorra 2 meses
+                </p>
+                <ul className="space-y-3 mb-8">
                   {[
-                    "🚀 Todo lo del plan Básico",
-                    "♾️ Pedidos, clientes y recetas ilimitados",
-                    "👥 Gestión completa de equipo (hasta 5 usuarios)",
-                    "📊 Estadísticas avanzadas",
-                    "🎯 Generador de presupuestos",
-                    "💡 Insights de fidelidad de clientes",
-                    "⚙️ Integraciones personalizadas",
-                    "⚡ Soporte prioritario",
-                  ].map((feature, index) => (
-                    <div key={index} className="flex items-center gap-3">
-                      <span
-                        className={`text-gray-700 text-lg ${
-                          index === 0 || index === 2 || index === 5
-                            ? "font-semibold"
-                            : ""
-                        }`}
-                      >
-                        {feature}
-                      </span>
-                    </div>
-                  ))}
-                </CardContent>
-                <CardFooter>
-                  <Button className="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white py-6 text-lg font-semibold shadow-xl rounded-xl">
-                    <Link
-                      href={`${appDomain}/empezar-prueba?priceId=${proPriceId}`}
+                    "Todo lo del plan Básico",
+                    "Pedidos, clientes y recetas ilimitados",
+                    "Hasta 5 usuarios",
+                    "Estadísticas avanzadas",
+                    "Generador de presupuestos",
+                    "Insights de fidelidad",
+                    "Integraciones personalizadas",
+                    "Soporte prioritario",
+                  ].map((f, j) => (
+                    <li
+                      key={j}
+                      className={`flex items-start gap-3 text-sm ${j === 0 ? "text-[#C9A96E] font-medium" : "text-white/80"}`}
                     >
-                      Empezar Gratis 14 Días
-                    </Link>
-                  </Button>
-                </CardFooter>
-              </Card>
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#C9A96E] mt-2 shrink-0"></span>
+                      {f}
+                    </li>
+                  ))}
+                </ul>
+                <Button
+                  className="w-full bg-[#C9A96E] hover:bg-[#B89558] text-[#3D2519] py-5 rounded-full font-semibold transition-all duration-300 shadow-warm-lg"
+                  asChild
+                >
+                  <Link
+                    href={`${appDomain}/empezar-prueba?priceId=${proPriceId}`}
+                  >
+                    Probar 14 días gratis
+                  </Link>
+                </Button>
+              </div>
             </div>
 
-            <div className="text-center mt-16">
-              <p className="text-gray-600 text-lg mb-4">
-                ✨ Plan gratuito disponible • 🚫 Sin tarjeta de crédito • ⚡
-                Cancela cuando quieras
-              </p>
-              <p className="text-gray-500">
-                Todos los precios incluyen IVA • Soporte en español • Datos
-                protegidos en Europa
+            <div className="text-center mt-12">
+              <p className="text-[#A89888] text-sm">
+                Todos los precios incluyen IVA · Soporte en español · Datos
+                protegidos en Europa · Cancela cuando quieras
               </p>
             </div>
           </div>
         </section>
-        <section id="comparativa" className="py-24 md:py-32 bg-white">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-20">
-              <h2 className="text-4xl md:text-6xl font-black text-gray-900 mb-8 leading-tight">
-                Compara nuestros
-                <br />
-                <span className="bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
-                  planes disponibles
-                </span>
+
+        {/* ═══════════════════════════════════════════
+            FAQ SECTION
+            Warm accordion
+        ═══════════════════════════════════════════ */}
+        <section id="faq" className="relative py-20 md:py-28 bg-[#FAF0E6]">
+          <div className="absolute inset-0 texture-grain"></div>
+          <div className="absolute top-20 right-10 w-36 h-36 bg-[#F2D1D1]/20 blob-1 animate-float-slow"></div>
+
+          <div className="max-w-3xl mx-auto px-5 relative z-10">
+            <div className="text-center mb-14">
+              <p className="text-[#D4A0A0] font-medium text-sm uppercase tracking-widest mb-4">
+                Dudas frecuentes
+              </p>
+              <h2 className="font-serif text-3xl md:text-5xl text-[#3D2519] leading-tight">
+                Preguntas frecuentes
               </h2>
             </div>
 
-            <div className="overflow-x-auto max-w-6xl mx-auto">
-              <table className="w-full text-left border-collapse">
-                <thead>
-                  <tr className="bg-gray-100 text-gray-800 text-lg">
-                    <th className="py-4 px-6 font-bold">Características</th>
-                    <th className="py-4 px-6 font-bold text-center">
-                      🆓 Gratuito
-                    </th>
-                    <th className="py-4 px-6 font-bold text-center">
-                      🟢 Básico
-                    </th>
-                    <th className="py-4 px-6 font-bold text-center">🚀 Pro</th>
-                  </tr>
-                </thead>
-                <tbody className="text-gray-700 text-base">
-                  <tr className="border-t">
-                    <td className="py-4 px-6">Pedidos mensuales</td>
-                    <td className="py-4 px-6 text-center">Hasta 10</td>
-                    <td className="py-4 px-6 text-center">Hasta 50</td>
-                    <td className="py-4 px-6 text-center">Ilimitados</td>
-                  </tr>
-                  <tr className="border-t">
-                    <td className="py-4 px-6">Clientes</td>
-                    <td className="py-4 px-6 text-center">Hasta 20</td>
-                    <td className="py-4 px-6 text-center">Hasta 100</td>
-                    <td className="py-4 px-6 text-center">Ilimitados</td>
-                  </tr>
-                  <tr className="border-t">
-                    <td className="py-4 px-6">Recetas</td>
-                    <td className="py-4 px-6 text-center">Hasta 5</td>
-                    <td className="py-4 px-6 text-center">Hasta 5</td>
-                    <td className="py-4 px-6 text-center">Ilimitadas</td>
-                  </tr>
-                  <tr className="border-t">
-                    <td className="py-4 px-6">Usuarios incluidos</td>
-                    <td className="py-4 px-6 text-center">1</td>
-                    <td className="py-4 px-6 text-center">1</td>
-                    <td className="py-4 px-6 text-center">Hasta 5</td>
-                  </tr>
-                  <tr className="border-t">
-                    <td className="py-4 px-6">Analíticas básicas</td>
-                    <td className="py-4 px-6 text-center">✅</td>
-                    <td className="py-4 px-6 text-center">✅</td>
-                    <td className="py-4 px-6 text-center">✅</td>
-                  </tr>
-                  <tr className="border-t">
-                    <td className="py-4 px-6">Estadísticas completas</td>
-                    <td className="py-4 px-6 text-center">❌</td>
-                    <td className="py-4 px-6 text-center">✅</td>
-                    <td className="py-4 px-6 text-center">✅</td>
-                  </tr>
-                  <tr className="border-t">
-                    <td className="py-4 px-6">Estadísticas avanzadas</td>
-                    <td className="py-4 px-6 text-center">❌</td>
-                    <td className="py-4 px-6 text-center">❌</td>
-                    <td className="py-4 px-6 text-center">✅</td>
-                  </tr>
-                  <tr className="border-t">
-                    <td className="py-4 px-6">Generador de presupuestos</td>
-                    <td className="py-4 px-6 text-center">❌</td>
-                    <td className="py-4 px-6 text-center">❌</td>
-                    <td className="py-4 px-6 text-center">✅</td>
-                  </tr>
-                  <tr className="border-t">
-                    <td className="py-4 px-6">Chat Bot</td>
-                    <td className="py-4 px-6 text-center">❌</td>
-                    <td className="py-4 px-6 text-center">❌</td>
-                    <td className="py-4 px-6 text-center">✅</td>
-                  </tr>
-                  <tr className="border-t">
-                    <td className="py-4 px-6">Insights de fidelidad</td>
-                    <td className="py-4 px-6 text-center">❌</td>
-                    <td className="py-4 px-6 text-center">❌</td>
-                    <td className="py-4 px-6 text-center">✅</td>
-                  </tr>
-                  <tr className="border-t">
-                    <td className="py-4 px-6">Integraciones personalizadas</td>
-                    <td className="py-4 px-6 text-center">❌</td>
-                    <td className="py-4 px-6 text-center">❌</td>
-                    <td className="py-4 px-6 text-center">✅</td>
-                  </tr>
-                  <tr className="border-t">
-                    <td className="py-4 px-6">Soporte prioritario</td>
-                    <td className="py-4 px-6 text-center">❌</td>
-                    <td className="py-4 px-6 text-center">❌</td>
-                    <td className="py-4 px-6 text-center">✅</td>
-                  </tr>
-                  <tr className="border-t border-b">
-                    <td className="py-4 px-6">
-                      Integración con Google Calendar
-                    </td>
-                    <td className="py-4 px-6 text-center">✅</td>
-                    <td className="py-4 px-6 text-center">✅</td>
-                    <td className="py-4 px-6 text-center">✅</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+            <Accordion type="multiple" className="space-y-3">
+              {faqs.map((faq, i) => (
+                <AccordionItem
+                  key={i}
+                  value={`item-${i}`}
+                  className="bg-[#FFFDF9] border border-[#E8DDD0]/60 rounded-xl overflow-hidden shadow-warm"
+                >
+                  <AccordionTrigger
+                    style={{ textDecoration: "none" }}
+                    className="flex w-full justify-between items-center px-6 py-4 text-left text-base font-medium text-[#3D2519] hover:text-[#8B9E7E] transition-colors"
+                  >
+                    {faq.question}
+                  </AccordionTrigger>
+                  <AccordionContent className="px-6 pb-5 text-[#5C3D2E]/75 text-[15px] leading-relaxed">
+                    {faq.answer}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
           </div>
         </section>
 
-        <section
-          className="relative bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 py-24 px-4"
-          id="faq"
-        >
-          <div className="absolute top-20 left-10 w-20 h-20 bg-gradient-to-br from-emerald-200 to-teal-300 rounded-full opacity-60 animate-pulse"></div>
-          <div className="absolute top-40 right-16 w-32 h-32 bg-gradient-to-br from-teal-200 to-cyan-300 rounded-full opacity-40 animate-pulse delay-1000"></div>
-          <div className="absolute bottom-32 left-20 w-16 h-16 bg-gradient-to-br from-cyan-200 to-emerald-300 rounded-full opacity-50 animate-pulse delay-500"></div>
+        {/* ═══════════════════════════════════════════
+            FINAL CTA SECTION
+            Emotional, warm, inviting
+        ═══════════════════════════════════════════ */}
+        <section className="relative py-24 md:py-32 bg-[#3D2519] overflow-hidden">
+          {/* Decorative blobs */}
+          <div className="absolute top-0 left-0 w-80 h-80 bg-[#5C3D2E] blob-1 -translate-x-1/3 -translate-y-1/3"></div>
+          <div className="absolute bottom-0 right-0 w-64 h-64 bg-[#5C3D2E] blob-2 translate-x-1/4 translate-y-1/4"></div>
 
-          <div className="relative max-w-4xl mx-auto z-10">
-            <h2 className="text-4xl font-extrabold text-center text-gray-900 mb-8">
-              Preguntas frecuentes
+          <div className="max-w-3xl mx-auto px-5 text-center relative z-10">
+            <Heart className="w-10 h-10 text-[#C9A96E] mx-auto mb-6" />
+            <h2 className="font-serif text-3xl md:text-5xl text-white leading-tight mb-6">
+              Tu próximo paso
+              <br />
+              <span className="text-[#C9A96E] italic">comienza aquí</span>
             </h2>
-            <div className="space-y-4">
-              <Accordion type="multiple" className="space-y-4">
-                {faqs.map((faq, i) => (
-                  <AccordionItem
-                    key={i}
-                    value={`item-${i}`}
-                    className="bg-white border border-emerald-100 rounded-xl shadow-sm overflow-hidden"
-                  >
-                    <AccordionTrigger
-                      style={{
-                        textDecoration: "none",
-                      }}
-                      className="flex w-full justify-between items-center px-6 py-4 text-left text-lg font-medium text-gray-800 transition-colors"
-                    >
-                      {faq.question}
-                    </AccordionTrigger>
-                    <AccordionContent className="px-6 pb-4 text-gray-600 text-base">
-                      {faq.answer}
-                    </AccordionContent>
-                  </AccordionItem>
-                ))}
-              </Accordion>
-            </div>
+            <p className="text-white/70 text-lg mb-10 max-w-xl mx-auto leading-relaxed">
+              Únete a la comunidad de pasteleros que ya gestionan su negocio con
+              amor y profesionalidad. Tu pastelería merece la tranquilidad que
+              Cakely te ofrece.
+            </p>
+            <Button
+              size="lg"
+              className="bg-[#C9A96E] hover:bg-[#B89558] text-[#3D2519] px-10 py-6 text-base font-semibold rounded-full shadow-warm-xl transition-all duration-300"
+              asChild
+            >
+              <Link href={`${appDomain}/empezar-prueba`}>
+                Prueba Cakely gratis
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </Button>
+            <p className="text-white/40 text-sm mt-6">
+              Sin tarjeta de crédito · Empieza en 60 segundos
+            </p>
           </div>
         </section>
       </main>
 
-      {/* Footer */}
-      <footer className="py-16 bg-gray-900 text-white">
-        <div className="container mx-auto px-4">
-          <div className="text-center">
-            <div className="flex items-center justify-center gap-3 mb-8">
-              <Image
-                src="/img/logo-white.webp"
-                alt="Logo Cakely"
-                width={80}
-                height={80}
-              />
-            </div>
-            <p className="text-gray-400 mb-10 max-w-3xl mx-auto text-lg leading-relaxed">
-              La revolución digital que tu pastelería necesitaba. Transforma el
-              caos en control y el estrés en crecimiento.
+      {/* ═══════════════════════════════════════════
+          FOOTER
+          Warm, intimate, close
+      ═══════════════════════════════════════════ */}
+      <footer className="py-14 bg-[#3D2519] border-t border-[#5C3D2E]">
+        <div className="max-w-5xl mx-auto px-5">
+          <div className="flex flex-col items-center text-center">
+            <Image
+              src="/img/logo-white.webp"
+              alt="Logo Cakely"
+              width={52}
+              height={52}
+              className="mb-5"
+            />
+            <p className="text-white/50 mb-8 max-w-md text-sm leading-relaxed">
+              Hecho con cariño para quienes crean con las manos. Cakely es tu
+              compañero en cada pedido, cada receta y cada cliente.
             </p>
-            <div className="grid grid-cols-2 gap-4 sm:flex sm:justify-center sm:gap-8 mb-10 text-center">
-              <Link
-                href="/terminos"
-                className="text-gray-400 hover:text-white transition-colors text-lg"
-              >
-                Términos
-              </Link>
-              <Link
-                href="/privacidad"
-                className="text-gray-400 hover:text-white transition-colors text-lg"
-              >
-                Privacidad
-              </Link>
-              <Link
-                href="/contacto"
-                className="text-gray-400 hover:text-white transition-colors text-lg"
-              >
-                Contacto
-              </Link>
-              <Link
-                href="/privacidad/cookies"
-                className="text-gray-400 hover:text-white transition-colors text-lg"
-              >
-                Política de Cookies
-              </Link>
+            <div className="flex flex-wrap justify-center gap-6 mb-8">
+              {[
+                { href: "/terminos", label: "Términos" },
+                { href: "/privacidad", label: "Privacidad" },
+                { href: "/contacto", label: "Contacto" },
+                { href: "/privacidad/cookies", label: "Cookies" },
+                { href: "/blog", label: "Blog" },
+              ].map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="text-white/40 hover:text-[#C9A96E] transition-colors text-sm"
+                >
+                  {link.label}
+                </Link>
+              ))}
             </div>
-            <p className="text-gray-500">
-              © {new Date().getFullYear()} Cakely. Hecho con ❤️ para
-              profesionales de la repostería.
+            <p className="text-white/30 text-xs">
+              © {new Date().getFullYear()} Cakely. Todos los derechos
+              reservados.
             </p>
           </div>
         </div>

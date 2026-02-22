@@ -49,14 +49,17 @@ export default function HeaderLoginButton() {
 
   if (isLoading) {
     return (
-      <div className="h-9 w-24 bg-gray-200 animate-pulse rounded-md"></div>
+      <div className="h-9 w-24 bg-[#FAF0E6] animate-pulse rounded-full"></div>
     );
   }
 
   if (isAuthenticated && user) {
     return (
       <div className="flex items-center gap-2">
-        <Button className="bg-emerald-600 border-emerald-200 hover:bg-emerald-300 hover:border-emerald-300" asChild>
+        <Button
+          className="bg-[#8B9E7E] hover:bg-[#6B7F5E] text-white rounded-full px-5"
+          asChild
+        >
           <Link href={`${appDomain}/`}>Panel de control</Link>
         </Button>
         <User isLoading={isLoading} user={user} />
@@ -65,14 +68,12 @@ export default function HeaderLoginButton() {
   }
 
   return (
-    <>
-      <Button
-        variant="outline"
-        className="border-emerald-200 hover:bg-emerald-50 hover:border-emerald-300"
-        asChild
-      >
-        <Link href={`${appDomain}/login`}>Iniciar Sesión</Link>
-      </Button>
-    </>
+    <Button
+      variant="outline"
+      className="border-[#E8DDD0] text-[#5C3D2E] hover:bg-[#FAF0E6] hover:border-[#D4A0A0]/40 rounded-full px-5"
+      asChild
+    >
+      <Link href={`${appDomain}/login`}>Iniciar Sesión</Link>
+    </Button>
   );
 }

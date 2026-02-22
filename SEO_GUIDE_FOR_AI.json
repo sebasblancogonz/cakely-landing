@@ -35,19 +35,31 @@
       "longitud_max": 170,
       "longitud_ideal": "150-160 caracteres",
       "debe_incluir": [
-        "Resume el contenido",
-        "Call to action implícito",
-        "Palabras clave naturales"
+        "Resume el contenido principal del artículo",
+        "Genera curiosidad sin ser clickbait",
+        "Palabras clave naturales",
+        "Tono conversacional y directo"
       ],
+      "instruccion_importante": "VARÍA EL INICIO. No uses siempre 'Descubre' o 'Aprende'. Sé creativo y natural.",
       "ejemplos_buenos": [
-        "Descubre 7 estrategias probadas para organizar pedidos, reducir errores y ahorrar tiempo en tu pastelería. Incluye plantillas descargables.",
-        "Aprende a calcular el coste real de tus recetas, establecer precios rentables y aumentar tus márgenes. Guía paso a paso con ejemplos."
+        "La gestión de pedidos en temporada alta puede ser caótica. Te mostramos 7 estrategias probadas para mantener el control y aumentar tu eficiencia.",
+        "¿Sabes realmente cuánto ganas con cada tarta? Esta guía te enseña a calcular costes reales y establecer precios rentables paso a paso.",
+        "Organizar un obrador eficiente es clave para crecer. Conoce las técnicas que usan las pastelerías más exitosas para optimizar su espacio.",
+        "Instagram puede ser tu mejor vendedor si sabes usarlo. Estrategias prácticas de marketing digital específicas para pastelerías artesanales.",
+        "Los costes suben pero tus precios no pueden hacerlo tanto. 8 tácticas para mantener rentabilidad sin perder clientes ni calidad."
+      ],
+      "inicios_permitidos": [
+        "Pregunta directa al lector",
+        "Afirmación sobre un problema común",
+        "Estadística o dato impactante",
+        "Beneficio claro y directo",
+        "Contexto del problema + solución"
       ]
     },
     "contenido": {
       "longitud_min_palabras": 800,
       "longitud_ideal_palabras": "1200-2000",
-      "longitud_max_palabras": 3000,
+      "longitud_max_palabras": 2500,
       "comillas": "Usar html &quot; para comillas dobles y &#39; para comillas simples",
       "estructura_html": {
         "usar": ["h2", "h3", "h4", "p", "ul", "ol", "li", "strong", "em", "a"],

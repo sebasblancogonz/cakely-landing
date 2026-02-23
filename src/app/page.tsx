@@ -25,11 +25,11 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { useUserCountry } from "@/hooks/use-user-country";
+import { getRegionalPrices } from "@/lib/pricing";
 
 const appDomain =
   process.env.NEXT_PUBLIC_APP_DOMAIN || "https://app.cakely.es";
-const basicPriceId = process.env.STRIPE_PRICE_ID_BASICO_MONTHLY!;
-const proPriceId = process.env.STRIPE_PRICE_ID_PRO_MONTHLY!;
 
 const faqs = [
   {
@@ -91,6 +91,9 @@ const testimonials = [
 ];
 
 export default function Index() {
+  const { region } = useUserCountry();
+  const prices = getRegionalPrices(region);
+
   return (
     <div className="flex flex-col min-h-screen bg-[#FFF8F0]">
       {/* ─── Header ─── */}
@@ -557,8 +560,8 @@ export default function Index() {
                   </p>
                 </div>
                 <div className="mb-6">
-                  <span className="font-serif text-5xl text-[#3D2519]">0€</span>
-                  <span className="text-[#A89888] text-lg ml-1">/mes</span>
+                  <span className="font-serif text-5xl text-[#3D2519]">{prices.free.display}</span>
+                  <span className="text-[#A89888] text-lg ml-1">{prices.free.interval}</span>
                 </div>
                 <p className="text-xs text-[#8B9E7E] font-medium mb-6">
                   Siempre gratis
@@ -601,12 +604,12 @@ export default function Index() {
                 </div>
                 <div className="mb-6">
                   <span className="font-serif text-5xl text-[#3D2519]">
-                    9,99€
+                    {prices.basico.display.monthly}
                   </span>
                   <span className="text-[#A89888] text-lg ml-1">/mes</span>
                 </div>
                 <p className="text-xs text-[#C9A96E] font-medium mb-6">
-                  99,99€/año — ahorra 2 meses
+                  {prices.basico.display.yearly} — {prices.basico.display.yearlySavings}
                 </p>
                 <ul className="space-y-3 mb-8">
                   {[
@@ -631,7 +634,7 @@ export default function Index() {
                   asChild
                 >
                   <Link
-                    href={`${appDomain}/empezar-prueba?priceId=${basicPriceId}`}
+                    href={`${appDomain}/empezar-prueba?priceId=${prices.basico.stripeIds.monthly}`}
                   >
                     Probar 14 días gratis
                   </Link>
@@ -653,12 +656,12 @@ export default function Index() {
                 </div>
                 <div className="mb-6">
                   <span className="font-serif text-5xl text-[#C9A96E]">
-                    19,99€
+                    {prices.pro.display.monthly}
                   </span>
                   <span className="text-white/60 text-lg ml-1">/mes</span>
                 </div>
                 <p className="text-xs text-[#C9A96E] font-medium mb-6">
-                  199,99€/año — ahorra 2 meses
+                  {prices.pro.display.yearly} — {prices.pro.display.yearlySavings}
                 </p>
                 <ul className="space-y-3 mb-8">
                   {[
@@ -685,7 +688,7 @@ export default function Index() {
                   asChild
                 >
                   <Link
-                    href={`${appDomain}/empezar-prueba?priceId=${proPriceId}`}
+                    href={`${appDomain}/empezar-prueba?priceId=${prices.pro.stripeIds.monthly}`}
                   >
                     Probar 14 días gratis
                   </Link>
@@ -695,8 +698,7 @@ export default function Index() {
 
             <div className="text-center mt-12">
               <p className="text-[#A89888] text-sm">
-                Todos los precios incluyen IVA · Soporte en español · Datos
-                protegidos en Europa · Cancela cuando quieras
+                {prices.footerText}
               </p>
             </div>
           </div>

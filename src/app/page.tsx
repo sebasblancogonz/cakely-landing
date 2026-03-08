@@ -14,6 +14,8 @@ import {
   Heart,
   ChefHat,
   Palette,
+  FileText,
+  Store,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -65,7 +67,7 @@ const faqs = [
   {
     question: "¿Qué incluye el plan Pro?",
     answer:
-      "Además de clientes y pedidos ilimitados, tendrás estadísticas avanzadas, generador de presupuestos, insights de fidelidad, integraciones personalizadas y soporte prioritario. Todo lo que necesitas para crecer con confianza.",
+      "Además de clientes y pedidos ilimitados, tendrás generador de facturas con envío por email, gestión de sucursales, estadísticas avanzadas, generador de presupuestos, insights de fidelidad y soporte prioritario. Todo lo que necesitas para crecer con confianza.",
   },
 ];
 
@@ -369,6 +371,22 @@ export default function Index() {
                   accent: "#D4A0A0",
                   bgAccent: "#D4A0A0",
                 },
+                {
+                  icon: FileText,
+                  title: "Generador de facturas",
+                  description:
+                    "Crea facturas completas y simplificadas conforme a la normativa española. Descárgalas en PDF o envíalas por email.",
+                  accent: "#8B9E7E",
+                  bgAccent: "#8B9E7E",
+                },
+                {
+                  icon: Store,
+                  title: "Gestión de sucursales",
+                  description:
+                    "Configura y administra varias sedes desde un solo panel. Cada sucursal con sus propios ajustes y datos.",
+                  accent: "#C9A96E",
+                  bgAccent: "#C9A96E",
+                },
               ].map((feature, i) => (
                 <div
                   key={i}
@@ -616,6 +634,7 @@ export default function Index() {
                     "Todo lo del plan Gratuito",
                     "Hasta 50 pedidos al mes",
                     "Hasta 100 clientes",
+                    "Generador de facturas",
                     "Estadísticas completas",
                     "Google Calendar",
                     "1 usuario",
@@ -668,10 +687,11 @@ export default function Index() {
                     "Todo lo del plan Básico",
                     "Pedidos, clientes y recetas ilimitados",
                     "Hasta 5 usuarios",
+                    "Generador de facturas con envío por email",
+                    "Gestión de sucursales",
                     "Estadísticas avanzadas",
                     "Generador de presupuestos",
                     "Insights de fidelidad",
-                    "Integraciones personalizadas",
                     "Soporte prioritario",
                   ].map((f, j) => (
                     <li

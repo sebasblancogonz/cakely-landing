@@ -1,17 +1,26 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { revalidatePath } from 'next/cache';
+import { timingSafeEqual } from 'crypto';
 import { prisma } from '@/lib/prisma';
 
 function validateApiKey(request: NextRequest): boolean {
   const apiKey = request.headers.get('x-api-key');
   const validApiKey = process.env.BLOG_API_KEY;
 
-  if (!validApiKey) {
-    console.error('BLOG_API_KEY not configured');
+  if (!validApiKey || !apiKey) {
     return false;
   }
 
-  return apiKey === validApiKey;
+  try {
+    const apiKeyBuffer = Buffer.from(apiKey);
+    const validKeyBuffer = Buffer.from(validApiKey);
+    if (apiKeyBuffer.length !== validKeyBuffer.length) {
+      return false;
+    }
+    return timingSafeEqual(apiKeyBuffer, validKeyBuffer);
+  } catch {
+    return false;
+  }
 }
 
 export async function GET(

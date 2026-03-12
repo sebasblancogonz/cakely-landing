@@ -1,17 +1,26 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { revalidatePath } from 'next/cache';
+import { timingSafeEqual } from 'crypto';
 import { prisma } from '@/lib/prisma';
 
 function validateApiKey(request: NextRequest): boolean {
   const apiKey = request.headers.get('x-api-key');
   const validApiKey = process.env.BLOG_API_KEY;
 
-  if (!validApiKey) {
-    console.error('BLOG_API_KEY not configured');
+  if (!validApiKey || !apiKey) {
     return false;
   }
 
-  return apiKey === validApiKey;
+  try {
+    const apiKeyBuffer = Buffer.from(apiKey);
+    const validKeyBuffer = Buffer.from(validApiKey);
+    if (apiKeyBuffer.length !== validKeyBuffer.length) {
+      return false;
+    }
+    return timingSafeEqual(apiKeyBuffer, validKeyBuffer);
+  } catch {
+    return false;
+  }
 }
 
 function generateSlug(title: string): string {
@@ -102,8 +111,10 @@ export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url);
     const published = searchParams.get('published');
     const category = searchParams.get('category');
-    const limit = parseInt(searchParams.get('limit') || '10');
-    const offset = parseInt(searchParams.get('offset') || '0');
+    const rawLimit = parseInt(searchParams.get('limit') || '10');
+    const rawOffset = parseInt(searchParams.get('offset') || '0');
+    const limit = Math.max(1, Math.min(100, isNaN(rawLimit) ? 10 : rawLimit));
+    const offset = Math.max(0, isNaN(rawOffset) ? 0 : rawOffset);
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const where: any = published === 'false'

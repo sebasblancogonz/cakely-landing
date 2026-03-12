@@ -5,6 +5,7 @@ import { Calendar, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { prisma } from "@/lib/prisma";
 import { MobileMenu } from "@/components/MobileMenu";
+import sanitizeHtml from 'sanitize-html';
 import "./blog-post.css";
 
 async function getBlogPost(slug: string) {
@@ -233,7 +234,21 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
               <div
                 className="blog-content"
-                dangerouslySetInnerHTML={{ __html: post.content }}
+                dangerouslySetInnerHTML={{
+                  __html: sanitizeHtml(post.content, {
+                    allowedTags: sanitizeHtml.defaults.allowedTags.concat(['img', 'h1', 'h2', 'h3', 'figure', 'figcaption', 'iframe', 'video', 'source', 'picture']),
+                    allowedAttributes: {
+                      ...sanitizeHtml.defaults.allowedAttributes,
+                      img: ['src', 'alt', 'title', 'width', 'height', 'loading'],
+                      a: ['href', 'target', 'rel'],
+                      iframe: ['src', 'width', 'height', 'frameborder', 'allowfullscreen'],
+                      video: ['src', 'controls', 'width', 'height'],
+                      source: ['src', 'type'],
+                      '*': ['class', 'id', 'style'],
+                    },
+                    allowedIframeHostnames: ['www.youtube.com', 'youtube.com', 'www.instagram.com'],
+                  }),
+                }}
               />
 
               <div className="mt-16 pt-8 border-t border-gray-200">

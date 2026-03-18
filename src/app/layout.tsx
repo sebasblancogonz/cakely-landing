@@ -4,6 +4,7 @@ import "./globals.css";
 import { Analytics } from "@vercel/analytics/react";
 import { Loader2 } from "lucide-react";
 import { Playfair_Display, DM_Sans } from "next/font/google";
+import MetaPixel from "@/components/analytics/MetaPixel";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -80,6 +81,7 @@ export default function RootLayout({
         </Suspense>
       </body>
       <Analytics />
+      <MetaPixel />
     </html>
   );
 }

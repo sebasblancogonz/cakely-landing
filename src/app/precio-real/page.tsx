@@ -213,7 +213,7 @@ export default function PrecioRealPage() {
 
                 {/* Headline */}
                 <h1
-                  className='font-serif text-4xl md:text-5xl text-[#3D2519] leading-[1.1] tracking-tight mb-6 opacity-0 animate-fade-in-up animate-delay-100'
+                  className='font-serif text-3xl md:text-5xl text-[#3D2519] leading-[1.1] tracking-tight mb-6 opacity-0 animate-fade-in-up animate-delay-100'
                 >
                   Llevas meses haciendo tartas.
                   <br />
@@ -223,7 +223,7 @@ export default function PrecioRealPage() {
                 </h1>
 
                 {/* Subtitle */}
-                <p className='text-lg text-[#5C3D2E]/70 leading-relaxed mb-10 opacity-0 animate-fade-in-up animate-delay-200'>
+                <p className='text-base md:text-lg text-[#5C3D2E]/70 leading-relaxed mb-10 opacity-0 animate-fade-in-up animate-delay-200'>
                   Cakely calcula el precio real de cada tarta con tus ingredientes y
                   tus costes. Sin Excel. Sin adivinanzas.
                 </p>
@@ -232,17 +232,17 @@ export default function PrecioRealPage() {
                 <div className='flex flex-col gap-4 mb-8 opacity-0 animate-fade-in-up animate-delay-300'>
                   <Button
                     size='lg'
-                    className='bg-[#8B9E7E] hover:bg-[#6B7F5E] text-white px-8 py-6 text-base font-semibold rounded-full shadow-warm-lg transition-all duration-300 hover:shadow-warm-xl'
+                    className='bg-[#8B9E7E] hover:bg-[#6B7F5E] text-white px-6 py-5 text-sm md:text-base font-semibold rounded-full shadow-warm-lg transition-all duration-300 hover:shadow-warm-xl w-full'
                     asChild
                   >
                     <Link href={registerUrl}>
-                      → Calcula el precio de tu primera tarta gratis
+                      → Empieza gratis
                     </Link>
                   </Button>
                   <Button
                     variant='outline'
                     size='lg'
-                    className='border-[#E8DDD0] text-[#5C3D2E] hover:bg-[#FAF0E6] px-8 py-6 text-base font-medium rounded-full'
+                    className='border-[#E8DDD0] text-[#5C3D2E] hover:bg-[#FAF0E6] px-6 py-5 text-sm md:text-base font-medium rounded-full w-full'
                     asChild
                   >
                     <Link href='#como-funciona'>

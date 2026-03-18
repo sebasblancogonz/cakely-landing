@@ -9,10 +9,6 @@ import {
   ArrowRight,
   TrendingUp,
   ClipboardList,
-  Users,
-  FileText,
-  BarChartBig,
-  Receipt,
   ChevronDown,
 } from 'lucide-react';
 import Image from 'next/image';
@@ -214,14 +210,6 @@ export default function PrecioRealPage() {
             <div className='grid md:grid-cols-5 gap-12 items-center'>
               {/* Left — Copy */}
               <div className='text-left md:col-span-2'>
-                {/* Badge */}
-                <div
-                  className='inline-flex items-center gap-2 bg-[#FFFDF9] border border-[#E8DDD0] text-[#8B9E7E] px-5 py-2.5 rounded-full text-sm font-medium shadow-warm mb-8 opacity-0 animate-fade-in-up'
-                  style={{ animationDelay: '0s' }}
-                >
-                  <Calculator className='w-4 h-4' />
-                  Para reposteras artesanales
-                </div>
 
                 {/* Headline */}
                 <h1

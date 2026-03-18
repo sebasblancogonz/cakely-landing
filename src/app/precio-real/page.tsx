@@ -612,16 +612,16 @@ export default function PrecioRealPage() {
               asChild
             >
               <Link href={registerUrl}>
-                → Calcular el precio de mi primera tarta
+                → Quiero probarlo
               </Link>
             </Button>
             <p className='text-white/40 text-sm mt-6'>
               ¿Tienes dudas? Escríbenos a{' '}
               <a
-                href='mailto:hola@cakely.es'
+                href='mailto:contacto@cakely.es'
                 className='underline underline-offset-2 hover:text-white/60 transition-colors'
               >
-                hola@cakely.es
+                contacto@cakely.es
               </a>
             </p>
           </div>

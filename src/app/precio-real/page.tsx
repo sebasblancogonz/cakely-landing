@@ -614,7 +614,7 @@ export default function PrecioRealPage() {
               </span>
             </h2>
             <p className='text-white/60 text-lg mb-4 max-w-xl mx-auto leading-relaxed'>
-              Hoy puedes ser la última vez que pongas un precio "a ojo".
+              Hoy puedes ser la última vez que pongas un precio &ldquo;a ojo&rdquo;.
             </p>
             <p className='text-white/40 text-base mb-10 max-w-xl mx-auto'>
               Regístrate gratis. Mete tu primera receta. Y descubre cuánto

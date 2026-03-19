@@ -17,7 +17,7 @@ import Link from 'next/link';
 const appDomain =
   process.env.NEXT_PUBLIC_APP_DOMAIN || 'https://app.cakely.es';
 
-const registerUrl = `${appDomain}/auth/register`;
+const registerUrl = `${appDomain}/empezar-prueba`;
 
 interface PainPoint {
   emoji: string;

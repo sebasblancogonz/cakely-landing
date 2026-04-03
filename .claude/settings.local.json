@@ -26,7 +26,12 @@
       "mcp__stitch__get_project",
       "Bash(ls -la \"/Users/sebastian.blanco/Documents/Sebas/Cakely/app/\\(dashboard\\)/ajustes/\")",
       "Bash(npx tsc:*)",
-      "Bash(pnpm dlx:*)"
+      "Bash(pnpm dlx:*)",
+      "Bash(for f:*)",
+      "Bash(do echo:*)",
+      "Read(//Users/sebastian.blanco/Documents/Sebas/cakely-landing/**)",
+      "Bash(done)",
+      "Bash(cd:*)"
     ],
     "deny": [],
     "ask": [],

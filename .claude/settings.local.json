@@ -1,10 +1,40 @@
 {
   "permissions": {
     "allow": [
+      "Bash(grep:*)",
+      "Bash(test:*)",
+      "Bash(cat:*)",
+      "Bash(find:*)",
+      "Bash(ls:*)",
+      "Bash(wc:*)",
+      "Bash(dir /s /b)",
+      "Bash(findstr:*)",
+      "Bash(npx cap copy:*)",
       "Bash(pnpm add:*)",
-      "Bash(npx prisma init)"
+      "Bash(pod install:*)",
+      "Bash(npm view:*)",
+      "Bash(npx drizzle-kit:*)",
+      "Bash(npm run db:migrate:*)",
+      "Bash(head:*)",
+      "Bash(npx tsx:*)",
+      "Bash(cd /Users/sebastian.blanco/Documents/Sebas/cakely-landing && npx next dev -p 3001 2>&1 | head -30)",
+      "Bash(npx next:*)",
+      "Bash(find /Users/sebastian.blanco/Documents/Sebas/cakely-landing -path \"*/node_modules\" -prune -o -type f \\\\\\( -name \"*.tsx\" -o -name \"*.ts\" -o -name \"tailwind.config.*\" -o -name \"globals.css\" -o -name \"*.json\" \\\\\\) -print 2>/dev/null | grep -v node_modules | sort)",
+      "mcp__stitch__create_project",
+      "mcp__stitch__generate_screen_from_text",
+      "mcp__stitch__list_screens",
+      "mcp__stitch__get_project",
+      "Bash(ls -la \"/Users/sebastian.blanco/Documents/Sebas/Cakely/app/\\(dashboard\\)/ajustes/\")",
+      "Bash(npx tsc:*)",
+      "Bash(pnpm dlx:*)"
     ],
     "deny": [],
-    "ask": []
+    "ask": [],
+    "additionalDirectories": [
+      "/Users/sebastian.blanco/Documents/Sebas/cakely-landing"
+    ]
+  },
+  "enabledPlugins": {
+    "ui-ux-pro-max@ui-ux-pro-max-skill": true
   }
 }

@@ -44,7 +44,7 @@ export function MobileMenu() {
           style={{
             position: "absolute",
             inset: 0,
-            backgroundColor: "rgba(61, 37, 25, 0.4)",
+            backgroundColor: "rgba(28, 25, 23, 0.4)",
             animation: isClosing
               ? "fadeOut 0.3s ease-out"
               : "fadeIn 0.3s ease-out",
@@ -60,8 +60,8 @@ export function MobileMenu() {
             bottom: 0,
             width: "300px",
             maxWidth: "85vw",
-            backgroundColor: "#FFF8F0",
-            boxShadow: "-8px 0 30px rgba(61, 37, 25, 0.1)",
+            backgroundColor: "#FAFAF8",
+            boxShadow: "-8px 0 30px rgba(28, 25, 23, 0.1)",
             animation: isClosing
               ? "slideOutRight 0.3s ease-out"
               : "slideInRight 0.3s ease-out",
@@ -74,15 +74,14 @@ export function MobileMenu() {
               alignItems: "center",
               justifyContent: "space-between",
               padding: "20px 24px",
-              borderBottom: "1px solid #E8DDD0",
+              borderBottom: "1px solid #E7E5E4",
             }}
           >
             <span
               style={{
                 fontSize: "18px",
                 fontWeight: 600,
-                color: "#3D2519",
-                fontFamily: "var(--font-playfair), Georgia, serif",
+                color: "#1C1917",
               }}
             >
               Menú
@@ -91,7 +90,7 @@ export function MobileMenu() {
               onClick={handleClose}
               style={{
                 padding: "8px",
-                color: "#A89888",
+                color: "#A8A29E",
                 borderRadius: "8px",
                 border: "none",
                 background: "transparent",
@@ -116,11 +115,10 @@ export function MobileMenu() {
             {/* Links */}
             <div style={{ marginBottom: "24px" }}>
               {[
-                { href: "#servicios", label: "Servicios" },
-                { href: "#como-funciona", label: "Cómo funciona" },
+                { href: "#funciones", label: "Funciones" },
                 { href: "#precios", label: "Precios" },
                 { href: "/blog", label: "Blog" },
-                { href: "#faq", label: "Preguntas frecuentes" },
+                { href: "#faq", label: "FAQ" },
               ].map((item, index) => (
                 <Link
                   key={item.href}
@@ -131,7 +129,7 @@ export function MobileMenu() {
                     padding: "14px 16px",
                     fontSize: "15px",
                     fontWeight: 500,
-                    color: "#5C3D2E",
+                    color: "#44403C",
                     textDecoration: "none",
                     borderRadius: "12px",
                     marginBottom: "4px",
@@ -141,13 +139,13 @@ export function MobileMenu() {
                     }s backwards`,
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundColor = "#FAF0E6";
-                    e.currentTarget.style.color = "#8B9E7E";
+                    e.currentTarget.style.backgroundColor = "#F5F5F4";
+                    e.currentTarget.style.color = "#E8943A";
                     e.currentTarget.style.transform = "translateX(4px)";
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.backgroundColor = "transparent";
-                    e.currentTarget.style.color = "#5C3D2E";
+                    e.currentTarget.style.color = "#44403C";
                     e.currentTarget.style.transform = "translateX(0)";
                   }}
                 >
@@ -160,7 +158,7 @@ export function MobileMenu() {
             <div
               style={{
                 height: "1px",
-                backgroundColor: "#E8DDD0",
+                backgroundColor: "#E7E5E4",
                 marginBottom: "24px",
                 animation: "slideUp 0.3s ease-out 0.25s backwards",
               }}
@@ -178,24 +176,22 @@ export function MobileMenu() {
                   fontSize: "15px",
                   fontWeight: 600,
                   color: "white",
-                  backgroundColor: "#8B9E7E",
+                  backgroundColor: "#1C1917",
                   textAlign: "center",
                   textDecoration: "none",
-                  borderRadius: "999px",
+                  borderRadius: "8px",
                   marginBottom: "12px",
                   transition: "all 0.2s ease",
                   animation: "slideUp 0.3s ease-out 0.3s backwards",
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = "#6B7F5E";
-                  e.currentTarget.style.transform = "scale(1.02)";
+                  e.currentTarget.style.opacity = "0.9";
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = "#8B9E7E";
-                  e.currentTarget.style.transform = "scale(1)";
+                  e.currentTarget.style.opacity = "1";
                 }}
               >
-                Prueba Cakely gratis
+                Prueba gratis 14 días
               </Link>
 
               <Link
@@ -207,22 +203,20 @@ export function MobileMenu() {
                   padding: "13px 16px",
                   fontSize: "15px",
                   fontWeight: 600,
-                  color: "#5C3D2E",
+                  color: "#44403C",
                   backgroundColor: "transparent",
-                  border: "1.5px solid #E8DDD0",
+                  border: "1.5px solid #E7E5E4",
                   textAlign: "center",
                   textDecoration: "none",
-                  borderRadius: "999px",
+                  borderRadius: "8px",
                   transition: "all 0.2s ease",
                   animation: "slideUp 0.3s ease-out 0.35s backwards",
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = "#FAF0E6";
-                  e.currentTarget.style.transform = "scale(1.02)";
+                  e.currentTarget.style.backgroundColor = "#F5F5F4";
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.backgroundColor = "transparent";
-                  e.currentTarget.style.transform = "scale(1)";
                 }}
               >
                 Iniciar sesión
@@ -237,7 +231,7 @@ export function MobileMenu() {
     <div className="md:hidden">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="p-2 text-[#5C3D2E] hover:text-[#8B9E7E] transition-colors"
+        className="p-2 text-[#44403C] hover:text-[#E8943A] transition-colors"
       >
         {isOpen ? <X size={26} /> : <Menu size={26} />}
       </button>

@@ -31,7 +31,10 @@
       "Bash(do echo:*)",
       "Read(//Users/sebastian.blanco/Documents/Sebas/cakely-landing/**)",
       "Bash(done)",
-      "Bash(cd:*)"
+      "Bash(cd:*)",
+      "Bash(git checkout:*)",
+      "Bash(git add:*)",
+      "Bash(git push:*)"
     ],
     "deny": [],
     "ask": [],

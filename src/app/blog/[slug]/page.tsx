@@ -76,7 +76,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       title: post.title,
       description,
       images: [optimizedImage],
-      creator: '@cakely_app',
+      creator: '@cakely.es',
     },
     alternates: {
       canonical: `${baseUrl}/blog/${slug}`,

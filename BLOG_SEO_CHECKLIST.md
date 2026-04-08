@@ -36,7 +36,7 @@ optimizedImage = imageUrl.split('?')[0] + '?w=1200&h=630&fit=crop&q=80';
 - ✅ `twitter:title` - Título del artículo
 - ✅ `twitter:description` - Descripción
 - ✅ `twitter:images` - Imagen optimizada
-- ✅ `twitter:creator` - "@cakely_app"
+- ✅ `twitter:creator` - "@cakely.es"
 
 ### 4. **Schema.org / JSON-LD**
 - ✅ BlogPosting schema en posts individuales

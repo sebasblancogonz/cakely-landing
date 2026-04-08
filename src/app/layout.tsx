@@ -58,7 +58,7 @@ export const metadata = {
     title: "Cakely – Gestión de pedidos para pastelerías",
     description: "Organiza los pedidos de tu pastelería, lleva el control de tus clientes y haz crecer tu negocio de repostería con Cakely.",
     images: ["https://cakely.es/img/logo.png"],
-    creator: "@cakely_app",
+    creator: "@cakely.es",
   },
 };
 

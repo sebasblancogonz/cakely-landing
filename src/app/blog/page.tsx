@@ -73,7 +73,7 @@ export const metadata: Metadata = {
     title: "Blog Cakely - Consejos para pastelerías",
     description:
       "Consejos, novedades y mejores prácticas para gestionar tu pastelería artesanal",
-    creator: "@cakely_app",
+    creator: "@cakely.es",
   },
   alternates: {
     canonical: `${process.env.NEXT_PUBLIC_LANDING_DOMAIN || "https://cakely.es"}/blog`,

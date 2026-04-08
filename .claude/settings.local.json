@@ -34,7 +34,9 @@
       "Bash(cd:*)",
       "Bash(git checkout:*)",
       "Bash(git add:*)",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "Bash(file:*)",
+      "Bash(flutter analyze:*)"
     ],
     "deny": [],
     "ask": [],

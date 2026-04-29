@@ -37,7 +37,7 @@ export function HeroSection() {
           </div>
 
           <p className="text-sm text-[#A8A29E] mt-6 text-center">
-            Sin tarjeta de crédito &middot; Cancela cuando quieras
+            14 días gratis &middot; Cancela cuando quieras
           </p>
         </div>
 

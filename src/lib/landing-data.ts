@@ -162,7 +162,6 @@ export const PLAN_COMPARISON = {
         { label: 'Gastos', free: true, basico: true, pro: true },
         { label: 'Escaneo de recibos', free: false, basico: true, pro: true },
         { label: 'Calculadora de presupuestos', free: false, basico: false, pro: true },
-        { label: 'Chatbot', free: false, basico: false, pro: true },
         { label: 'Soporte prioritario', free: false, basico: false, pro: true },
         { label: 'Integraciones / API', free: false, basico: false, pro: true },
         { label: 'Landing page', free: false, basico: false, pro: true },

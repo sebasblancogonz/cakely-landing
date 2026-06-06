@@ -125,6 +125,52 @@ export const PRICING_FEATURES = {
   ],
 } as const;
 
+/**
+ * Comparativa completa de planes para la sección de tabla bajo la PricingSection.
+ * Fuente de verdad: `config/plans.ts` del dashboard. Cualquier cambio allí debe
+ * reflejarse aquí — son repos separados, no hay import compartido.
+ *
+ * VITALICIO se omite: no está a la venta para usuarios nuevos.
+ */
+export type PlanColumn = 'free' | 'basico' | 'pro';
+
+export const PLAN_COMPARISON = {
+  groups: [
+    {
+      label: 'Cuotas',
+      rows: [
+        { label: 'Pedidos al mes', free: '10', basico: '50', pro: 'Sin límite' },
+        { label: 'Clientes', free: '20', basico: '100', pro: 'Sin límite' },
+        { label: 'Recetas', free: '5', basico: '5', pro: 'Sin límite' },
+        { label: 'Usuarios en equipo', free: '1', basico: '1', pro: '5' },
+        { label: 'Sedes', free: '1', basico: '1', pro: '5' },
+        { label: 'Facturas al mes', free: '—', basico: '20', pro: 'Sin límite' },
+        { label: 'Gastos al mes', free: '20', basico: '100', pro: 'Sin límite' },
+      ],
+    },
+    {
+      label: 'Funciones',
+      rows: [
+        { label: 'Analíticas básicas', free: true, basico: true, pro: true },
+        { label: 'Estadísticas', free: false, basico: true, pro: true },
+        { label: 'Estadísticas avanzadas', free: false, basico: false, pro: true },
+        { label: 'Múltiples usuarios', free: false, basico: false, pro: true },
+        { label: 'Sedes / sucursales', free: false, basico: false, pro: true },
+        { label: 'Facturación', free: false, basico: true, pro: true },
+        { label: 'Envío de facturas por email', free: false, basico: false, pro: true },
+        { label: 'Inventario', free: false, basico: true, pro: true },
+        { label: 'Gastos', free: true, basico: true, pro: true },
+        { label: 'Escaneo de recibos', free: false, basico: true, pro: true },
+        { label: 'Calculadora de presupuestos', free: false, basico: false, pro: true },
+        { label: 'Chatbot', free: false, basico: false, pro: true },
+        { label: 'Soporte prioritario', free: false, basico: false, pro: true },
+        { label: 'Integraciones / API', free: false, basico: false, pro: true },
+        { label: 'Landing page', free: false, basico: false, pro: true },
+      ],
+    },
+  ],
+} as const;
+
 export const FOOTER_LINKS = {
   producto: [
     { href: '#funciones', label: 'Funciones' },

@@ -6,7 +6,7 @@ const appDomain =
 
 export function HeroSection() {
   return (
-    <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden">
+    <section className="relative isolate pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden">
       {/* Fondo: gradiente cálido sutil sobre el background base */}
       <div aria-hidden className="absolute inset-0 -z-10 bg-[#FAFAF8]" />
       <div

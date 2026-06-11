@@ -92,3 +92,14 @@ html {
     font-family: var(--font-dm-sans), system-ui, sans-serif;
   }
 }
+
+/* tw-animate-css no trae soporte de prefers-reduced-motion — lo añadimos
+   global para todas las animaciones de entrada del sitio. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}

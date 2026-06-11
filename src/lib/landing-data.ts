@@ -175,6 +175,8 @@ export const FOOTER_LINKS = {
     { href: '#funciones', label: 'Funciones' },
     { href: '#precios', label: 'Precios' },
     { href: '/blog', label: 'Blog' },
+    { href: '/software-para-pastelerias', label: 'Software para pastelerías' },
+    { href: '/software-para-panaderias', label: 'Software para panaderías' },
   ],
   legal: [
     { href: '/terminos', label: 'Términos' },

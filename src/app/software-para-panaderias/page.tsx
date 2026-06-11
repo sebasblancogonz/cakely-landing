@@ -18,6 +18,14 @@ export const metadata: Metadata = {
     description: PANADERIAS.metaDescription,
     url: `${baseUrl}/${PANADERIAS.slug}`,
     type: 'website',
+    images: [
+      {
+        url: 'https://cakely.es/img/logo.png',
+        width: 1200,
+        height: 630,
+        alt: PANADERIAS.metaTitle,
+      },
+    ],
   },
 };
 

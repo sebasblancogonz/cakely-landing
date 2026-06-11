@@ -11,7 +11,7 @@ export function CtaSection() {
           Tu pastelería merece estar organizada
         </h2>
         <p className="text-[#A8A29E] mt-4 text-lg max-w-md mx-auto">
-          Empieza gratis. Sin tarjeta, sin compromisos.
+          Pruébalo gratis 14 días. Cancela cuando quieras.
         </p>
         <div className="mt-8">
           <Link

@@ -1,4 +1,5 @@
 import { TESTIMONIALS } from '@/lib/landing-data';
+import { Reveal } from './Reveal';
 
 export function TestimonialsSection() {
   return (
@@ -12,10 +13,13 @@ export function TestimonialsSection() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
           {TESTIMONIALS.map((testimonial, i) => (
+            <Reveal key={i} delay={i * 80}>
             <div
-              key={i}
               className="bg-white rounded-xl p-8 border border-[#E7E5E4]"
             >
+              <div className="text-[#C9A96E] text-sm tracking-wider" aria-hidden>
+                ★★★★★
+              </div>
               <blockquote className="text-[#44403C] text-base leading-relaxed">
                 {testimonial.text}
               </blockquote>
@@ -28,6 +32,7 @@ export function TestimonialsSection() {
                 </span>
               </footer>
             </div>
+            </Reveal>
           ))}
         </div>
       </div>

@@ -21,7 +21,7 @@ const dmSans = DM_Sans({
 });
 
 export const metadata = {
-  title: "Cakely – Gestión de pedidos para pastelerías",
+  title: "Cakely – Gestión de pedidos para pastelerías y panaderías",
   description:
     "Gestiona pedidos, clientes y recetas en tu pastelería sin complicaciones. Cakely te ayuda a organizar tu negocio de repostería de forma sencilla y profesional.",
   keywords: [
@@ -32,14 +32,18 @@ export const metadata = {
     "gestionar clientes pastelería",
     "agenda para pastelerías",
     "cakely app repostería",
+    "gestión pedidos panadería",
+    "software para panaderías",
+    "programa para panaderías",
+    "gestión encargos panadería",
   ],
   authors: [{ name: "Cakely", url: "https://cakely.es" }],
   creator: "Cakely",
   metadataBase: new URL("https://cakely.es"),
   openGraph: {
-    title: "Cakely – Gestión de pedidos para pastelerías",
+    title: "Cakely – Gestión de pedidos para pastelerías y panaderías",
     description:
-      "Organiza los pedidos de tu pastelería, lleva el control de tus clientes y haz crecer tu negocio de repostería con Cakely.",
+      "Organiza los pedidos de tu pastelería o panadería, lleva el control de tus clientes y haz crecer tu negocio artesanal con Cakely.",
     url: "https://cakely.es",
     siteName: "Cakely",
     images: [
@@ -47,7 +51,7 @@ export const metadata = {
         url: "https://cakely.es/img/logo.png",
         width: 1200,
         height: 630,
-        alt: "Cakely – Gestión de pedidos para pastelerías",
+        alt: "Cakely – Gestión de pedidos para pastelerías y panaderías",
       },
     ],
     locale: "es_ES",
@@ -55,8 +59,8 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Cakely – Gestión de pedidos para pastelerías",
-    description: "Organiza los pedidos de tu pastelería, lleva el control de tus clientes y haz crecer tu negocio de repostería con Cakely.",
+    title: "Cakely – Gestión de pedidos para pastelerías y panaderías",
+    description: "Organiza los pedidos de tu pastelería o panadería, lleva el control de tus clientes y haz crecer tu negocio artesanal con Cakely.",
     images: ["https://cakely.es/img/logo.png"],
     creator: "@cakely.es",
   },

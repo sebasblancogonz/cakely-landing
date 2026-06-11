@@ -7,14 +7,23 @@ import { PlanComparisonTable } from '@/components/landing/PlanComparisonTable';
 import { FaqSection } from '@/components/landing/FaqSection';
 import { CtaSection } from '@/components/landing/CtaSection';
 import { Footer } from '@/components/landing/Footer';
+import { VerticalsTeaser } from '@/components/landing/VerticalsTeaser';
+import {
+  organizationJsonLd,
+  softwareApplicationJsonLd,
+  jsonLdScriptProps,
+} from '@/lib/structured-data';
 
 export default function Index() {
   return (
     <div className="flex flex-col min-h-screen">
+      <script {...jsonLdScriptProps(organizationJsonLd())} />
+      <script {...jsonLdScriptProps(softwareApplicationJsonLd())} />
       <Header />
       <main className="flex-grow">
         <HeroSection />
         <FeaturesSection />
+        <VerticalsTeaser />
         <TestimonialsSection />
         <PricingSection />
         <PlanComparisonTable />

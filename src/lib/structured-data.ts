@@ -8,7 +8,10 @@ export function organizationJsonLd() {
     '@type': 'Organization',
     name: 'Cakely',
     url: baseUrl,
-    logo: `${baseUrl}/img/logo.webp`,
+    logo: {
+      '@type': 'ImageObject',
+      url: `${baseUrl}/img/logo.webp`,
+    },
   };
 }
 
@@ -62,7 +65,10 @@ export function jsonLdScriptProps(data: object) {
   return {
     type: 'application/ld+json',
     dangerouslySetInnerHTML: {
-      __html: JSON.stringify(data).replace(/</g, '\\u003c'),
+      __html: JSON.stringify(data)
+        .replace(/</g, '\\u003c')
+        .replace(/>/g, '\\u003e')
+        .replace(/&/g, '\\u0026'),
     },
   } as const;
 }

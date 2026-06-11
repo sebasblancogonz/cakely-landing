@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { TrackedCtaLink } from './TrackedCtaLink';
 import {
   Accordion,
   AccordionContent,
@@ -40,12 +41,13 @@ export function VerticalLanding({ vertical }: { vertical: VerticalConfig }) {
                 {vertical.heroSubtitle}
               </p>
               <div className="flex gap-3 justify-center items-center mt-10">
-                <Link
+                <TrackedCtaLink
                   href={`${appDomain}/empezar-prueba`}
+                  contentName={`${vertical.slug}-hero`}
                   className="bg-[#E8943A] text-white hover:bg-[#C97A2E] px-6 py-3 text-base rounded-lg font-medium transition-colors shadow-sm"
                 >
                   Prueba gratis 14 días
-                </Link>
+                </TrackedCtaLink>
                 <Link
                   href="#funciones"
                   className="text-[#44403C] hover:text-[#1C1917] text-base font-medium underline underline-offset-4 decoration-[#E7E5E4] hover:decoration-[#1C1917] transition-colors"
@@ -170,12 +172,13 @@ export function VerticalLanding({ vertical }: { vertical: VerticalConfig }) {
               Pruébalo gratis 14 días. Cancela cuando quieras.
             </p>
             <div className="mt-8">
-              <Link
+              <TrackedCtaLink
                 href={`${appDomain}/empezar-prueba`}
-                className="inline-block bg-white text-[#1C1917] hover:bg-white/90 px-6 py-3 rounded-lg font-medium text-base"
+                contentName={`${vertical.slug}-final`}
+                className="inline-block bg-white text-[#1C1917] hover:bg-white/90 px-6 py-3 rounded-lg font-medium text-base transition-colors"
               >
                 Empezar ahora
-              </Link>
+              </TrackedCtaLink>
             </div>
           </div>
         </section>

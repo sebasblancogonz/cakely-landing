@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { TrackedCtaLink } from './TrackedCtaLink';
 
 const appDomain =
   process.env.NEXT_PUBLIC_APP_DOMAIN || 'https://app.cakely.es';
@@ -29,12 +30,13 @@ export function HeroSection() {
           </p>
 
           <div className="flex gap-3 justify-center items-center mt-10">
-            <Link
+            <TrackedCtaLink
               href={`${appDomain}/empezar-prueba`}
+              contentName="home-hero"
               className="bg-[#E8943A] text-white hover:bg-[#C97A2E] px-6 py-3 text-base rounded-lg font-medium transition-colors shadow-sm"
             >
               Prueba gratis 14 días
-            </Link>
+            </TrackedCtaLink>
             <Link
               href="#funciones"
               className="text-[#44403C] hover:text-[#1C1917] text-base font-medium underline underline-offset-4 decoration-[#E7E5E4] hover:decoration-[#1C1917] transition-colors"

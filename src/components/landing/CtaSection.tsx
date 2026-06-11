@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { TrackedCtaLink } from './TrackedCtaLink';
 
 const appDomain =
   process.env.NEXT_PUBLIC_APP_DOMAIN || "https://app.cakely.es";
@@ -14,12 +14,13 @@ export function CtaSection() {
           Pruébalo gratis 14 días. Cancela cuando quieras.
         </p>
         <div className="mt-8">
-          <Link
+          <TrackedCtaLink
             href={`${appDomain}/empezar-prueba`}
-            className="inline-block bg-white text-[#1C1917] hover:bg-white/90 px-6 py-3 rounded-lg font-medium text-base"
+            contentName="home-final"
+            className="inline-block bg-white text-[#1C1917] hover:bg-white/90 px-6 py-3 rounded-lg font-medium text-base transition-colors"
           >
             Crear cuenta gratis
-          </Link>
+          </TrackedCtaLink>
         </div>
       </div>
     </section>

@@ -6,7 +6,9 @@
 
 ## Contexto y objetivo
 
-El objetivo del bloque es **captación de usuarios nuevos** vía búsqueda orgánica en España. Hoy la landing es una sola página orientada exclusivamente a "pastelería", con diseño previo al design system actual. Queremos posicionar también el vertical **panadería** ("gestión pedidos panadería", "software para panaderías") y que el tráfico aterrice en una landing que convierta.
+El objetivo del bloque es **captación de usuarios nuevos** vía búsqueda orgánica en España. Hoy la landing es una sola página orientada exclusivamente a "pastelería". Queremos posicionar también el vertical **panadería** ("gestión pedidos panadería", "software para panaderías") y que el tráfico aterrice en una landing que convierta.
+
+**Nota de contexto (corregida tras explorar el código):** la landing YA implementa el design system (paleta cálida en `globals.css`, serif Playfair, componentes Notion+artisan — commit `8f87d2a`). La parte visual de este bloque NO es una migración de tokens sino una **elevación**: subir el nivel del hero, añadir social proof, micro-interacciones y pulido de secciones.
 
 Rediseño y SEO se ejecutan como **un solo bloque**: para una landing de una página son en gran parte el mismo trabajo, y así cada página se construye una sola vez sobre los componentes nuevos.
 
@@ -39,11 +41,15 @@ Las dos páginas verticales comparten una plantilla parametrizada. Secciones, en
 
 La parametrización (copy, keywords, screenshots, FAQs) vive en un objeto de configuración por vertical, de modo que añadir un tercer vertical (cafeterías, obradores) sea cuestión de horas.
 
-## Rediseño visual
+## Elevación visual
 
-- Trasladar los tokens de `Cakely/design-system/MASTER.md` al `@theme` de `globals.css` (la landing usa Tailwind 4, configuración CSS-first): paleta (background `#FAFAF8`, primary `#E8943A`, secondary `#1C1917`, gold `#C9A96E`, semánticos desaturados), tipografía y espaciado.
-- Restyling de los 9 componentes de sección existentes (`Header`, `HeroSection`, `FeaturesSection`, `TestimonialsSection`, `PricingSection`, `PlanComparisonTable`, `FaqSection`, `CtaSection`, `Footer`) con la estética Notion + artisan. Sin decisiones de identidad nuevas — el design system las fija.
-- La home conserva su estructura de secciones actual: cambia la piel y el copy, no la información. Se añade un bloque de presentación de verticales ("¿Tienes una panadería?").
+La base ya está en el design system; este bloque la sube de nivel:
+
+- **Hero más ambicioso:** fondo con gradiente cálido sutil, CTA primario en naranja de marca (hoy es negro), franja de social proof bajo el hero, animación de entrada.
+- **Micro-interacciones:** componente `Reveal` (fade-in al hacer scroll, respetando `prefers-reduced-motion`) aplicado a las secciones; hover states en cards de features y pricing.
+- **Testimonios** con estrellas gold y mejor jerarquía visual.
+- **Coherencia de copy:** corregir restos de "sin tarjeta" en `CtaSection` (contradicen el fix `b7cc2cd` del hero).
+- La home conserva su estructura de secciones: se añade un bloque de presentación de verticales ("¿Tienes una panadería?").
 - Mobile-first: el tráfico de búsqueda del nicho es mayoritariamente móvil.
 
 ## SEO técnico

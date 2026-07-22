@@ -8,11 +8,15 @@ import { FaqSection } from '@/components/landing/FaqSection';
 import { CtaSection } from '@/components/landing/CtaSection';
 import { Footer } from '@/components/landing/Footer';
 import { VerticalsTeaser } from '@/components/landing/VerticalsTeaser';
+import { LatestPostsSection } from '@/components/landing/LatestPostsSection';
 import {
   organizationJsonLd,
   softwareApplicationJsonLd,
   jsonLdScriptProps,
 } from '@/lib/structured-data';
+
+// ISR: la home consulta los últimos posts; regenerar cada hora es de sobra
+export const revalidate = 3600;
 
 export default function Index() {
   return (
@@ -28,6 +32,7 @@ export default function Index() {
         <PricingSection />
         <PlanComparisonTable />
         <FaqSection />
+        <LatestPostsSection />
         <CtaSection />
       </main>
       <Footer />

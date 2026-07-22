@@ -9,6 +9,7 @@ import {
   getCategoryLabel,
   getCategoryDescription,
   getAllCategories,
+  MIN_POSTS_TO_INDEX,
 } from "@/lib/categories";
 
 export const revalidate = 60;
@@ -80,10 +81,17 @@ export async function generateMetadata({
 
   const label = getCategoryLabel(category);
   const description = getCategoryDescription(category);
+  const postCount = await prisma.blogPost.count({
+    where: { published: true, category },
+  });
 
   return {
     title: `${label} - Cakely Blog`,
     description,
+    // Categorías casi vacías: noindex para no gastar presupuesto de rastreo
+    // en páginas finas; vuelven a indexarse solas al superar el umbral.
+    robots:
+      postCount < MIN_POSTS_TO_INDEX ? { index: false, follow: true } : undefined,
     openGraph: {
       title: `${label} - Cakely Blog`,
       description,

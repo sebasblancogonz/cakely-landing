@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { Calendar, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { prisma } from "@/lib/prisma";
+import { BlogCategory } from "@prisma/client";
 import { MobileMenu } from "@/components/MobileMenu";
 import sanitizeHtml from 'sanitize-html';
 import "./blog-post.css";
@@ -18,6 +19,35 @@ async function getBlogPost(slug: string) {
   }
 
   return post;
+}
+
+async function getRelatedPosts(slug: string, category: BlogCategory | null) {
+  const select = { slug: true, title: true, excerpt: true } as const;
+
+  const related = category
+    ? await prisma.blogPost.findMany({
+        where: { published: true, category, slug: { not: slug } },
+        orderBy: { publishedAt: "desc" },
+        take: 3,
+        select,
+      })
+    : [];
+
+  // Completar con los más recientes de otras categorías si no llegamos a 3
+  if (related.length < 3) {
+    const fill = await prisma.blogPost.findMany({
+      where: {
+        published: true,
+        slug: { notIn: [slug, ...related.map((p) => p.slug)] },
+      },
+      orderBy: { publishedAt: "desc" },
+      take: 3 - related.length,
+      select,
+    });
+    related.push(...fill);
+  }
+
+  return related;
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
@@ -118,6 +148,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   if (!post) {
     notFound();
   }
+
+  const relatedPosts = await getRelatedPosts(post.slug, post.category);
 
   // JSON-LD para SEO (Schema.org)
   const jsonLd = {
@@ -250,6 +282,32 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                   }),
                 }}
               />
+
+              {relatedPosts.length > 0 && (
+                <section className="mt-16 pt-8 border-t border-gray-200">
+                  <h2 className="text-2xl font-bold text-gray-900 mb-6">
+                    Artículos relacionados
+                  </h2>
+                  <div className="grid gap-6 md:grid-cols-3">
+                    {relatedPosts.map((related) => (
+                      <Link
+                        key={related.slug}
+                        href={`/blog/${related.slug}`}
+                        className="group block"
+                      >
+                        <h3 className="text-lg font-semibold text-gray-900 group-hover:text-emerald-600 transition-colors mb-2">
+                          {related.title}
+                        </h3>
+                        {related.excerpt && (
+                          <p className="text-gray-600 text-sm line-clamp-2 leading-relaxed">
+                            {related.excerpt}
+                          </p>
+                        )}
+                      </Link>
+                    ))}
+                  </div>
+                </section>
+              )}
 
               <div className="mt-16 pt-8 border-t border-gray-200">
                 <Link href="/blog">

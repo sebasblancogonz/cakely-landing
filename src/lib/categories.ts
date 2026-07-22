@@ -1,5 +1,9 @@
 import { BlogCategory } from "@prisma/client";
 
+// Categorías con menos posts que esto van con noindex y fuera del sitemap
+// para no diluir la calidad percibida del sitio con páginas casi vacías.
+export const MIN_POSTS_TO_INDEX = 3;
+
 export const CATEGORY_LABELS: Record<BlogCategory, string> = {
   GESTION: "Gestión",
   FINANZAS: "Finanzas",

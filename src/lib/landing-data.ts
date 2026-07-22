@@ -180,6 +180,7 @@ export const FOOTER_LINKS = {
     { href: '/blog', label: 'Blog' },
     { href: '/software-para-pastelerias', label: 'Software para pastelerías' },
     { href: '/software-para-panaderias', label: 'Software para panaderías' },
+    { href: '/pagina-web-para-pastelerias', label: 'Página web para pastelerías' },
   ],
   legal: [
     { href: '/terminos', label: 'Términos' },

@@ -5,6 +5,12 @@ import {
   ChefHat,
   Receipt,
   BarChart3,
+  Globe,
+  Images,
+  Quote,
+  PenLine,
+  AtSign,
+  Search,
   type LucideIcon,
 } from 'lucide-react';
 
@@ -241,8 +247,122 @@ export const PASTELERIAS: VerticalConfig = {
       answer:
         'Los datos personales de tus clientes se guardan cifrados y cumplimos el RGPD. Solo tú y tu equipo tenéis acceso.',
     },
+    {
+      question:
+        '¿Qué diferencia hay entre Cakely y llevar la pastelería en Excel o WhatsApp?',
+      answer:
+        'Excel y WhatsApp reparten la información en mil sitios: el pedido en un chat, el precio en una hoja y la fecha en tu cabeza. Cakely lo junta todo — pedidos, costes, clientes, facturas y calendario — y calcula márgenes por ti, sin fórmulas ni buscar en conversaciones de hace tres semanas.',
+    },
+    {
+      question: '¿Incluye Cakely una página web para mi pastelería?',
+      answer:
+        'Sí. El plan Pro incluye tu propia página web pública con tu historia, galería de fotos, testimonios y datos de contacto, editable desde el panel sin saber programar. Perfecta para el enlace de tu bio de Instagram.',
+    },
   ],
   ctaTitle: 'Tu pastelería merece estar organizada',
+};
+
+export const WEB_PASTELERIAS: VerticalConfig = {
+  slug: 'pagina-web-para-pastelerias',
+  name: 'pastelerías',
+  metaTitle:
+    'Página web para tu pastelería — sin programar y sin pagar un diseño | Cakely',
+  metaDescription:
+    'Crea la página web de tu pastelería en una tarde: tu historia, galería de fotos, testimonios y contacto. Incluida en Cakely, sin programar y sin coste de desarrollo web.',
+  heroTitle: 'La página web de tu pastelería',
+  heroAccent: 'lista en una tarde, sin programar',
+  heroSubtitle:
+    'Tu historia, tus creaciones, testimonios y contacto en una página pública propia. Incluida con Cakely: la editas desde el panel y la enlazas en tu bio de Instagram.',
+  painsTitle: '¿Por qué tu pastelería aún no tiene web?',
+  pains: [
+    {
+      title: 'Un desarrollo web cuesta cientos de euros',
+      description:
+        'Entre diseño, dominio, hosting y mantenimiento, una web de encargo se va fácilmente a más de 1.000 €. La página de Cakely viene incluida en tu plan: cero coste de desarrollo y cero mantenimiento técnico.',
+    },
+    {
+      title: 'Instagram no es una página web',
+      description:
+        'Tu perfil vive dentro de una app y no aparece bien en Google. Con una página propia, quien busca una pastelería como la tuya te encuentra — y desde ahí puede escribirte o llamarte.',
+    },
+    {
+      title: 'No tienes tiempo de mantener una web',
+      description:
+        'Cambias una foto, un testimonio o el teléfono desde el panel de Cakely y la página se actualiza al momento. Sin tocar código, sin depender de nadie.',
+    },
+    {
+      title: 'Tu información está desperdigada',
+      description:
+        'El teléfono en Instagram, las fotos en el móvil, las reseñas en WhatsApp. Tu página lo reúne todo en un solo enlace que puedes compartir donde quieras.',
+    },
+  ],
+  featuresTitle: 'Lo que incluye tu página',
+  features: [
+    {
+      icon: Globe,
+      title: 'Tu página pública propia',
+      description:
+        'Una dirección para tu pastelería con tu nombre, tu eslogan y tu historia. Lista para compartir en redes, WhatsApp o tarjetas.',
+    },
+    {
+      icon: PenLine,
+      title: 'Editor sin código',
+      description:
+        'Todo se edita desde el panel de Cakely con formularios sencillos. Si sabes usar Instagram, sabes editar tu web.',
+    },
+    {
+      icon: Images,
+      title: 'Galería de tus creaciones',
+      description:
+        'Sube fotos de tus tartas y trabajos favoritos. Tu escaparate abierto las 24 horas.',
+    },
+    {
+      icon: Quote,
+      title: 'Testimonios de clientes',
+      description:
+        'Muestra las opiniones de quienes ya te han comprado. Nada convence más a un cliente nuevo.',
+    },
+    {
+      icon: AtSign,
+      title: 'Perfecta para tu bio',
+      description:
+        'Un solo enlace con todo: historia, fotos, testimonios y contacto. Ideal para la bio de Instagram o TikTok.',
+    },
+    {
+      icon: Search,
+      title: 'Visible en Google',
+      description:
+        'Tu página es pública e indexable: quien busque tu pastelería por nombre podrá encontrarla fuera de las redes sociales.',
+    },
+  ],
+  faqs: [
+    {
+      question: '¿Cuánto cuesta hacer la página web de mi pastelería con Cakely?',
+      answer:
+        'La página web está incluida en el plan Pro de Cakely, junto con la gestión de pedidos, presupuestos, recetas y facturación. No pagas diseño, ni desarrollo, ni hosting aparte. Puedes probarlo gratis 14 días y cancelar cuando quieras dentro de ese período sin que se te cobre nada.',
+    },
+    {
+      question: '¿Necesito saber programar o diseñar?',
+      answer:
+        'No. Rellenas tus datos en el panel de Cakely — eslogan, historia, fotos, testimonios y contacto — y la página se genera con un diseño cuidado. Cualquier cambio se publica al instante.',
+    },
+    {
+      question: '¿Qué secciones incluye la página?',
+      answer:
+        'Tu nombre y eslogan, la historia de tu pastelería, una galería de fotos de tus creaciones, testimonios de clientes y tus datos de contacto: email, teléfono e Instagram.',
+    },
+    {
+      question: '¿Puedo usarla como enlace de mi bio de Instagram?',
+      answer:
+        'Sí, es uno de sus usos principales: un único enlace con toda tu información, mucho más completo que un link-in-bio genérico y con tu marca.',
+    },
+    {
+      question: '¿La página aparece en Google?',
+      answer:
+        'Sí. Es una página pública e indexable, así que tus clientes pueden encontrarte buscando el nombre de tu pastelería, sin necesidad de tener cuenta en ninguna red social.',
+    },
+  ],
+  ctaTitle: 'Tu pastelería merece una web tan bonita como tus tartas',
 };
 
 export const VERTICALS: VerticalConfig[] = [PASTELERIAS, PANADERIAS];

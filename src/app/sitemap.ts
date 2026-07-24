@@ -60,6 +60,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.9,
     },
     {
+      url: `${baseUrl}/calcular-presupuesto-tarta`,
+      changeFrequency: 'monthly' as const,
+      priority: 0.9,
+    },
+    {
       url: `${baseUrl}/blog`,
       lastModified: latestPostDate,
       changeFrequency: 'daily',

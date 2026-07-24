@@ -181,6 +181,7 @@ export const FOOTER_LINKS = {
     { href: '/software-para-pastelerias', label: 'Software para pastelerías' },
     { href: '/software-para-panaderias', label: 'Software para panaderías' },
     { href: '/pagina-web-para-pastelerias', label: 'Página web para pastelerías' },
+    { href: '/calcular-presupuesto-tarta', label: 'Calculadora de precios de tartas' },
   ],
   legal: [
     { href: '/terminos', label: 'Términos' },

@@ -1,14 +1,10 @@
-# Allow all user agents
+# Cakely — https://cakely.es
 User-agent: *
 Allow: /
 
-# Disallow API routes and admin paths
+# Rutas internas sin valor para el índice.
+# OJO: /_next/ NO se bloquea — Googlebot necesita los assets para renderizar.
 Disallow: /api/
-Disallow: /_next/
 Disallow: /admin/
 
-# Host
-Host: https://cakely.es
-
-# Sitemap
 Sitemap: https://cakely.es/sitemap.xml

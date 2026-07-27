@@ -158,7 +158,6 @@ export const PLAN_COMPARISON = {
         { label: 'Estadísticas avanzadas', free: false, basico: false, pro: true },
         { label: 'Múltiples usuarios', free: false, basico: false, pro: true },
         { label: 'Sedes / sucursales', free: false, basico: false, pro: true },
-        { label: 'Facturación', free: false, basico: true, pro: true },
         { label: 'Envío de facturas por email', free: false, basico: false, pro: true },
         { label: 'Inventario', free: false, basico: true, pro: true },
         { label: 'Gastos', free: true, basico: true, pro: true },

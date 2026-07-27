@@ -165,7 +165,6 @@ export const PLAN_COMPARISON = {
         { label: 'Calculadora de presupuestos', free: false, basico: false, pro: true },
         { label: 'Asistente IA con los datos de tu negocio', free: false, basico: false, pro: true },
         { label: 'Soporte prioritario', free: false, basico: false, pro: true },
-        { label: 'Integraciones / API', free: false, basico: false, pro: true },
         { label: 'Mini-web pública de tu negocio', free: false, basico: false, pro: true },
       ],
     },

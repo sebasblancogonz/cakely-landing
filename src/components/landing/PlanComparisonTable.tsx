@@ -18,7 +18,7 @@ function CellValue({ value }: { value: string | boolean }) {
     );
   }
   return (
-    <span className="font-sans text-sm text-[#1C1917] tabular-nums">
+    <span className="font-sans text-xs md:text-sm text-[#1C1917] tabular-nums">
       {value}
     </span>
   );
@@ -38,15 +38,21 @@ export function PlanComparisonTable() {
           </p>
         </div>
 
-        {/* Tabla — scroll horizontal en móvil con primera columna sticky */}
-        <div className="mt-12 -mx-5 md:mx-0">
+        {/* Tabla — fluida, se adapta al ancho sin scroll horizontal */}
+        <div className="mt-12">
           <div className="overflow-x-auto">
-            <table className="w-full min-w-[640px] md:min-w-0 border-collapse">
+            <table className="w-full table-fixed border-collapse">
+              <colgroup>
+                <col className="w-[40%]" />
+                <col className="w-[20%]" />
+                <col className="w-[20%]" />
+                <col className="w-[20%]" />
+              </colgroup>
               <thead>
                 <tr>
                   <th
                     scope="col"
-                    className="sticky left-0 z-10 bg-[#FAFAF8] text-left font-sans font-semibold text-sm text-[#78716C] py-4 px-5 md:px-6"
+                    className="text-left font-sans font-semibold text-sm text-[#78716C] py-4 pr-2 md:px-6"
                   >
                     <span className="sr-only">Concepto</span>
                   </th>
@@ -56,8 +62,8 @@ export function PlanComparisonTable() {
                       scope="col"
                       className={
                         plan === 'pro'
-                          ? 'text-center font-sans font-semibold text-sm text-[#1C1917] py-4 px-4 md:px-6 bg-white rounded-t-lg border-x border-t border-[#E7E5E4]'
-                          : 'text-center font-sans font-semibold text-sm text-[#1C1917] py-4 px-4 md:px-6'
+                          ? 'text-center font-sans font-semibold text-xs md:text-sm text-[#1C1917] py-4 px-1.5 md:px-6 bg-white rounded-t-lg border-x border-t border-[#E7E5E4]'
+                          : 'text-center font-sans font-semibold text-xs md:text-sm text-[#1C1917] py-4 px-1.5 md:px-6'
                       }
                     >
                       {PLAN_LABELS[plan]}
@@ -80,9 +86,9 @@ export function PlanComparisonTable() {
                       <tr key={`group-${group.label}`}>
                         <td
                           colSpan={4}
-                          className={`sticky left-0 bg-[#FAFAF8] text-left font-sans text-[11px] uppercase tracking-[0.12em] font-semibold text-[#A8A29E] ${
+                          className={`text-left font-sans text-[11px] uppercase tracking-[0.12em] font-semibold text-[#A8A29E] ${
                             groupIdx === 0 ? 'pt-8' : 'pt-10'
-                          } pb-3 px-5 md:px-6`}
+                          } pb-3 pr-2 md:px-6`}
                         >
                           {group.label}
                         </td>
@@ -99,7 +105,7 @@ export function PlanComparisonTable() {
                           >
                             <th
                               scope="row"
-                              className="sticky left-0 bg-[#FAFAF8] font-sans font-normal text-sm text-[#44403C] py-3.5 px-5 md:px-6 text-left"
+                              className="font-sans font-normal text-[13px] md:text-sm text-[#44403C] py-3.5 pr-2 md:px-6 text-left align-top"
                             >
                               {row.label}
                             </th>
@@ -108,12 +114,12 @@ export function PlanComparisonTable() {
                                 key={plan}
                                 className={
                                   plan === 'pro'
-                                    ? `text-center py-3.5 px-4 md:px-6 bg-white border-x border-[#E7E5E4] ${
+                                    ? `text-center align-top py-3.5 px-1.5 md:px-6 bg-white border-x border-[#E7E5E4] ${
                                         isLastOverall
                                           ? 'rounded-b-lg border-b'
                                           : ''
                                       }`
-                                    : 'text-center py-3.5 px-4 md:px-6'
+                                    : 'text-center align-top py-3.5 px-1.5 md:px-6'
                                 }
                               >
                                 <CellValue

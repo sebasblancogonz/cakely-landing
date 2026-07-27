@@ -119,7 +119,6 @@ export const PRICING_FEATURES = {
     'Sin límites',
     'Hasta 5 usuarios',
     'Asistente IA con tus datos',
-    'Facturas con envío por email',
     'Gestión de sucursales',
     'Mini-web pública de tu negocio',
     'Generador de presupuestos',

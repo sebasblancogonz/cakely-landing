@@ -23,7 +23,7 @@ export function softwareApplicationJsonLd() {
     applicationCategory: 'BusinessApplication',
     operatingSystem: 'Web, iOS, Android',
     description:
-      'Software de gestión de pedidos, clientes, recetas y facturas para pastelerías y panaderías artesanales.',
+      'Software de gestión de pedidos, clientes, recetas y costes para pastelerías y panaderías artesanales.',
     url: baseUrl,
     inLanguage: 'es',
     offers: {

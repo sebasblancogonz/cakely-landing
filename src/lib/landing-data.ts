@@ -4,7 +4,6 @@ import {
   Calculator,
   CalendarCheck,
   BarChartBig,
-  FileText,
 } from 'lucide-react';
 
 export const NAV_LINKS = [
@@ -32,12 +31,6 @@ export const FEATURES = [
     title: 'Clientes organizados',
     description:
       'Historial de pedidos, preferencias y alergias. Cada detalle guardado para que el trato sea siempre personal.',
-  },
-  {
-    icon: FileText,
-    title: 'Facturas en un clic',
-    description:
-      'Genera facturas conforme a la normativa española. Descárgalas en PDF o envíalas directamente por email.',
   },
   {
     icon: CalendarCheck,
@@ -90,7 +83,7 @@ export const FAQS = [
   {
     question: '¿Qué incluye el plan Pro?',
     answer:
-      'Pedidos, clientes y recetas ilimitados. Asistente IA que responde con los datos de tu negocio, facturas con envío por email, gestión de sucursales, estadísticas avanzadas, generador de presupuestos, mini-web pública para tu negocio y soporte prioritario.',
+      'Pedidos, clientes y recetas ilimitados. Asistente IA que responde con los datos de tu negocio, gestión de sucursales, estadísticas avanzadas, generador de presupuestos, mini-web pública para tu negocio y soporte prioritario.',
   },
   {
     question: '¿Mis datos están seguros?',
@@ -110,7 +103,6 @@ export const PRICING_FEATURES = {
   basico: [
     '50 pedidos al mes',
     '100 clientes',
-    'Generador de facturas',
     'Inventario y escaneo de recibos',
     'Estadísticas completas',
     'Google Calendar',
@@ -119,7 +111,6 @@ export const PRICING_FEATURES = {
     'Sin límites',
     'Hasta 5 usuarios',
     'Asistente IA con tus datos',
-    'Facturas con envío por email',
     'Gestión de sucursales',
     'Mini-web pública de tu negocio',
     'Generador de presupuestos',
@@ -146,7 +137,6 @@ export const PLAN_COMPARISON = {
         { label: 'Recetas', free: '5', basico: '5', pro: 'Sin límite' },
         { label: 'Usuarios en equipo', free: '1', basico: '1', pro: '5' },
         { label: 'Sedes', free: '1', basico: '1', pro: '5' },
-        { label: 'Facturas al mes', free: '—', basico: '20', pro: 'Sin límite' },
         { label: 'Gastos al mes', free: '20', basico: '100', pro: 'Sin límite' },
       ],
     },
@@ -158,7 +148,6 @@ export const PLAN_COMPARISON = {
         { label: 'Estadísticas avanzadas', free: false, basico: false, pro: true },
         { label: 'Múltiples usuarios', free: false, basico: false, pro: true },
         { label: 'Sedes / sucursales', free: false, basico: false, pro: true },
-        { label: 'Envío de facturas por email', free: false, basico: false, pro: true },
         { label: 'Inventario', free: false, basico: true, pro: true },
         { label: 'Gastos', free: true, basico: true, pro: true },
         { label: 'Escaneo de recibos', free: false, basico: true, pro: true },

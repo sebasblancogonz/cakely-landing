@@ -25,7 +25,7 @@ export function HeroSection() {
           </h1>
 
           <p className="text-lg md:text-xl text-[#78716C] max-w-xl mx-auto mt-6">
-            Pedidos, clientes, recetas y facturas. Todo en un lugar pensado para
+            Pedidos, clientes, recetas y costes. Todo en un lugar pensado para
             pastelerías artesanales.
           </p>
 

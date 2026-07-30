@@ -52,7 +52,7 @@ export const PANADERIAS: VerticalConfig = {
   name: 'panaderías',
   metaTitle: 'Software para panaderías — gestión de pedidos y encargos | Cakely',
   metaDescription:
-    'Gestiona los encargos, clientes y producción de tu panadería sin libretas ni hojas de cálculo. Cakely organiza tu obrador: pedidos, recetas, facturas y cobros en un solo lugar.',
+    'Gestiona los encargos, clientes y producción de tu panadería sin libretas ni hojas de cálculo. Cakely organiza tu obrador: pedidos, recetas, costes y cobros en un solo lugar.',
   heroTitle: 'El software de gestión para panaderías',
   heroAccent: 'que entiende tu obrador',
   heroSubtitle:
@@ -108,9 +108,9 @@ export const PANADERIAS: VerticalConfig = {
     },
     {
       icon: Receipt,
-      title: 'Facturas y cobros',
+      title: 'Cobros y pagos',
       description:
-        'Factura los encargos que lo necesiten y controla pagos parciales y señales sin hojas de cálculo.',
+        'Controla pagos parciales, señales y lo que queda pendiente de cada encargo sin hojas de cálculo.',
     },
     {
       icon: BarChart3,
@@ -154,7 +154,7 @@ export const PASTELERIAS: VerticalConfig = {
   name: 'pastelerías',
   metaTitle: 'Software para pastelerías — pedidos, presupuestos y recetas | Cakely',
   metaDescription:
-    'El programa de gestión para pastelerías artesanales: pedidos de tartas personalizadas, presupuestos, recetas con escandallo, clientes y facturas. Pruébalo gratis 14 días.',
+    'El programa de gestión para pastelerías artesanales: pedidos de tartas personalizadas, presupuestos, recetas con escandallo, clientes y cobros. Pruébalo gratis 14 días.',
   heroTitle: 'El software de gestión para pastelerías',
   heroAccent: 'hecho para tartas con nombre y apellido',
   heroSubtitle:
@@ -251,7 +251,7 @@ export const PASTELERIAS: VerticalConfig = {
       question:
         '¿Qué diferencia hay entre Cakely y llevar la pastelería en Excel o WhatsApp?',
       answer:
-        'Excel y WhatsApp reparten la información en mil sitios: el pedido en un chat, el precio en una hoja y la fecha en tu cabeza. Cakely lo junta todo — pedidos, costes, clientes, facturas y calendario — y calcula márgenes por ti, sin fórmulas ni buscar en conversaciones de hace tres semanas.',
+        'Excel y WhatsApp reparten la información en mil sitios: el pedido en un chat, el precio en una hoja y la fecha en tu cabeza. Cakely lo junta todo — pedidos, costes, clientes, cobros y calendario — y calcula márgenes por ti, sin fórmulas ni buscar en conversaciones de hace tres semanas.',
     },
     {
       question: '¿Incluye Cakely una página web para mi pastelería?',
@@ -339,7 +339,7 @@ export const WEB_PASTELERIAS: VerticalConfig = {
     {
       question: '¿Cuánto cuesta hacer la página web de mi pastelería con Cakely?',
       answer:
-        'La página web está incluida en el plan Pro de Cakely, junto con la gestión de pedidos, presupuestos, recetas y facturación. No pagas diseño, ni desarrollo, ni hosting aparte. Puedes probarlo gratis 14 días y cancelar cuando quieras dentro de ese período sin que se te cobre nada.',
+        'La página web está incluida en el plan Pro de Cakely, junto con la gestión de pedidos, presupuestos, recetas y cobros. No pagas diseño, ni desarrollo, ni hosting aparte. Puedes probarlo gratis 14 días y cancelar cuando quieras dentro de ese período sin que se te cobre nada.',
     },
     {
       question: '¿Necesito saber programar o diseñar?',

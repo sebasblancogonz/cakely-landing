@@ -1,4 +1,5 @@
 import { TrackedCtaLink } from './TrackedCtaLink';
+import { StoreBadges } from './StoreBadges';
 
 const appDomain =
   process.env.NEXT_PUBLIC_APP_DOMAIN || "https://app.cakely.es";
@@ -22,6 +23,7 @@ export function CtaSection() {
             Crear cuenta gratis
           </TrackedCtaLink>
         </div>
+        <StoreBadges className="mt-6 items-center justify-center" />
       </div>
     </section>
   );

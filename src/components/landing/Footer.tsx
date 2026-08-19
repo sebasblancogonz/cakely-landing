@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { FOOTER_LINKS } from "@/lib/landing-data";
+import { StoreBadges } from "./StoreBadges";
 
 export function Footer() {
   return (
@@ -20,6 +21,7 @@ export function Footer() {
             <p className="text-sm text-[#A8A29E] mt-3">
               Software de gestión para pastelerías artesanales.
             </p>
+            <StoreBadges className="mt-4 flex-col items-start" />
           </div>
 
           {/* Producto */}

@@ -20,8 +20,6 @@ const dmSans = DM_Sans({
   weight: ["400", "500", "600", "700"],
 });
 
-import MetaPixel from "@/components/MetaPixel";
-
 export const metadata = {
   title: "Cakely – Gestión de pedidos para pastelerías y panaderías",
   description:
@@ -88,7 +86,6 @@ export default function RootLayout({
         <MetaPixel />
       </body>
       <Analytics />
-      <MetaPixel />
     </html>
   );
 }

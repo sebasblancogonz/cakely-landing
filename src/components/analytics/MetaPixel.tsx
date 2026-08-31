@@ -13,7 +13,7 @@ declare global {
 
 export default function MetaPixel() {
   const pathname = usePathname();
-  const pixelId = process.env.NEXT_PUBLIC_META_PIXEL_ID;
+  const pixelId = process.env.NEXT_PUBLIC_META_PIXEL_ID ?? '2965165823832360';
 
   useEffect(() => {
     if (typeof window !== 'undefined' && window.fbq) {

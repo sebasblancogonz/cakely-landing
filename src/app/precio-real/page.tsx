@@ -10,6 +10,7 @@ import {
 import Link from 'next/link';
 import { Header } from '@/components/landing/Header';
 import { Footer } from '@/components/landing/Footer';
+import { TrackedCtaLink } from '@/components/landing/TrackedCtaLink';
 
 const appDomain =
   process.env.NEXT_PUBLIC_APP_DOMAIN || 'https://app.cakely.es';
@@ -189,13 +190,14 @@ export default function PrecioRealPage() {
                 </p>
 
                 <div className='flex flex-col gap-4 mb-8'>
-                  <Link
+                  <TrackedCtaLink
                     href={registerUrl}
+                    contentName='precio-real-hero'
                     className='inline-flex items-center justify-center bg-[#1C1917] hover:bg-[#1C1917]/90 text-white px-6 py-3 text-sm md:text-base font-medium rounded-lg w-full'
                   >
                     Quiero saber mi precio real
                     <ArrowRight className='ml-2 h-4 w-4' />
-                  </Link>
+                  </TrackedCtaLink>
                   <Link
                     href='#problema'
                     className='inline-flex items-center justify-center border border-[#E7E5E4] text-[#44403C] hover:bg-white px-6 py-3 text-sm md:text-base font-medium rounded-lg w-full'
@@ -360,13 +362,14 @@ export default function PrecioRealPage() {
               <p className='text-[#78716C] text-base mb-6'>
                 ¿Cuántas tartas has vendido ya a pérdidas sin saberlo?
               </p>
-              <Link
+              <TrackedCtaLink
                 href={registerUrl}
+                contentName='precio-real-desglose'
                 className='inline-flex items-center bg-[#1C1917] hover:bg-[#1C1917]/90 text-white px-8 py-3 text-base font-medium rounded-lg'
               >
                 Calcular el precio real de mi tarta
                 <ArrowRight className='ml-2 h-4 w-4' />
-              </Link>
+              </TrackedCtaLink>
             </div>
           </div>
         </section>
@@ -455,13 +458,14 @@ export default function PrecioRealPage() {
             </div>
 
             <div className='text-center mt-14'>
-              <Link
+              <TrackedCtaLink
                 href={registerUrl}
+                contentName='precio-real-pasos'
                 className='inline-flex items-center bg-[#1C1917] hover:bg-[#1C1917]/90 text-white px-8 py-3 text-base font-medium rounded-lg'
               >
                 Quiero saber mi precio real
                 <ArrowRight className='ml-2 h-4 w-4' />
-              </Link>
+              </TrackedCtaLink>
             </div>
           </div>
         </section>
@@ -516,12 +520,13 @@ export default function PrecioRealPage() {
               deberías estar cobrando.
             </p>
             <div className='mt-8'>
-              <Link
+              <TrackedCtaLink
                 href={registerUrl}
+                contentName='precio-real-final'
                 className='inline-block bg-white text-[#1C1917] hover:bg-white/90 px-6 py-3 rounded-lg font-medium text-base'
               >
                 Quiero saber mi precio real
-              </Link>
+              </TrackedCtaLink>
             </div>
             <p className='text-[#A8A29E] text-sm mt-6'>
               Gratis · Sin tarjeta · 2 minutos

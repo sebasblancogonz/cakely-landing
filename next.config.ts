@@ -2,6 +2,22 @@ import type { NextConfig } from "next";
 import { withSentryConfig } from "@sentry/nextjs";
 
 const nextConfig: NextConfig = {
+  async redirects() {
+    return [
+      // Variantes en singular que aparecen en anuncios (Meta Ads) y enlaces externos.
+      // La query string (fbclid, utm_*) se conserva automáticamente.
+      {
+        source: '/software-para-pasteleria',
+        destination: '/software-para-pastelerias',
+        permanent: true,
+      },
+      {
+        source: '/software-para-panaderia',
+        destination: '/software-para-panaderias',
+        permanent: true,
+      },
+    ];
+  },
   images: {
     remotePatterns: [
       {
